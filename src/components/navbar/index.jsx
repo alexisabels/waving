@@ -1,8 +1,8 @@
-import { Box, Button } from "@mui/material";
-import { teal } from "@mui/material/colors";
-import Link from "@mui/material/Link";
+import { Box, Button, Link } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useLogout } from "../../hooks/auth";
+import AccountMenu from './AccountMenu'; // Asegúrate de que esta ruta sea la correcta para importar AccountMenu
+import { PROTECTED } from "../../lib/routes";
 
 export default function Navbar() {
   const { logout, isLoading } = useLogout();
@@ -13,38 +13,30 @@ export default function Navbar() {
         boxShadow: 1,
         position: "fixed",
         width: "100%",
-        borderTop: "6px solid",
-        borderColor: teal[400],
+        borderColor: "#0F1A1D",
         height: 64,
         zIndex: 3,
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "center",
         display: "flex",
-        backgroundColor: "white",
-        px: 2
+        backgroundColor: "#0F1A1D",
+        
       }}
     >
       <Link
         component={NavLink}
-        to="/home"
+        to={`${PROTECTED}/home`}
         sx={{
-          color: teal[500],
+          color: "#FFFF",
           fontWeight: "bold",
           textDecoration: "none",
-          fontSize: '1rem' // Puedes ajustar el tamaño de la fuente según necesites
+          fontSize: '1.3rem'
         }}
       >
-        Home
+        Waving
       </Link>
-      <Button 
-        variant="contained" 
-        onClick={logout}
-        color="primary"
-        disabled={isLoading}
       
-      >
-        Cerrar sesión
-      </Button>
+      <AccountMenu />
     </Box>
   );
 }

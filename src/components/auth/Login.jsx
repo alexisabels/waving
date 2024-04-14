@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, TextField, Button, Typography, Snackbar, Alert } from '@mui/material';
+import { Box, TextField, Button, Typography, Snackbar, Alert, InputAdornment, Grid } from '@mui/material';
 import { useLogin } from '../../hooks/auth';
 import { useForm } from "react-hook-form";
 import { emailValidate, passwordValidate } from '../../utils/form-validate';
 import { HOME } from '../../lib/routes';
+import { AlternateEmail, Key } from '@mui/icons-material';
 
 const Login = ({ onToggleForm }) => {
   const { login, isLoading, openSnackbar, setOpenSnackbar, snackbarMessage, snackbarSeverity } = useLogin();
@@ -35,23 +36,26 @@ async function handleLogin(data) {
           fullWidth
           type="email"
           label="Email"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AlternateEmail fontSize="medium" />
+              </InputAdornment>
+            ),
+          }}
           margin="normal"
           {...register("email", emailValidate)}
           helperText={errors.email && errors.email.message}
-          FormHelperTextProps={{
-            style: {
-              backgroundColor: 'transparent', // Establecer el fondo transparente
-              color: 'red' // Establecer el color del texto a rojo
-            }
-          }}
+          FormHelperTextProps={{ style: { color: 'red'}}}
+          style={{ background: 'transparent'}}
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
-                borderColor: "#023b44",
+                borderColor: "#303030",
               },
             },
             "& .MuiInputLabel-outlined.Mui-focused": {
-              color: "#023b44",
+              color: "#303030",
             },
             bgcolor: "white",
           }}        />
@@ -59,23 +63,26 @@ async function handleLogin(data) {
           fullWidth
           label="Contraseña"
           type="password"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Key fontSize="medium" />
+              </InputAdornment>
+            ),
+          }}
           margin="normal"
           {...register("password", passwordValidate)}
           helperText={errors.password && errors.password.message}
-          FormHelperTextProps={{
-            style: {
-              backgroundColor: 'transparent', // Establecer el fondo transparente
-              color: 'red' // Establecer el color del texto a rojo
-            }
-          }}
+          FormHelperTextProps={{ style: { color: 'red'}}}
+          style={{ background: 'transparent'}}
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
-                borderColor: "#023b44",
+                borderColor: "#303030",
               },
             },
             "& .MuiInputLabel-outlined.Mui-focused": {
-              color: "#023b44",
+              color: "#303030",
             },
             bgcolor: "white",
           }}        />
@@ -87,13 +94,33 @@ async function handleLogin(data) {
           sx={{
             mt: 3,
             mb: 2,
-            backgroundColor: "#023b44",
-            "&:hover": { backgroundColor: "#022b34" },
+            backgroundColor: "#303030",
+            "&:hover": { backgroundColor: "#303030" },
+            textTransform: 'none',
+          fontWeight: 'regular'  
           }}
+          
+
         >
-          Login
+          Iniciar sesión
         </Button>
       </form>
+      <Grid container alignItems="center" justifyContent="center" spacing={1}>
+  <Grid item>
+    <Typography>¿Aún no tienes cuenta?</Typography>
+  </Grid>
+  <Grid item>
+    <Button
+      onClick={onToggleForm}
+      sx={{
+        color: "#303030",
+        fontWeight: "medium"
+      }}
+    >
+      Regístrate
+    </Button>
+  </Grid>
+</Grid>
       <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleClose}
    anchorOrigin={{
       vertical: "bottom",
@@ -103,12 +130,7 @@ async function handleLogin(data) {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-      <Typography textAlign="center">
-        ¿No tienes una cuenta?
-        <Button onClick={onToggleForm} sx={{ mt: 0, mb: 0, color: "#023b44" }}>
-          Regístrate
-        </Button>
-      </Typography>
+      
     </Box>
   );
 };
