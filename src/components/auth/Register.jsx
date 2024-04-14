@@ -151,8 +151,10 @@ const Register = ({ onToggleForm }) => {
               checked={acceptTerms}
               onChange={(e) => setAcceptTerms(e.target.checked)}
               name="acceptTerms"
-              sx={{ color: "#023b44" }}
-            />
+              sx={{ color: '#023b44', fill: '#023b44' } }
+              style ={{
+                color: "#023b44",
+              }}            />
           }
           label="Acepto los términos y condiciones"
         />

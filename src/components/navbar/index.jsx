@@ -31,7 +31,6 @@ export default function Navbar() {
           color: teal[500],
           fontWeight: "bold",
           textDecoration: "none",
-          fontFamily: 'Roboto, sans-serif', // Aplica la fuente Roboto aquí
           fontSize: '1rem' // Puedes ajustar el tamaño de la fuente según necesites
         }}
       >

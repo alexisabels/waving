@@ -27,7 +27,7 @@ async function handleLogin(data) {
 
   return (
     <Box sx={{ maxWidth: 400, mx: "auto" }}>
-      <Typography variant="h4" component="h2" mb={2}>
+      <Typography variant="h4"  component="h2" mb={2}>
         Iniciar Sesión
       </Typography>
       <form onSubmit={handleSubmit(handleLogin)}>
