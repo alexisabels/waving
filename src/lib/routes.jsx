@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import AuthPage from "../components/auth/AuthPage";
 import Layout from "../components/layout"
+import Home from "../components/home";
 export const ROOT ="/";
 export const AUTH = "/auth";
 export const PROFILE ="/protected/profile/:id"
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
     {path: PROTECTED, element: <Layout />, children: [
         {
             path: HOME,
-            element: "Home"
+            element: <Home />
         },
         {
             path: PROFILE,
