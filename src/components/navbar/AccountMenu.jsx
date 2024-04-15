@@ -14,7 +14,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth, useLogout } from "../../hooks/auth";
 import { Link } from "react-router-dom";
 import { PROTECTED } from "../../lib/routes";
-
+import avatarexample from './../../assets/img/avatarexample.png'
 function ActiveUserLink() {
   const { user, isLoading } = useAuth();
   if (isLoading) return "Cargando...";
@@ -66,8 +66,8 @@ export default function AccountMenu() {
 
             {/* Asegúrate de que la URL de la imagen del avatar sea la correcta */}
             <Avatar
-              sx={{ width: 32, height: 32, color: "black" }}
-              src="../../assets/img/ocean.jpg"
+              sx={{ width: 38, height: 38, color: "black" }}
+              src={avatarexample}
               
             ></Avatar>
           </IconButton>
@@ -125,7 +125,7 @@ export default function AccountMenu() {
           }}
         >
           {" "}
-          <Avatar src="../../assets/img/ocean.jpg" sx={{ width: 32, height: 32, color: "black" }}/> <ActiveUserLink />
+          <Avatar src={avatarexample} sx={{ width: 32, height: 32, color: "black" }}/> <ActiveUserLink />
           {/* AQUI VA MI PERFIL */}
         </MenuItem>
         <Divider />
