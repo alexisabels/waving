@@ -53,7 +53,11 @@ export function useLogin() {
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
     } catch (error) {
-      setSnackbarMessage(error.message);
+        switch(error.code) {
+          case 'auth/invalid-credential':
+            setSnackbarMessage("El email o la contraseña son incorrectos");
+            break;
+       }
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
       console.error("Error en el login: ", error);
@@ -105,7 +109,7 @@ export function useRegister() {
     setLoading(true);
     const usernameExists = await isUsernameExists(username);
     if (usernameExists) {
-      setSnackbarMessage("Ya existe un usuario con ese nombre");
+      setSnackbarMessage("Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo");
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
       setLoading(false)
@@ -123,8 +127,12 @@ export function useRegister() {
         setOpenSnackbar(true);
         navigate(redirectTo);
       } catch (error) {
-        setSnackbarMessage("Error en el registro:" + error.message);
-        setSnackbarSeverity("success");
+        switch(error.code) {         
+          case 'auth/email-already-in-use':
+            setSnackbarMessage("Ya existe una cuenta con ese email");
+            break;
+       }
+        setSnackbarSeverity("error");
         setOpenSnackbar(true);
       }
     }

@@ -31,6 +31,6 @@ export const usernameValidate = {
     },
     minLength: {
       value: 6,
-      message: "La contraseña debe tener al menos 6 caracteres",
+      message: "La contraseña no puede tener menos de 6 caracteres",
     },
   };
