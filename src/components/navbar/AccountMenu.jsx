@@ -81,10 +81,10 @@ export default function AccountMenu() {
         PaperProps={{
           elevation: 0,
           sx: {
-            backgroundColor: "rgb(187, 187, 187)",
+            backgroundColor: "rgb(230, 230, 230)",
             width: 175,
             overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            filter: "drop-shadow(0px 2px 6px rgba(0,0,0,0.22))",
             mt: 3,
             borderRadius: "25px",
             px: 1,
@@ -103,7 +103,7 @@ export default function AccountMenu() {
               right: 30,
               width: 10,
               height: 10,
-              backgroundColor: "rgb(187, 187, 187)",
+              backgroundColor: "rgb(230, 230, 230)",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
@@ -115,7 +115,10 @@ export default function AccountMenu() {
         <MenuItem
           onClick={handleClose}
           sx={{
+            color: "rgba(0, 0, 0, 0.6)",
+
             "&:hover": {
+              color: "inherit",
               borderRadius: "25px", // Esto aplica border-radius a los items al hacer hover
               backgroundColor: "rgba(0, 0, 0, 0.1)", // Opcional: puedes cambiar el color de fondo al hacer hover si así lo deseas
             },
@@ -133,12 +136,16 @@ export default function AccountMenu() {
           sx={{
             pt: "10x",
             pb: "9.2px",
+            color: "rgba(0, 0, 0, 0.6)",
+
             "&:hover": {
+              color: "inherit",
+
             border: "rgba(0, 0, 0, 4)",
               borderRadius: "25px", // Esto aplica border-radius a los items al hacer hover
               backgroundColor: "rgba(0, 0, 0, 0.1)", // Opcional: puedes cambiar el color de fondo al hacer hover si así lo deseas
             },
-            color: "inherit", textDecoration: "none", fontSize: "1.2rem", fontWeight: "bolder"
+           textDecoration: "none", fontSize: "1.2rem", fontWeight: "bolder"
           }}
           
         
