@@ -6,6 +6,7 @@ import Login from './Login';
 import { Link } from 'react-router-dom';
 import ocean from '../../assets/img/ocean.jpg'
 import texture from '../../assets/img/texture.png'
+import './AuthPage.css'
 const AuthPage = () => {
   const [isRegistered, setIsRegistered] = useState(true);
   const theme = useTheme();

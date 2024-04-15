@@ -1,26 +1,47 @@
-import React from 'react';
-import { Box, TextField, Button, Typography, Snackbar, Alert, InputAdornment, Grid } from '@mui/material';
-import { useLogin } from '../../hooks/auth';
+import React from "react";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+  Alert,
+  InputAdornment,
+  Grid,
+} from "@mui/material";
+import { useLogin } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
-import { emailValidate, passwordValidate } from '../../utils/form-validate';
-import { HOME } from '../../lib/routes';
-import { AlternateEmail, Key } from '@mui/icons-material';
+import { emailValidate, passwordValidate } from "../../utils/form-validate";
+import { HOME } from "../../lib/routes";
+import { AlternateEmail, Key } from "@mui/icons-material";
 
 const Login = ({ onToggleForm }) => {
-  const { login, isLoading, openSnackbar, setOpenSnackbar, snackbarMessage, snackbarSeverity } = useLogin();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
-console.log(errors)
-async function handleLogin(data) {
-  const succeeded = await login({
-    email: data.email,
-    password: data.password,
-    redirectTo: HOME,
-  })
-  if (succeeded) reset();
-}
+  const {
+    login,
+    isLoading,
+    openSnackbar,
+    setOpenSnackbar,
+    snackbarMessage,
+    snackbarSeverity,
+  } = useLogin();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  console.log(errors);
+  async function handleLogin(data) {
+    const succeeded = await login({
+      email: data.email,
+      password: data.password,
+      redirectTo: HOME,
+    });
+    if (succeeded) reset();
+  }
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnackbar(false);
@@ -28,7 +49,7 @@ async function handleLogin(data) {
 
   return (
     <Box sx={{ maxWidth: 400, mx: "auto" }}>
-      <Typography variant="h4"  component="h2" mb={2}>
+      <Typography variant="h4" component="h2" mb={2}>
         Iniciar Sesión
       </Typography>
       <form onSubmit={handleSubmit(handleLogin)}>
@@ -46,8 +67,8 @@ async function handleLogin(data) {
           margin="normal"
           {...register("email", emailValidate)}
           helperText={errors.email && errors.email.message}
-          FormHelperTextProps={{ style: { color: 'red'}}}
-          style={{ background: 'transparent'}}
+          FormHelperTextProps={{ style: { color: "red" } }}
+          style={{ background: "transparent" }}
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
@@ -58,7 +79,8 @@ async function handleLogin(data) {
               color: "#303030",
             },
             bgcolor: "white",
-          }}        />
+          }}
+        />
         <TextField
           fullWidth
           label="Contraseña"
@@ -73,8 +95,8 @@ async function handleLogin(data) {
           margin="normal"
           {...register("password", passwordValidate)}
           helperText={errors.password && errors.password.message}
-          FormHelperTextProps={{ style: { color: 'red'}}}
-          style={{ background: 'transparent'}}
+          FormHelperTextProps={{ style: { color: "red" } }}
+          style={{ background: "transparent" }}
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
@@ -85,7 +107,8 @@ async function handleLogin(data) {
               color: "#303030",
             },
             bgcolor: "white",
-          }}        />
+          }}
+        />
         <Button
           type="submit"
           fullWidth
@@ -95,42 +118,49 @@ async function handleLogin(data) {
             mt: 3,
             mb: 2,
             backgroundColor: "#303030",
-            "&:hover": { backgroundColor: "#303030" },
-            textTransform: 'none',
-          fontWeight: 'regular'  
-          }}
-          
+            borderRadius: "20px",
 
+            "&:hover": { backgroundColor: "#303030" },
+            textTransform: "none",
+            fontWeight: "regular",
+          }}
         >
           Iniciar sesión
         </Button>
       </form>
       <Grid container alignItems="center" justifyContent="center" spacing={1}>
-  <Grid item>
-    <Typography>¿Aún no tienes cuenta?</Typography>
-  </Grid>
-  <Grid item>
-    <Button
-      onClick={onToggleForm}
-      sx={{
-        color: "#303030",
-        fontWeight: "medium"
-      }}
-    >
-      Regístrate
-    </Button>
-  </Grid>
-</Grid>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleClose}
-   anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right"
-   }}>
-        <Alert onClose={handleClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+        <Grid item>
+          <Typography>¿Aún no tienes cuenta?</Typography>
+        </Grid>
+        <Grid item>
+          <Button
+            onClick={onToggleForm}
+            sx={{
+              color: "#303030",
+              fontWeight: "medium",
+            }}
+          >
+            Regístrate
+          </Button>
+        </Grid>
+      </Grid>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
           {snackbarMessage}
         </Alert>
       </Snackbar>
-      
     </Box>
   );
 };

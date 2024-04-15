@@ -97,8 +97,10 @@ const Register = ({ onToggleForm }) => {
             },
             "& .MuiInputLabel-outlined.Mui-focused": {
               color: "#303030",
+              
             },
             bgcolor: "white",
+            
           }}
         />
         <TextField
@@ -184,6 +186,7 @@ const Register = ({ onToggleForm }) => {
           sx={{
             mt: 3,
             mb: 2,
+            borderRadius: '20px',
             backgroundColor: "#303030",
             "&:hover": { backgroundColor: "#303030" },
             textTransform: "none",
