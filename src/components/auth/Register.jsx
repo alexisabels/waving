@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+
 import {
   TextField,
   Button,
@@ -164,20 +166,20 @@ const Register = ({ onToggleForm }) => {
             bgcolor: "white",
           }}
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={acceptTerms}
-              onChange={(e) => setAcceptTerms(e.target.checked)}
-              name="acceptTerms"
-              sx={{ color: "#303030", fill: "#303030" }}
-              style={{
-                color: "#303030",
-              }}
-            />
-          }
-          label="Acepto los términos y condiciones"
-        />
+<FormControlLabel
+  control={
+    <Checkbox
+      checked={acceptTerms}
+      onChange={(e) => setAcceptTerms(e.target.checked)}
+      name="acceptTerms"
+      sx={{ color: "#303030", fill: "#303030" }}
+      style={{
+        color: "#303030",
+      }}
+    />
+  }
+  label={<span>Acepto los <Link to="/terminosycondiciones" style={{ textDecoration: 'underline', color: '#000000' }}>términos y condiciones</Link></span>}
+/>
         <Button
           type="submit"
           fullWidth
