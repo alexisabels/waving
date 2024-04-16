@@ -52,6 +52,8 @@ const Register = ({ onToggleForm }) => {
 
   console.log(errors);
   async function handleRegister(data) {
+    setTermsError(""); 
+    
     if (!acceptTerms) {
       setTermsError(
         "Debes aceptar los términos y condiciones para registrarte."
@@ -65,10 +67,14 @@ const Register = ({ onToggleForm }) => {
       password: data.password,
       redirectTo: HOME,
     });
-    if (result) {
+    if (result.error) {
+      setTermsError(result.error);
+      setOpenSnackbar(true);
+    } else {
       reset();
     }
   }
+  
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
