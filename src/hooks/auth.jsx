@@ -11,27 +11,28 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../lib/firebase";
 import { AUTH, HOME } from "../lib/routes";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import isUsernameExists from "../utils/isUsernameExist"
+import isUsernameExists from "../utils/isUsernameExist";
 export function useAuth() {
   const [authUser, authLoading, error] = useAuthState(auth);
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState(null); //default value
   useEffect(() => {
-    async function fetchData(){
-      setLoading(true)
-      const ref = doc(db, "users", authUser.uid)
-      const docSnap = await getDoc(ref)
-      setUser(docSnap.data())
-      setLoading(false)
+    async function fetchData() {
+      setLoading(true);
+      const ref = doc(db, "users", authUser.uid);
+      const docSnap = await getDoc(ref);
+      setUser(docSnap.data());
+      setLoading(false);
     }
     if (!authLoading) {
-      if(authUser) {
+      if (authUser) {
         fetchData();
-      }else {
-        setLoading(false) //sesion no iniciada
+      } else {
+        setLoading(false); //sesion no iniciada
       }
     }
-  }, [authLoading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoading]);
   return { user, isLoading, error };
 }
 
@@ -53,11 +54,11 @@ export function useLogin() {
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
     } catch (error) {
-        switch(error.code) {
-          case 'auth/invalid-credential':
-            setSnackbarMessage("El email o la contraseña son incorrectos");
-            break;
-       }
+      switch (error.code) {
+        case "auth/invalid-credential":
+          setSnackbarMessage("El email o la contraseña son incorrectos");
+          break;
+      }
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
       console.error("Error en el login: ", error);
@@ -70,6 +71,7 @@ export function useLogin() {
   return {
     login,
     isLoading,
+
     openSnackbar,
     setOpenSnackbar,
     snackbarMessage,
@@ -109,34 +111,36 @@ export function useRegister() {
     setLoading(true);
     const usernameExists = await isUsernameExists(username);
     if (usernameExists) {
-      setSnackbarMessage("Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo");
+      setSnackbarMessage(
+        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo"
+      );
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
-      setLoading(false)
+      setLoading(false);
     } else {
-      try{
-        const res = await createUserWithEmailAndPassword(auth, email, password)
+      try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
         await setDoc(doc(db, "users", res.user.uid), {
           id: res.user.uid,
           username: username.toLowerCase(),
           avatar: "",
           date: Date.now(),
-        }) 
+        });
         setSnackbarMessage("Cuenta creada correctamente");
         setSnackbarSeverity("success");
         setOpenSnackbar(true);
         navigate(redirectTo);
       } catch (error) {
-        switch(error.code) {         
-          case 'auth/email-already-in-use':
+        switch (error.code) {
+          case "auth/email-already-in-use":
             setSnackbarMessage("Ya existe una cuenta con ese email");
             break;
-       }
+        }
         setSnackbarSeverity("error");
         setOpenSnackbar(true);
       }
     }
-    setLoading(false)
+    setLoading(false);
   }
   return {
     register,

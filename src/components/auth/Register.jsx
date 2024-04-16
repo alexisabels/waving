@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   TextField,
@@ -10,7 +11,10 @@ import {
   Checkbox,
   InputAdornment,
   Grid,
+  IconButton,
 } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Snackbar, Alert } from "@mui/material";
 import { useRegister } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
@@ -24,6 +28,12 @@ import { AlternateEmail, Key, MailOutline } from "@mui/icons-material";
 const Register = ({ onToggleForm }) => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [termsError, setTermsError] = useState(""); // State to handle terms acceptance error
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const {
     register: signup,
@@ -99,10 +109,8 @@ const Register = ({ onToggleForm }) => {
             },
             "& .MuiInputLabel-outlined.Mui-focused": {
               color: "#303030",
-              
             },
             bgcolor: "white",
-            
           }}
         />
         <TextField
@@ -145,15 +153,27 @@ const Register = ({ onToggleForm }) => {
           style={{ background: "transparent" }}
           fullWidth
           name="password"
+          type={showPassword ? "text" : "password"}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
                 <Key fontSize="medium" />
               </InputAdornment>
             ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
           label="Contraseña"
-          type="password"
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
@@ -166,20 +186,30 @@ const Register = ({ onToggleForm }) => {
             bgcolor: "white",
           }}
         />
-<FormControlLabel
-  control={
-    <Checkbox
-      checked={acceptTerms}
-      onChange={(e) => setAcceptTerms(e.target.checked)}
-      name="acceptTerms"
-      sx={{ color: "#303030", fill: "#303030" }}
-      style={{
-        color: "#303030",
-      }}
-    />
-  }
-  label={<span>Acepto los <Link to="/terminosycondiciones" style={{ textDecoration: 'underline', color: '#000000' }}>términos y condiciones</Link></span>}
-/>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={acceptTerms}
+              onChange={(e) => setAcceptTerms(e.target.checked)}
+              name="acceptTerms"
+              sx={{ color: "#303030", fill: "#303030" }}
+              style={{
+                color: "#303030",
+              }}
+            />
+          }
+          label={
+            <span>
+              Acepto los{" "}
+              <Link
+                to="/terminosycondiciones"
+                style={{ textDecoration: "underline", color: "#000000" }}
+              >
+                términos y condiciones
+              </Link>
+            </span>
+          }
+        />
         <Button
           type="submit"
           fullWidth
@@ -188,7 +218,7 @@ const Register = ({ onToggleForm }) => {
           sx={{
             mt: 3,
             mb: 2,
-            borderRadius: '20px',
+            borderRadius: "20px",
             backgroundColor: "#303030",
             "&:hover": { backgroundColor: "#303030" },
             textTransform: "none",
@@ -199,22 +229,21 @@ const Register = ({ onToggleForm }) => {
         </Button>
       </form>
       <Grid container alignItems="center" justifyContent="center" spacing={1}>
-  <Grid item>
-    <Typography>¿Ya tienes una cuenta?</Typography>
-  </Grid>
-  <Grid item>
-    <Button
-      onClick={onToggleForm}
-      sx={{
-        color: "#303030",
-        fontWeight: "medium"
-      }}
-    >
-      Iniciar sesión
-    </Button>
-  </Grid>
-</Grid>
-
+        <Grid item>
+          <Typography>¿Ya tienes una cuenta?</Typography>
+        </Grid>
+        <Grid item>
+          <Button
+            onClick={onToggleForm}
+            sx={{
+              color: "#303030",
+              fontWeight: "medium",
+            }}
+          >
+            Iniciar sesión
+          </Button>
+        </Grid>
+      </Grid>
 
       <Snackbar
         open={openSnackbar}

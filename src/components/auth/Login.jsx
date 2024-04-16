@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+
 import {
   Box,
   TextField,
@@ -7,13 +9,20 @@ import {
   Snackbar,
   Alert,
   InputAdornment,
+  IconButton,
   Grid,
 } from "@mui/material";
+
 import { useLogin } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
 import { emailValidate, passwordValidate } from "../../utils/form-validate";
 import { HOME } from "../../lib/routes";
-import { AlternateEmail, Key } from "@mui/icons-material";
+import {
+  AlternateEmail,
+  Key,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 
 const Login = ({ onToggleForm }) => {
   const {
@@ -46,7 +55,12 @@ const Login = ({ onToggleForm }) => {
     }
     setOpenSnackbar(false);
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   return (
     <Box sx={{ maxWidth: 400, mx: "auto" }}>
       <Typography variant="h4" component="h2" mb={2}>
@@ -81,14 +95,27 @@ const Login = ({ onToggleForm }) => {
             bgcolor: "white",
           }}
         />
+
         <TextField
           fullWidth
           label="Contraseña"
-          type="password"
+          type={showPassword ? "text" : "password"}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
                 <Key fontSize="medium" />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
               </InputAdornment>
             ),
           }}
