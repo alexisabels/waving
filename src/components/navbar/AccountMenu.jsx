@@ -64,7 +64,6 @@ export default function AccountMenu() {
           >
             <ActiveUserName />
 
-            {/* Asegúrate de que la URL de la imagen del avatar sea la correcta */}
             <Avatar
               sx={{ width: 38, height: 38, color: "black" }}
               src={avatarexample}
@@ -119,8 +118,8 @@ export default function AccountMenu() {
 
             "&:hover": {
               color: "inherit",
-              borderRadius: "25px", // Esto aplica border-radius a los items al hacer hover
-              backgroundColor: "rgba(0, 0, 0, 0.1)", // Opcional: puedes cambiar el color de fondo al hacer hover si así lo deseas
+              borderRadius: "25px",
+              backgroundColor: "rgba(0, 0, 0, 0.1)", 
             },
           }}
         >
@@ -142,8 +141,8 @@ export default function AccountMenu() {
               color: "inherit",
 
             border: "rgba(0, 0, 0, 4)",
-              borderRadius: "25px", // Esto aplica border-radius a los items al hacer hover
-              backgroundColor: "rgba(0, 0, 0, 0.1)", // Opcional: puedes cambiar el color de fondo al hacer hover si así lo deseas
+              borderRadius: "25px", 
+              backgroundColor: "rgba(0, 0, 0, 0.1)", 
             },
            textDecoration: "none", fontSize: "1.2rem", fontWeight: "bolder"
           }}

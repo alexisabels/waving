@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { router } from "./lib/routes";
 import './globals.css';
 
-// Crea un tema personalizado de MUI y sobrescribe la propiedad fontFamily
 const theme = createTheme({
   typography: {
     fontFamily: [
@@ -24,7 +23,7 @@ const theme = createTheme({
 });
 
 export default function App() {
-  //rutas
+
   return (
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />

@@ -27,7 +27,7 @@ import { HOME } from "../../lib/routes";
 import { AlternateEmail, Key, MailOutline } from "@mui/icons-material";
 const Register = ({ onToggleForm }) => {
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [termsError, setTermsError] = useState(""); // State to handle terms acceptance error
+  const [termsError, setTermsError] = useState(""); 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -58,7 +58,7 @@ const Register = ({ onToggleForm }) => {
       setTermsError(
         "Debes aceptar los términos y condiciones para registrarte."
       );
-      setOpenSnackbar(true); // Show the snackbar
+      setOpenSnackbar(true); 
       return;
     }
     const result = await signup({

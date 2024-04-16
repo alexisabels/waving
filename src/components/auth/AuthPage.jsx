@@ -18,7 +18,6 @@ const AuthPage = () => {
       height: '100vh',
       bgcolor: 'primary.white',
     }}>
-      {/* Omitir la sección gráfica en móviles */}
       {!isMobile && (
         <Box sx={{
           flex: 1,
@@ -34,10 +33,10 @@ const AuthPage = () => {
   component="div"
   sx={{
     color: 'white',
-    userSelect: 'none', // Standard
-    WebkitUserSelect: 'none', // Chrome, Safari, and Opera
-    msUserSelect: 'none', // Internet Explorer
-    MozUserSelect: 'none', // Firefox
+    userSelect: 'none', 
+    WebkitUserSelect: 'none',
+    msUserSelect: 'none', 
+    MozUserSelect: 'none',
   }}
 >
   Hola!
