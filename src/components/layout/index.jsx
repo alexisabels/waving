@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AUTH } from "../../lib/routes";
 import { useAuth } from "../../hooks/auth";
 import Navbar from "../navbar";
+import { Box } from "@mui/material";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -20,7 +21,13 @@ export default function Layout() {
   return (
     <>
       <Navbar />
+      <Box sx={{
+      maxWidth: 'lg', 
+      mx: 'auto', 
+      p: 2, 
+    }}>
       <Outlet />
+      </Box>
     </>
   );
 }

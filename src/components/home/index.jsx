@@ -1,8 +1,9 @@
 import { Alert, Box, Button, Snackbar, Stack, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useAddPost } from "../../hooks/post";
+import { useAddPost, usePosts } from "../../hooks/post";
 import { useAuth } from "../../hooks/auth";
-export default function Home() {
+import PostsLists from "../posts/PostsLists";
+function NewPost() {
   const { register, handleSubmit, reset } = useForm();
   const {
     addPost,
@@ -31,7 +32,7 @@ export default function Home() {
   };
   return (
     <>
-      <Box maxWidth="600px" mx="auto" py={8}>
+        <Box maxWidth="600px" mx="auto" paddingTop={8} paddingBottom={4} >
         <form onSubmit={handleSubmit(handleAddPost)}>
           <Stack spacing={2} direction="row" justifyContent="space-between">
             <Typography variant="h5" component="h4" fontWeight="bold">
@@ -75,6 +76,16 @@ export default function Home() {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+    </>
+  )
+}
+export default function Home() {
+  const { posts, isLoading: postsLoading } = usePosts();
+
+  return (
+    <>
+  <NewPost />
+  <PostsLists posts={posts} isLoading={postsLoading}/>
     </>
   );
 }
