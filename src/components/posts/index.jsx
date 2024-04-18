@@ -22,6 +22,7 @@ export default function Post({ post }) {
       <Typography
         variant="body1"
         sx={{ wordBreak: "break-word" }}
+        component="pre"
       >
         {text}
       </Typography>

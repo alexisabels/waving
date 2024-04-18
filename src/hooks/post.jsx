@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { db } from "../lib/firebase";
-import { collection, addDoc, query, setDoc, doc } from "firebase/firestore";
+import { collection, addDoc, query, setDoc, doc, orderBy } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore"
 export function useAddPost() {
     const [isLoading, setLoading] = useState(false);
@@ -39,9 +39,9 @@ export function useAddPost() {
         snackbarSeverity, };
 }
 export function usePosts() {
-    const q = query(collection(db, "posts") );
+    // Ajusta la query para ordenar los posts por la fecha 'date' en orden descendente
+    const q = query(collection(db, "posts"), orderBy("date", "desc"));
     const [posts, isLoading, error] = useCollectionData(q);
     if (error) throw error;
-    return { posts, isLoading }
-
+    return { posts, isLoading };
 }
