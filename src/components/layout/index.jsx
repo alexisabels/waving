@@ -4,7 +4,7 @@ import { AUTH } from "../../lib/routes";
 import { useAuth } from "../../hooks/auth";
 import Navbar from "../navbar";
 import { Box } from "@mui/material";
-
+import LoadingPage from "../../utils/LoadingPage";
 export default function Layout() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function Layout() {
     }
   }, [pathname, user, isLoading, navigate]);
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingPage />;
 
   return (
     <>
