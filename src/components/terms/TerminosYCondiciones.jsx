@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 export default function TerminosYCondiciones() {
-    //rutas
     return( 
     <><h2><strong>Terms and Conditions</strong></h2>
 

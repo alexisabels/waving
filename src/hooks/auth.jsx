@@ -79,6 +79,7 @@ export function useLogin() {
   };
 }
 export function useLogout() {
+  // eslint-disable-next-line no-unused-vars
   const [signOut, isLoading, error] = useSignOut(auth);
   const navigate = useNavigate();
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -90,7 +91,7 @@ export function useLogout() {
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
       navigate(AUTH);
-    } //else: show error signout es false
+    } // (opcional) else: show error signout es false
   }
   return {
     logout,

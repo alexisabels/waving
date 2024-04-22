@@ -39,7 +39,6 @@ export function useAddPost() {
         snackbarSeverity, };
 }
 export function usePosts() {
-    // Ajusta la query para ordenar los posts por la fecha 'date' en orden descendente
     const q = query(collection(db, "posts"), orderBy("date", "desc"));
     const [posts, isLoading, error] = useCollectionData(q);
     if (error) throw error;

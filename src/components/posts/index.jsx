@@ -6,24 +6,31 @@ export default function Post({ post }) {
   return (
     <Paper
 
-      elevation={1}
+      elevation={0}
       sx={{
         
-        maxWidth: "500px",
         width: '90%',
         mb: 2,
-        p: 2,
+
+    
         border: 1,
-        borderColor: "grey.300",
-        borderRadius: 2,
-        // No se necesita 'mx' si el Box padre ya centra sus elementos hijos
+
+        borderRadius: 5,
+        p: 2,
+        bgcolor: "rgb(230, 230, 230)",
+        borderColor: "rgb(230, 230, 230)",
+      
+   
+       
       }}
     >
-      <Typography
-        variant="body1"
-        sx={{ wordBreak: "break-word" }}
-        component="pre"
-      >
+  <Typography
+  variant="body1"
+  sx={{ 
+    wordBreak: "break-word",
+    whiteSpace: 'pre-line' 
+  }}
+>
         {text}
       </Typography>
     </Paper>

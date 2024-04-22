@@ -161,9 +161,8 @@ const Login = ({ onToggleForm }) => {
         </Grid>
         <Grid item>
           <Button
-          //BOTÓN DE REGISTROS DESHABILITADO!!!!!!!!!!!
+          //BOTÓN DE REGISTROS DESHABILITADO
           disabled
-          // DESHABILITADO TEMPORALMENTE
           // CAMBIAR CONFIG. FIREBASE TAMBIÉN
           variant="contained"
             onClick={onToggleForm}
