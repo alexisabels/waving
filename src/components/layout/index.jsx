@@ -5,6 +5,9 @@ import { useAuth } from "../../hooks/auth";
 import Navbar from "../navbar";
 import { Box } from "@mui/material";
 import LoadingPage from "../../utils/LoadingPage";
+import texture from '../../assets/img/texture.png'
+
+
 export default function Layout() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -19,15 +22,20 @@ export default function Layout() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <>
+    <Box sx={{
+      backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(${texture})`,
+
+
+    }}>
       <Navbar />
       <Box sx={{
       maxWidth: 'lg', 
       mx: 'auto', 
       p: 2, 
+
     }}>
       <Outlet />
       </Box>
-    </>
+    </Box>
   );
 }
