@@ -46,10 +46,10 @@ function NewPost() {
         <form onSubmit={handleSubmit(handleAddPost)}>
           <Stack spacing={2} direction="row" justifyContent="space-between">
             <Typography variant="h4" component="h4" fontWeight="bold">
-              {/* cambiar a loadingbutton de mui */}
               Nuevo Post
             </Typography>
             <Button
+            // cambiar a loadingbutton de mui 
               variant="contained"
               size="large"
               type="submit"
@@ -57,6 +57,7 @@ function NewPost() {
                 borderRadius: 20,
                 textTransform: "none",
                 backgroundColor: "#0F1A1D",
+                width: "100px"
               }}
             >
               Post

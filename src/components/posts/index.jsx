@@ -37,8 +37,13 @@ export default function Post({ post }) {
           <Typography variant="subtitle2" component="div" noWrap>
             {username}
           </Typography>
-          <Typography variant="caption" color="text.secondary" noWrap>
-            {timestamp}
+          <Typography
+      variant="caption"
+      sx={{
+        color: 'rgba(0, 0, 0, 0.38)', 
+        noWrap: true
+      }}
+    >            {timestamp}
           </Typography>
         </Box>
       </Box>
