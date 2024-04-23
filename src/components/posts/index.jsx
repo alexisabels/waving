@@ -1,4 +1,5 @@
 import { Paper, Typography, Box, Avatar, Stack } from "@mui/material";
+import avatarexample from './../../assets/img/avatarexample.png'
 
 export default function Post({ post }) {
   const { text } = post;
@@ -32,7 +33,8 @@ export default function Post({ post }) {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ width: 38, height: 38, color: "white" }}></Avatar>{" "}
+        <Avatar               src={avatarexample}
+ sx={{ width: 38, height: 38, color: "white" }}> </Avatar>{" "}
         <Box sx={{ ml: 2,  }}>
           <Typography variant="subtitle2" component="div" noWrap>
             {username}

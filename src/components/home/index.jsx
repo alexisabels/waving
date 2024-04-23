@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form";
 import { useAddPost, usePosts } from "../../hooks/post";
 import { useAuth } from "../../hooks/auth";
 import PostsLists from "../posts/PostsLists";
+import avatarexample from './../../assets/img/avatarexample.png'
+
 import { grey } from "@mui/material/colors";
 function NewPost() {
   const { register, handleSubmit, reset } = useForm();
@@ -92,7 +94,7 @@ function NewPost() {
               },
               startAdornment: (
                 <InputAdornment position="start">
-                  <Avatar
+                  <Avatar src={avatarexample}
                     sx={{ width: 38, height: 38, color: "white" }}
                   ></Avatar>
                 </InputAdornment>
