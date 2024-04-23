@@ -198,9 +198,9 @@ const Register = ({ onToggleForm }) => {
               checked={acceptTerms}
               onChange={(e) => setAcceptTerms(e.target.checked)}
               name="acceptTerms"
-              sx={{ color: "#303030", fill: "#303030" }}
+              sx={{ color: "#223C43", fill: "#223C43" }}
               style={{
-                color: "#303030",
+                color: "#223C43",
               }}
             />
           }
@@ -209,7 +209,7 @@ const Register = ({ onToggleForm }) => {
               Acepto los{" "}
               <Link
                 to="/terminosycondiciones"
-                style={{ textDecoration: "underline", color: "#000000" }}
+                style={{ textDecoration: "underline", color: "#223C43" }}
               >
                 términos y condiciones
               </Link>
@@ -225,8 +225,8 @@ const Register = ({ onToggleForm }) => {
             mt: 3,
             mb: 2,
             borderRadius: "20px",
-            backgroundColor: "#303030",
-            "&:hover": { backgroundColor: "#303030" },
+            backgroundColor: "#223C43",
+            "&:hover": { backgroundColor: "#223C43" },
             textTransform: "none",
             fontWeight: "regular",
           }}
@@ -242,7 +242,7 @@ const Register = ({ onToggleForm }) => {
           <Button
             onClick={onToggleForm}
             sx={{
-              color: "#303030",
+              color: "#223C43",
               fontWeight: "medium",
             }}
           >
