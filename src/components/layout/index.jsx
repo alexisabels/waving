@@ -5,7 +5,6 @@ import { useAuth } from "../../hooks/auth";
 import Navbar from "../navbar";
 import { Box } from "@mui/material";
 import LoadingPage from "../../utils/LoadingPage";
-import texture from '../../assets/img/texture.png'
 
 
 export default function Layout() {
@@ -19,7 +18,7 @@ export default function Layout() {
     }
   }, [pathname, user, isLoading, navigate]);
 
-  if (isLoading) return <LoadingPage />;
+  if (!isLoading) return <LoadingPage />;
 
   return (
     <Box sx={{
