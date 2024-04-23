@@ -16,7 +16,9 @@ export default function Navbar() {
       position: 'sticky',
       top: 0,
       zIndex: 3,  pt: 1,
-      display: "flex", // Asegurarse de que la Box principal usa display flex
+      display: "flex",
+   
+
     }}>
     <Box
       sx={{
@@ -30,7 +32,7 @@ export default function Navbar() {
         alignItems: "center",
         display: "flex",
         backgroundColor: "#223C43",
-
+        boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
       }}
     >
       <Link

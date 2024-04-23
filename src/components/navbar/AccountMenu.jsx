@@ -17,7 +17,10 @@ import { PROTECTED } from "../../lib/routes";
 import avatarexample from './../../assets/img/avatarexample.png'
 function ActiveUserLink() {
   const { user, isLoading } = useAuth();
-  if (isLoading) return "Cargando...";
+  if (isLoading) return <Typography textAlign="center"  style={{ color: "inherit", textDecoration: "none", fontSize: "1.2rem", fontWeight: "bolder"
+}}>
+  Cargando...
+</Typography>;
   return (
     <Link
       to={`${PROTECTED}/profile/${user?.username}`}
@@ -30,7 +33,9 @@ function ActiveUserLink() {
 }
 function ActiveUserName() {
   const { user, isLoading } = useAuth();
-  if (isLoading) return "Cargando...";
+  if (isLoading) return  <Typography textAlign="center" color="white" marginInlineEnd="10px">
+  Cargando...
+</Typography>;
   return (
     <Typography textAlign="center" color="white" marginInlineEnd="10px">
       @{user?.username}
