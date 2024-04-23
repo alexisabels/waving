@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Paper,
   useTheme,
   useMediaQuery,
   Avatar,
@@ -19,6 +18,7 @@ import avatarexample from "./../../assets/img/avatarexample.png";
 export default function AppMobileBar() {
   const [value, setValue] = useState("recents");
   const theme = useTheme();
+  // eslint-disable-next-line no-unused-vars
   const { logout, isLoading } = useLogout();
   const { user } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
