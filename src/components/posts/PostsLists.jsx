@@ -21,7 +21,8 @@ export default function PostsLists({ posts, isLoading }) {
           maxWidth: "600px",
           mx: "auto",
 
-          my: 2,
+          mt: 2,
+          mb: 9,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
