@@ -5,7 +5,7 @@ export default function PostsLists({ posts, isLoading }) {
   if (isLoading) {
     return (
       <Typography textAlign="center">
-        <CircularProgress color="primary" size={50} /> <br />
+        <CircularProgress sx={{ color: "#223C43" }} size={50} /> <br />
         Cargando posts...
       </Typography>
     );

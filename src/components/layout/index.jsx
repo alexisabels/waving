@@ -5,6 +5,7 @@ import { useAuth } from "../../hooks/auth";
 import Navbar from "../navbar";
 import { Box } from "@mui/material";
 import LoadingPage from "../../utils/LoadingPage";
+import AppMobileBar from "../home/AppMobileBar";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -36,6 +37,7 @@ export default function Layout() {
       >
         <Outlet />
       </Box>
+      <AppMobileBar />
     </Box>
   );
 }

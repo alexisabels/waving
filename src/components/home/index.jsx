@@ -15,17 +15,18 @@ import { useAuth } from "../../hooks/auth";
 import PostsLists from "../posts/PostsLists";
 import avatarexample from "./../../assets/img/avatarexample.png";
 
-import { grey } from "@mui/material/colors";
 function NewPost() {
   const { register, handleSubmit, reset } = useForm();
   const {
     addPost,
+    // eslint-disable-next-line no-unused-vars
     isLoading,
     openSnackbar,
     setOpenSnackbar,
     snackbarMessage,
     snackbarSeverity,
   } = useAddPost();
+  // eslint-disable-next-line no-unused-vars
   const { user, isLoading: authLoading } = useAuth();
   function handleAddPost(data) {
     addPost({
@@ -67,7 +68,6 @@ function NewPost() {
         </Stack>
         <TextField
           minRows="1"
-          id="outlined-textarea"
           placeholder="Escribe un nuevo post..."
           multiline
           fullWidth
@@ -78,17 +78,12 @@ function NewPost() {
               borderRadius: 10,
               p: 2.5,
               bgcolor: "#223C43",
-              borderColor: "rgb(230, 230, 230)",
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "black",
-                border: "none",
-                boxShadow: "0 0 0 5px rgba(230, 230, 230, 0.25)",
-              },
+              borderColor: "#223C43",
 
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                 borderColor: "black",
                 border: "none",
-                boxShadow: "0 0 0 5px rgba(230, 230, 230, 0.5)",
+                boxShadow: "0 0 0 5px rgba(34, 60, 67, 0.1)",
               },
             },
             startAdornment: (
