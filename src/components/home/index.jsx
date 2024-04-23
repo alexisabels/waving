@@ -56,7 +56,7 @@ function NewPost() {
               style={{
                 borderRadius: 20,
                 textTransform: "none",
-                backgroundColor: "#0F1A1D",
+                backgroundColor: "#223C43",
                 width: "100px"
               }}
             >
@@ -72,9 +72,10 @@ function NewPost() {
             margin="normal"
             InputProps={{
               sx: {
+                color: 'white',
                 borderRadius: 10,
                 p: 2.5,
-                bgcolor: "rgb(230, 230, 230)",
+                bgcolor: "#223C43",
                 borderColor: "rgb(230, 230, 230)",
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: 'black',

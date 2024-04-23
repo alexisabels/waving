@@ -150,7 +150,7 @@ export default function AccountMenu() {
         
         >
           <ListItemIcon>
-            <LogoutIcon fontSize="medium" htmlColor="#0F1A1D" color="#0F1A1D" />
+            <LogoutIcon fontSize="medium" htmlColor="#223C43" color="#223C43" />
           </ListItemIcon>
           Logout
         </MenuItem>

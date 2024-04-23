@@ -15,16 +15,16 @@ export default function Post({ post }) {
         flexDirection: "column",
         alignItems: "flex-start",
         border: 1,
-        borderColor: "grey.300",
-        borderRadius: 5,
+        borderColor: "transparent",
+        borderRadius: 3,
         overflow: "hidden",
-        bgcolor: "grey.100",
+        bgcolor: "white",
       }}
     >
       <Box
         sx={{
-          bgcolor: "rgb(230, 230, 230)",
-
+          bgcolor: "#223C43",
+          color: 'white',
           px: 2,
           py: 1,
           display: "flex",
@@ -32,15 +32,15 @@ export default function Post({ post }) {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ width: 38, height: 38, color: "black" }}></Avatar>{" "}
-        <Box sx={{ ml: 2 }}>
+        <Avatar sx={{ width: 38, height: 38, color: "white" }}></Avatar>{" "}
+        <Box sx={{ ml: 2,  }}>
           <Typography variant="subtitle2" component="div" noWrap>
             {username}
           </Typography>
           <Typography
       variant="caption"
       sx={{
-        color: 'rgba(0, 0, 0, 0.38)', 
+        color: 'rgba(255, 255, 255, 0.7)', 
         noWrap: true
       }}
     >            {timestamp}

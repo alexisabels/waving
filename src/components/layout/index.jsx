@@ -23,8 +23,8 @@ export default function Layout() {
 
   return (
     <Box sx={{
-      backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(${texture})`,
-
+      // backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(${texture})`,
+bgcolor: '#EBE3DD'
 
     }}>
       <Navbar />
