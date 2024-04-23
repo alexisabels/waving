@@ -27,7 +27,7 @@ import { HOME } from "../../lib/routes";
 import { AlternateEmail, Key, MailOutline } from "@mui/icons-material";
 const Register = ({ onToggleForm }) => {
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [termsError, setTermsError] = useState(""); 
+  const [termsError, setTermsError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -52,13 +52,13 @@ const Register = ({ onToggleForm }) => {
 
   console.log(errors);
   async function handleRegister(data) {
-    setTermsError(""); 
-    
+    setTermsError("");
+
     if (!acceptTerms) {
       setTermsError(
-        "Debes aceptar los términos y condiciones para registrarte."
+        "Debes aceptar los términos y condiciones para registrarte.",
       );
-      setOpenSnackbar(true); 
+      setOpenSnackbar(true);
       return;
     }
     const result = await signup({
@@ -74,7 +74,6 @@ const Register = ({ onToggleForm }) => {
       reset();
     }
   }
-  
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

@@ -2,7 +2,11 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -14,7 +18,7 @@ const firebaseConfig = {
   projectId: "wavingsocial",
   storageBucket: "wavingsocial.appspot.com",
   messagingSenderId: "344973826679",
-  appId: "1:344973826679:web:e44a3cace8b21775100472"
+  appId: "1:344973826679:web:e44a3cace8b21775100472",
 };
 
 // Initialize Firebase

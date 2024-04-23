@@ -6,7 +6,6 @@ import Navbar from "../navbar";
 import { Box } from "@mui/material";
 import LoadingPage from "../../utils/LoadingPage";
 
-
 export default function Layout() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -18,22 +17,24 @@ export default function Layout() {
     }
   }, [pathname, user, isLoading, navigate]);
 
-  if (!isLoading) return <LoadingPage />;
+  if (isLoading) return <LoadingPage />;
 
   return (
-    <Box sx={{
-      // backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(${texture})`,
-bgcolor: '#EBE3DD'
-
-    }}>
+    <Box
+      sx={{
+        // backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(${texture})`,
+        bgcolor: "#EBE3DD",
+      }}
+    >
       <Navbar />
-      <Box sx={{
-      maxWidth: 'lg', 
-      mx: 'auto', 
-      p: 2, 
-
-    }}>
-      <Outlet />
+      <Box
+        sx={{
+          maxWidth: "lg",
+          mx: "auto",
+          p: 2,
+        }}
+      >
+        <Outlet />
       </Box>
     </Box>
   );

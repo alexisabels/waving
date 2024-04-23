@@ -161,17 +161,16 @@ const Login = ({ onToggleForm }) => {
         </Grid>
         <Grid item>
           <Button
-          //BOTÓN DE REGISTROS DESHABILITADO
-          // CAMBIAR CONFIG. FIREBASE TAMBIÉN
-          disabled
+            //BOTÓN DE REGISTROS DESHABILITADO
+            // CAMBIAR CONFIG. FIREBASE TAMBIÉN
+            disabled
             onClick={onToggleForm}
             sx={{
               color: "#223C43",
               fontWeight: "medium",
-              '&:hover': {
+              "&:hover": {
                 color: "#223C43",
-
-            },
+              },
             }}
           >
             REGISTRO DESHABILITADO TEMPORALMENTE

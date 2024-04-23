@@ -1,5 +1,6 @@
-import { Paper, Typography, Box, Avatar, Stack } from "@mui/material";
-import avatarexample from './../../assets/img/avatarexample.png'
+/* eslint-disable react/prop-types */
+import { Paper, Typography, Box, Avatar } from "@mui/material";
+import avatarexample from "./../../assets/img/avatarexample.png";
 
 export default function Post({ post }) {
   const { text } = post;
@@ -25,7 +26,7 @@ export default function Post({ post }) {
       <Box
         sx={{
           bgcolor: "#223C43",
-          color: 'white',
+          color: "white",
           px: 2,
           py: 1,
           display: "flex",
@@ -33,19 +34,25 @@ export default function Post({ post }) {
           alignItems: "center",
         }}
       >
-        <Avatar               src={avatarexample}
- sx={{ width: 38, height: 38, color: "white" }}> </Avatar>{" "}
-        <Box sx={{ ml: 2,  }}>
+        <Avatar
+          src={avatarexample}
+          sx={{ width: 38, height: 38, color: "white" }}
+        >
+          {" "}
+        </Avatar>{" "}
+        <Box sx={{ ml: 2 }}>
           <Typography variant="subtitle2" component="div" noWrap>
             {username}
           </Typography>
           <Typography
-      variant="caption"
-      sx={{
-        color: 'rgba(255, 255, 255, 0.7)', 
-        noWrap: true
-      }}
-    >            {timestamp}
+            variant="caption"
+            sx={{
+              color: "rgba(255, 255, 255, 0.7)",
+              noWrap: true,
+            }}
+          >
+            {" "}
+            {timestamp}
           </Typography>
         </Box>
       </Box>

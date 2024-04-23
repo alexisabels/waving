@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { useAddPost, usePosts } from "../../hooks/post";
 import { useAuth } from "../../hooks/auth";
 import PostsLists from "../posts/PostsLists";
-import avatarexample from './../../assets/img/avatarexample.png'
+import avatarexample from "./../../assets/img/avatarexample.png";
 
 import { grey } from "@mui/material/colors";
 function NewPost() {
@@ -45,65 +45,65 @@ function NewPost() {
   };
   return (
     <Box paddingTop={8} paddingBottom={4}>
-        <form onSubmit={handleSubmit(handleAddPost)}>
-          <Stack spacing={2} direction="row" justifyContent="space-between">
-            <Typography variant="h4" component="h4" fontWeight="bold">
-              Nuevo Post
-            </Typography>
-            <Button
-            // cambiar a loadingbutton de mui 
-              variant="contained"
-              size="large"
-              type="submit"
-              style={{
-                borderRadius: 20,
-                textTransform: "none",
-                backgroundColor: "#223C43",
-                width: "100px"
-              }}
-            >
-              Post
-            </Button>
-          </Stack>
-          <TextField
-            minRows="1"
-            id="outlined-textarea"
-            placeholder="Escribe un nuevo post..."
-            multiline
-            fullWidth
-            margin="normal"
-            InputProps={{
-              sx: {
-                color: 'white',
-                borderRadius: 10,
-                p: 2.5,
-                bgcolor: "#223C43",
-                borderColor: "rgb(230, 230, 230)",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: 'black',
-                  border: 'none',
-                  boxShadow: '0 0 0 5px rgba(230, 230, 230, 0.25)', 
-                },
-           
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: 'black',
-                  border: 'none',
-                  boxShadow: '0 0 0 5px rgba(230, 230, 230, 0.5)', 
-
-                }
-              },
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Avatar src={avatarexample}
-                    sx={{ width: 38, height: 38, color: "white" }}
-                  ></Avatar>
-                </InputAdornment>
-              ),
+      <form onSubmit={handleSubmit(handleAddPost)}>
+        <Stack spacing={2} direction="row" justifyContent="space-between">
+          <Typography variant="h4" component="h4" fontWeight="bold">
+            Nuevo Post
+          </Typography>
+          <Button
+            // cambiar a loadingbutton de mui
+            variant="contained"
+            size="large"
+            type="submit"
+            style={{
+              borderRadius: 20,
+              textTransform: "none",
+              backgroundColor: "#223C43",
+              width: "100px",
             }}
-            {...register("text", { required: true })}
-          />
-        </form>
-   
+          >
+            Post
+          </Button>
+        </Stack>
+        <TextField
+          minRows="1"
+          id="outlined-textarea"
+          placeholder="Escribe un nuevo post..."
+          multiline
+          fullWidth
+          margin="normal"
+          InputProps={{
+            sx: {
+              color: "white",
+              borderRadius: 10,
+              p: 2.5,
+              bgcolor: "#223C43",
+              borderColor: "rgb(230, 230, 230)",
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "black",
+                border: "none",
+                boxShadow: "0 0 0 5px rgba(230, 230, 230, 0.25)",
+              },
+
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "black",
+                border: "none",
+                boxShadow: "0 0 0 5px rgba(230, 230, 230, 0.5)",
+              },
+            },
+            startAdornment: (
+              <InputAdornment position="start">
+                <Avatar
+                  src={avatarexample}
+                  sx={{ width: 38, height: 38, color: "white" }}
+                ></Avatar>
+              </InputAdornment>
+            ),
+          }}
+          {...register("text", { required: true })}
+        />
+      </form>
+
       <Snackbar
         open={openSnackbar}
         autoHideDuration={4000}
@@ -128,11 +128,10 @@ export default function Home() {
   const { posts, isLoading: postsLoading } = usePosts();
 
   return (
-    <Box maxWidth="600px" mx="auto" >
-
+    <Box maxWidth="600px" mx="auto">
       <NewPost />
-      
+
       <PostsLists posts={posts} isLoading={postsLoading} />
-      </Box>
+    </Box>
   );
 }
