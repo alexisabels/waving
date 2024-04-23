@@ -93,7 +93,7 @@ function NewPost() {
               startAdornment: (
                 <InputAdornment position="start">
                   <Avatar
-                    sx={{ width: 38, height: 38, color: "black" }}
+                    sx={{ width: 38, height: 38, color: "white" }}
                   ></Avatar>
                 </InputAdornment>
               ),

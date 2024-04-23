@@ -14,7 +14,7 @@ export default function Post({ post }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        border: 1,
+        border: 0,
         borderColor: "transparent",
         borderRadius: 3,
         overflow: "hidden",
