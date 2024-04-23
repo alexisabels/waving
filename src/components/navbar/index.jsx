@@ -17,7 +17,9 @@ export default function Navbar() {
         alignItems: "center",
         display: "flex",
         backgroundColor: "#0F1A1D",
-        
+        position: 'sticky',
+        top: 0,
+
       }}
     >
       <Link
