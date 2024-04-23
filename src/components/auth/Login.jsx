@@ -86,11 +86,11 @@ const Login = ({ onToggleForm }) => {
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
-                borderColor: "#303030",
+                borderColor: "#223C43",
               },
             },
             "& .MuiInputLabel-outlined.Mui-focused": {
-              color: "#303030",
+              color: "#223C43",
             },
             bgcolor: "white",
           }}
@@ -127,11 +127,11 @@ const Login = ({ onToggleForm }) => {
           sx={{
             "& .MuiOutlinedInput-root": {
               "&.Mui-focused fieldset": {
-                borderColor: "#303030",
+                borderColor: "#223C43",
               },
             },
             "& .MuiInputLabel-outlined.Mui-focused": {
-              color: "#303030",
+              color: "#223C43",
             },
             bgcolor: "white",
           }}
@@ -144,10 +144,10 @@ const Login = ({ onToggleForm }) => {
           sx={{
             mt: 3,
             mb: 2,
-            backgroundColor: "#303030",
+            backgroundColor: "#223C43",
             borderRadius: "20px",
 
-            "&:hover": { backgroundColor: "#303030" },
+            "&:hover": { backgroundColor: "#223C43" },
             textTransform: "none",
             fontWeight: "regular",
           }}
@@ -162,13 +162,16 @@ const Login = ({ onToggleForm }) => {
         <Grid item>
           <Button
           //BOTÓN DE REGISTROS DESHABILITADO
-          disabled
           // CAMBIAR CONFIG. FIREBASE TAMBIÉN
-          variant="contained"
+          disabled
             onClick={onToggleForm}
             sx={{
-              color: "#303030",
+              color: "#223C43",
               fontWeight: "medium",
+              '&:hover': {
+                color: "#223C43",
+
+            },
             }}
           >
             REGISTRO DESHABILITADO TEMPORALMENTE
