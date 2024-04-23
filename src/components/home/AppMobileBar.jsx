@@ -8,9 +8,9 @@ import {
   Avatar,
   Box,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import LogoutIcon from "@mui/icons-material/Logout";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { NavLink } from "react-router-dom";
 import { PROTECTED } from "../../lib/routes";
 import { useAuth, useLogout } from "../../hooks/auth";
@@ -35,11 +35,13 @@ export default function AppMobileBar() {
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#EBE3DD",
+            backgroundColor: "rgba(235, 227, 221, 0.8)",
+
             position: "fixed",
             bottom: 0,
             zIndex: 3,
-            pt: 1,
+            // pt: 1,
+            pb: 1,
             display: "flex",
           }}
         >
@@ -54,7 +56,7 @@ export default function AppMobileBar() {
               justifyContent: "space-around",
               alignItems: "center",
               display: "flex",
-              backgroundColor: "#223C43",
+              backgroundColor: "rgba(34, 60, 67, 1.98)",
               boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
               "& .MuiBottomNavigationAction-label": {
                 color: "white",
@@ -63,7 +65,7 @@ export default function AppMobileBar() {
           >
             <BottomNavigationAction
               label="Home"
-              icon={<HomeIcon sx={{ color: "white" }} />}
+              icon={<HomeRoundedIcon sx={{ color: "white" }} />}
               component={NavLink}
               to={`${PROTECTED}/home`}
               showLabel={true}
@@ -73,7 +75,7 @@ export default function AppMobileBar() {
               icon={
                 <Avatar
                   src={avatarexample}
-                  sx={{ width: 32, height: 32, color: "black" }}
+                  sx={{ width: 24, height: 24, color: "black" }}
                 />
               }
               component={NavLink}
@@ -82,14 +84,14 @@ export default function AppMobileBar() {
             />
             <BottomNavigationAction
               label="Users"
-              icon={<GroupAddIcon sx={{ color: "white" }} />}
+              icon={<GroupRoundedIcon sx={{ color: "white" }} />}
               component={NavLink}
               to={`${PROTECTED}/users`}
               showLabel={true}
             />
             <BottomNavigationAction
               label="Logout"
-              icon={<LogoutIcon sx={{ color: "white" }} />}
+              icon={<LogoutRoundedIcon sx={{ color: "white" }} />}
               onClick={logout}
               showLabel={true}
             />
