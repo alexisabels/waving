@@ -12,7 +12,7 @@ export default function Post({ post }) {
     <Paper
       elevation={0}
       sx={{
-        width: "97%",
+        width: "96%",
         my: 2,
         display: "flex",
         flexDirection: "column",
