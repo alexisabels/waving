@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import { Paper, Typography, Box, Avatar } from "@mui/material";
+import { Paper, Typography, Box, Avatar, Link } from "@mui/material";
 import avatarexample from "./../../assets/img/avatarexample.png";
+import React from "react";
 
 export default function Post({ post }) {
   const { text } = post;
@@ -64,7 +65,21 @@ export default function Post({ post }) {
           p: 2,
         }}
       >
-        {text}
+        {/* Comprobar texto para saber si hay url y ponerla como tal */}
+        {text.split(/(\s+)/).map((part, index) => {
+          // Esta expresión regular identifica URLs
+
+          const urlRegex =
+            /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
+          if (urlRegex.test(part)) {
+            return (
+              <Link key={index} href={part} target="_blank" rel="noopener">
+                {part}
+              </Link>
+            );
+          }
+          return <React.Fragment key={index}>{part}</React.Fragment>;
+        })}
       </Typography>
     </Paper>
   );
