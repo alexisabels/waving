@@ -12,7 +12,7 @@ export default function Post({ post }) {
     <Paper
       elevation={0}
       sx={{
-        width: "100%",
+        width: "97%",
         my: 2,
         display: "flex",
         flexDirection: "column",
@@ -22,6 +22,7 @@ export default function Post({ post }) {
         borderRadius: 3,
         overflow: "hidden",
         bgcolor: "white",
+        boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
       }}
     >
       <Box
