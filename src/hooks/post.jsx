@@ -9,13 +9,20 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+
 export function useAddPost() {
   const [isLoading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("info");
+
   async function addPost(post) {
     try {
+      // Comprobacion para evitar que se suban posts con solo espacios en blanco
+      if (!post.text.trim()) {
+        throw new Error("El contenido del post no puede estar vacío.");
+      }
+
       setLoading(true);
       const docRef = await addDoc(collection(db, "posts"), {
         ...post,
@@ -25,7 +32,7 @@ export function useAddPost() {
       await setDoc(
         doc(db, "posts", docRef.id),
         { id: docRef.id },
-        { merge: true },
+        { merge: true }
       );
 
       console.log("Post publicado con ID: ", docRef.id);
@@ -33,8 +40,8 @@ export function useAddPost() {
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
     } catch (e) {
-      setSnackbarMessage("Error agregando doc: ", e);
-      console.error("Error agregando doc: ", e);
+      setSnackbarMessage("Error al publicar el post: " + e.message);
+      console.error("Error al publicar el post: ", e);
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
     } finally {
@@ -51,6 +58,7 @@ export function useAddPost() {
     snackbarSeverity,
   };
 }
+
 export function usePosts() {
   const q = query(collection(db, "posts"), orderBy("date", "desc"));
   const [posts, isLoading, error] = useCollectionData(q);
