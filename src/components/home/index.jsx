@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { useAddPost, usePosts } from "../../hooks/post";
 import { useAuth } from "../../hooks/auth";
 import PostsLists from "../posts/PostsLists";
-import avatarexample from "./../../assets/img/avatarexample.png";
+import avatarexample from "./../../../public/assets/img/avatarexample.png";
 
 function NewPost() {
   const { register, handleSubmit, reset } = useForm();

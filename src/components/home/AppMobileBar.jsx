@@ -13,7 +13,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { NavLink } from "react-router-dom";
 import { PROTECTED } from "../../lib/routes";
 import { useAuth, useLogout } from "../../hooks/auth";
-import avatarexample from "./../../assets/img/avatarexample.png";
+import avatarexample from "./../../../public/assets/img/avatarexample.png";
 
 export default function AppMobileBar() {
   const [value, setValue] = useState("recents");

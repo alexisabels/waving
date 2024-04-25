@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Paper, Typography, Box, Avatar, Link } from "@mui/material";
-import avatarexample from "./../../assets/img/avatarexample.png";
+import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import React from "react";
 
 export default function Post({ post }) {

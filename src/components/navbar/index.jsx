@@ -2,7 +2,7 @@ import { Box, Link, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import AccountMenu from "./AccountMenu"; // Asegúrate de que esta ruta sea la correcta para importar AccountMenu
 import { PROTECTED } from "../../lib/routes";
-import WaveLogo from "../../assets/img/WaveLogo";
+import WaveLogo from "../../../public/assets/img/WaveLogo";
 
 export default function Navbar() {
   return (

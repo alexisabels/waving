@@ -3,8 +3,8 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 import Register from "./Register";
 import Login from "./Login";
-import ocean from "../../assets/img/ocean.jpg";
-import texture from "../../assets/img/texture.png";
+import ocean from "../../../public/assets/img/ocean.jpg";
+import texture from "../../../public/assets/img/texture.png";
 import "./AuthPage.css";
 const AuthPage = () => {
   const [isRegistered, setIsRegistered] = useState(true);
