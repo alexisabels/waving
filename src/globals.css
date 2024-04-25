@@ -6,11 +6,8 @@ html, body {
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
   height: 100%; /* Asegura que html y body ocupen al menos la altura completa de la ventana */
-  
 }
-body {
-  background-color: #EBE3DD
-}
+
 
 
 

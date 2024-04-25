@@ -60,7 +60,6 @@ export default function Post({ post }) {
       </Box>
       <Typography
         variant="body1"
-        fontSize={14}
         sx={{
           wordBreak: "break-word",
           whiteSpace: "pre-line",
