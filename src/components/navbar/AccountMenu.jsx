@@ -24,7 +24,7 @@ function ActiveUserLink() {
         style={{
           color: "inherit",
           textDecoration: "none",
-          fontSize: "1.2rem",
+          fontSize: "1rem",
           fontWeight: "bolder",
         }}
       >
@@ -37,7 +37,7 @@ function ActiveUserLink() {
       style={{
         color: "inherit",
         textDecoration: "none",
-        fontSize: "1.2rem",
+        fontSize: "1rem",
         fontWeight: "bolder",
       }}
     >
@@ -54,7 +54,14 @@ function ActiveUserName() {
       </Typography>
     );
   return (
-    <Typography textAlign="center" color="white" marginInlineEnd="10px">
+    <Typography
+      textAlign="center"
+      color="white"
+      marginInlineEnd="10px"
+      sx={{
+        fontSize: "0.9rem",
+      }}
+    >
       @{user?.username}
     </Typography>
   );
@@ -87,7 +94,7 @@ export default function AccountMenu() {
             <ActiveUserName />
 
             <Avatar
-              sx={{ width: 38, height: 38, color: "black" }}
+              sx={{ width: 35, height: 35, color: "black" }}
               src={avatarexample}
             ></Avatar>
           </IconButton>
@@ -170,7 +177,7 @@ export default function AccountMenu() {
               backgroundColor: "rgba(0, 0, 0, 0.1)",
             },
             textDecoration: "none",
-            fontSize: "1.2rem",
+            fontSize: "1rem",
             fontWeight: "bolder",
           }}
         >

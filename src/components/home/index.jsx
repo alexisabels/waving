@@ -45,16 +45,21 @@ function NewPost() {
     setOpenSnackbar(false);
   };
   return (
-    <Box paddingTop={8} paddingBottom={4}>
+    <Box
+      paddingTop={6}
+      paddingBottom={4}
+      width="80%"
+      sx={{ width: "85%", maxWidth: "600px", mx: "auto" }}
+    >
       <form onSubmit={handleSubmit(handleAddPost)}>
         <Stack spacing={2} direction="row" justifyContent="space-between">
-          <Typography variant="h4" component="h4" fontWeight="bold">
+          <Typography variant="h5" component="h5" fontWeight="bold">
             Nuevo Post
           </Typography>
           <Button
             // cambiar a loadingbutton de mui
             variant="contained"
-            size="large"
+            size="medium"
             type="submit"
             style={{
               borderRadius: 20,
@@ -79,7 +84,8 @@ function NewPost() {
               p: 2.5,
               bgcolor: "#223C43",
               borderColor: "#223C43",
-
+              fontSize: "small",
+              fontWeight: "small",
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                 borderColor: "black",
                 border: "none",

@@ -12,17 +12,22 @@ export default function PostsLists({ posts, isLoading }) {
   }
   return (
     <>
-      <Typography variant="h4" component="h4" fontWeight="bold">
+      <Typography
+        sx={{ width: "85%", maxWidth: "600px", mx: "auto" }}
+        variant="h5"
+        component="h5"
+        fontWeight="bold"
+      >
         Últimos Posts
       </Typography>
       <Box
         sx={{
-          width: "100%",
+          width: "85%",
           maxWidth: "600px",
           mx: "auto",
 
-          mt: 2,
-          mb: 9,
+          mt: 1,
+          mb: 7,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

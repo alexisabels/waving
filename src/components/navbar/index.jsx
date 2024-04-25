@@ -25,7 +25,7 @@ export default function Navbar() {
 
           width: "97%",
           borderColor: "#223C43",
-          height: 64,
+          height: 60,
 
           justifyContent: "space-around",
           alignItems: "center",
@@ -41,7 +41,7 @@ export default function Navbar() {
             color: "#FFFF",
             fontWeight: "bold",
             textDecoration: "none",
-            fontSize: "1.3rem",
+            fontSize: "1rem",
           }}
         >
           <Stack alignItems="center" direction="row" gap={1}>

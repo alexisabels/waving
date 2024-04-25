@@ -33,6 +33,7 @@ export default function Layout() {
           maxWidth: "lg",
           mx: "auto",
           p: 2,
+          width: "85%",
         }}
       >
         <Outlet />
