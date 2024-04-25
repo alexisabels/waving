@@ -9,7 +9,9 @@ html, body {
 }
 
 
-
+body {
+  background-color: #EBE3DD
+}
 
 
 /* Estilos para Firefox */
