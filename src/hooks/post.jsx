@@ -7,6 +7,7 @@ import {
   setDoc,
   doc,
   orderBy,
+  deleteDoc,
 } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -14,7 +15,7 @@ export function useAddPost() {
   const [isLoading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState("info");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("");
 
   async function addPost(post) {
     try {
@@ -64,4 +65,37 @@ export function usePosts() {
   const [posts, isLoading, error] = useCollectionData(q);
   if (error) throw error;
   return { posts, isLoading };
+}
+
+export function useDeletePost() {
+  const [isLoading, setLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("");
+
+  async function deletePost(postId) {
+    try {
+      setLoading(true);
+      await deleteDoc(doc(db, "posts", postId));
+      setSnackbarMessage("Post eliminado correctamente");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
+    } catch (e) {
+      setSnackbarMessage("Error al eliminar el post: " + e.message);
+      console.error("Error al eliminar el post: ", e);
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return {
+    deletePost,
+    isLoading,
+    openSnackbar,
+    setOpenSnackbar,
+    snackbarMessage,
+    snackbarSeverity,
+  };
 }

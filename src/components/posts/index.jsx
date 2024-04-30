@@ -1,11 +1,21 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { Paper, Typography, Box, Avatar, Link } from "@mui/material";
+// Asegúrate de que la ruta de importación es correcta
+import { Paper, Typography, Box, Avatar, Stack } from "@mui/material";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import React from "react";
+import PostMenu from "./PostMenu"; // Verifica la ruta
+import { useUser } from "../../hooks/user";
 
-export default function Post({ post }) {
-  const { text } = post;
-  const username = "alex123";
+export default function Post({ post, currentUser, showSnackbar }) {
+  const { text, uid } = post;
+  const { user, loading } = useUser(uid);
+
+  const username = loading
+    ? "Cargando..."
+    : user
+      ? user.username
+      : "Usuario desconocido";
   const timestamp = "hace 1 minuto";
 
   return (
@@ -29,58 +39,43 @@ export default function Post({ post }) {
         sx={{
           bgcolor: "#223C43",
           color: "white",
-          px: 2,
-          py: 1,
           display: "flex",
           width: "100%",
-          alignItems: "center",
         }}
       >
-        <Avatar
-          src={avatarexample}
-          sx={{ width: 38, height: 38, color: "white" }}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ width: "100%", px: 2, py: 1 }}
         >
-          {" "}
-        </Avatar>{" "}
-        <Box sx={{ ml: 2 }}>
-          <Typography variant="subtitle2" component="div" noWrap>
-            {username}
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{
-              color: "rgba(255, 255, 255, 0.7)",
-              noWrap: true,
-            }}
-          >
-            {" "}
-            {timestamp}
-          </Typography>
-        </Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Avatar
+              src={avatarexample}
+              sx={{ width: 38, height: 38, color: "white" }}
+            />
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" component="div" noWrap>
+                {username}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{ color: "rgba(255, 255, 255, 0.7)" }}
+              >
+                {timestamp}
+              </Typography>
+            </Box>
+          </Box>
+          {currentUser.id === uid && (
+            <PostMenu postId={post.id} showSnackbar={showSnackbar} />
+          )}
+        </Stack>
       </Box>
       <Typography
         variant="body1"
-        sx={{
-          wordBreak: "break-word",
-          whiteSpace: "pre-line",
-          p: 2,
-        }}
+        sx={{ wordBreak: "break-word", whiteSpace: "pre-line", p: 2 }}
       >
-        {/* Comprobar texto para saber si hay url y ponerla como tal */}
-        {text.split(/(\s+)/).map((part, index) => {
-          // Esta expresión regular identifica URLs
-
-          const urlRegex =
-            /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
-          if (urlRegex.test(part)) {
-            return (
-              <Link key={index} href={part} target="_blank" rel="noopener">
-                {part}
-              </Link>
-            );
-          }
-          return <React.Fragment key={index}>{part}</React.Fragment>;
-        })}
+        {text}
       </Typography>
     </Paper>
   );
