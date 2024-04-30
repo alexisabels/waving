@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -27,7 +28,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.2",
-    "@eslint/js": "^9.0.0",
+    "@eslint/js": "^9.1.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
@@ -36,9 +37,9 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "globals": "^15.0.0",
+    "globals": "^15.1.0",
     "prettier": "^3.2.5",
     "vite": "^5.2.0",
     "vite-plugin-pwa": "^0.19.8"

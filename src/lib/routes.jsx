@@ -3,9 +3,10 @@ import AuthPage from "../components/auth/AuthPage";
 import Layout from "../components/layout";
 import Home from "../components/home";
 import TerminosYCondiciones from "../components/terms/TerminosYCondiciones";
+import Profile from "../components/profile/Profile";
 export const ROOT = "/";
 export const AUTH = "/auth";
-export const PROFILE = "/protected/profile/:id";
+export const PROFILE = "/protected/profile/:username";
 export const PROTECTED = "/protected";
 export const HOME = "/protected/home";
 export const TERMSANDCONDITONS = "/terminosycondiciones";
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: PROFILE,
-        element: "User profile for a specific id",
+        element: <Profile />,
       },
     ],
   },

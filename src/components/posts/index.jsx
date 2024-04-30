@@ -6,16 +6,14 @@ import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import React from "react";
 import PostMenu from "./PostMenu"; // Verifica la ruta
 import { useUser } from "../../hooks/user";
+import { PROTECTED } from "../../lib/routes";
+import { Link } from "react-router-dom";
 
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
   const { user, loading } = useUser(uid);
 
-  const username = loading
-    ? "Cargando..."
-    : user
-      ? user.username
-      : "Usuario desconocido";
+  const username = loading ? "" : user ? user.username : "Usuario desconocido";
   const timestamp = "hace 1 minuto";
 
   return (
@@ -53,11 +51,25 @@ export default function Post({ post, currentUser, showSnackbar }) {
             <Avatar
               src={avatarexample}
               sx={{ width: 38, height: 38, color: "white" }}
+              component={Link}
+              to={`${PROTECTED}/profile/${username}`}
             />
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" component="div" noWrap>
-                {username}
-              </Typography>
+              <div>
+                <Typography
+                  variant="subtitle2"
+                  component={Link}
+                  noWrap
+                  to={`${PROTECTED}/profile/${username}`}
+                  sx={{
+                    textDecoration: "none",
+                    color: "white",
+                    "&:hover": { textDecoration: "underline" },
+                  }}
+                >
+                  {username}
+                </Typography>
+              </div>
               <Typography
                 variant="caption"
                 sx={{ color: "rgba(255, 255, 255, 0.7)" }}
