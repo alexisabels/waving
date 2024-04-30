@@ -12,7 +12,7 @@ import {
   IconButton,
   Grid,
 } from "@mui/material";
-
+import PasswordResetModal from "./PasswordResetModal";
 import { useLogin } from "../../hooks/auth";
 import { useForm } from "react-hook-form";
 import { emailValidate, passwordValidate } from "../../utils/form-validate";
@@ -48,6 +48,7 @@ const Login = ({ onToggleForm }) => {
     });
     if (succeeded) reset();
   }
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -55,6 +56,10 @@ const Login = ({ onToggleForm }) => {
     }
     setOpenSnackbar(false);
   };
+
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -95,7 +100,6 @@ const Login = ({ onToggleForm }) => {
             bgcolor: "white",
           }}
         />
-
         <TextField
           fullWidth
           label="Contraseña"
@@ -136,6 +140,21 @@ const Login = ({ onToggleForm }) => {
             bgcolor: "white",
           }}
         />
+        <Typography
+          fontWeight="light"
+          fontSize="smaller"
+          sx={{
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          }}
+          onClick={handleOpenModal}
+        >
+          He olvidado mi contraseña
+        </Typography>
+        <PasswordResetModal open={modalOpen} onClose={handleCloseModal} />
+
         <Button
           type="submit"
           fullWidth
@@ -163,7 +182,8 @@ const Login = ({ onToggleForm }) => {
           <Button
             //BOTÓN DE REGISTROS DESHABILITADO
             // CAMBIAR CONFIG. FIREBASE TAMBIÉN
-            disabled
+            // disabled
+
             onClick={onToggleForm}
             sx={{
               color: "#223C43",
@@ -173,7 +193,7 @@ const Login = ({ onToggleForm }) => {
               },
             }}
           >
-            REGISTRO DESHABILITADO TEMPORALMENTE
+            REGISTRARME
           </Button>
         </Grid>
       </Grid>

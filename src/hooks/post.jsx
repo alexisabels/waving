@@ -18,7 +18,7 @@ export function useAddPost() {
 
   async function addPost(post) {
     try {
-      // Comprobacion para evitar que se suban posts con solo espacios en blanco
+      // para evitar posts en blanco
       if (!post.text.trim()) {
         throw new Error("El contenido del post no puede estar vacío.");
       }
