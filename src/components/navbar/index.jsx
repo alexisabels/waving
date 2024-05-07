@@ -1,10 +1,25 @@
-import { Box, Link, Stack } from "@mui/material";
+import {
+  Box,
+  Link,
+  Stack,
+  useMediaQuery,
+  useScrollTrigger,
+  useTheme,
+} from "@mui/material";
 import { NavLink } from "react-router-dom";
 import AccountMenu from "./AccountMenu"; // Asegúrate de que esta ruta sea la correcta para importar AccountMenu
 import { PROTECTED } from "../../lib/routes";
 import WaveLogo from "../../../public/assets/img/WaveLogo";
 
 export default function Navbar() {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
+  const theme = useTheme();
+
+  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <Box
       sx={{
@@ -17,13 +32,13 @@ export default function Navbar() {
         zIndex: 3,
         pt: 1,
         display: "flex",
+        transition: "all 0.3s ease",
       }}
     >
       <Box
         sx={{
           borderRadius: 5,
-
-          width: "97%",
+          width: trigger && isMobile ? "50%" : "97%",
           borderColor: "#223C43",
           height: 64,
 
@@ -32,6 +47,7 @@ export default function Navbar() {
           display: "flex",
           backgroundColor: "#223C43",
           boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+          transition: "width 0.3s ease",
         }}
       >
         <Link

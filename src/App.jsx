@@ -1,6 +1,5 @@
-import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { router } from "./lib/routes";
 import "./globals.css";
 
