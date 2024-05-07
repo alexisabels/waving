@@ -10,7 +10,7 @@ import {
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { PROTECTED } from "../../lib/routes";
 import { useAuth, useLogout } from "../../hooks/auth";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
@@ -22,7 +22,16 @@ export default function AppMobileBar() {
   const { logout, isLoading } = useLogout();
   const { user } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const location = useLocation();
 
+  const handleScrollToTop = () => {
+    if (location.pathname === `${PROTECTED}/home`) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -67,6 +76,7 @@ export default function AppMobileBar() {
               label="Home"
               icon={<HomeRoundedIcon sx={{ color: "white" }} />}
               component={NavLink}
+              onClick={handleScrollToTop}
               to={`${PROTECTED}/home`}
               showLabel={true}
             />

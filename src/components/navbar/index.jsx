@@ -6,8 +6,8 @@ import {
   useScrollTrigger,
   useTheme,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import AccountMenu from "./AccountMenu"; // Asegúrate de que esta ruta sea la correcta para importar AccountMenu
+import { NavLink, useLocation } from "react-router-dom";
+import AccountMenu from "./AccountMenu";
 import { PROTECTED } from "../../lib/routes";
 import WaveLogo from "../../../public/assets/img/WaveLogo";
 
@@ -19,7 +19,16 @@ export default function Navbar() {
   const theme = useTheme();
 
   const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+  const location = useLocation();
 
+  const handleScrollToTop = () => {
+    if (location.pathname === `${PROTECTED}/home`) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <Box
       sx={{
@@ -53,6 +62,7 @@ export default function Navbar() {
         <Link
           component={NavLink}
           to={`${PROTECTED}/home`}
+          onClick={handleScrollToTop}
           sx={{
             color: "#FFFF",
             fontWeight: "bold",
