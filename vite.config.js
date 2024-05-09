@@ -14,7 +14,6 @@ export default defineConfig({
       manifest: {
         theme_color: "#EBE3DD",
         name: "Waving Social",
-        short_name: "Waving",
         start_url: "/",
         display: "standalone",
         background_color: "#EBE3DD",
@@ -27,6 +26,7 @@ export default defineConfig({
             purpose: "any maskable",
           },
         ],
+        short_name: "Waving",
       },
     }),
   ],

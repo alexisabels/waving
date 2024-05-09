@@ -1,5 +1,5 @@
 {
-  "name": "Waving",
+  "name": "Waving Social",
   "icons": [
     {
       "src": "img/logo.png",
@@ -12,9 +12,9 @@
   "theme_color": "#ebe3dd",
   "background_color": "#ebe3dd",
   "description": "Waving Social",
-  "short_name": "Waving",
   "dir": "ltr",
   "lang": "es",
   "display_override": ["window-controls-overlay"],
-  "id": "123"
+  "id": "123",
+  "short_name": "Waving"
 }
