@@ -33,7 +33,7 @@ export function useAddPost() {
       await setDoc(
         doc(db, "posts", docRef.id),
         { id: docRef.id },
-        { merge: true }
+        { merge: true },
       );
 
       console.log("Post publicado con ID: ", docRef.id);

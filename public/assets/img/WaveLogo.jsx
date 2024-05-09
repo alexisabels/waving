@@ -1,4 +1,3 @@
-
 function WaveLogo() {
   return (
     <svg

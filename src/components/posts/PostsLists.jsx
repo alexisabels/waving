@@ -69,7 +69,7 @@ export default function PostsLists({ posts, isLoading }) {
                 currentUser={user}
                 showSnackbar={showSnackbar}
               />
-            ) : null
+            ) : null,
           )
         )}
       </Box>
