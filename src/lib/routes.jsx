@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import AuthPage from "../components/auth/AuthPage";
-import Layout from "../components/layout";
 import Home from "../components/home";
-import TerminosYCondiciones from "../components/terms/TerminosYCondiciones";
+import Layout from "../components/layout";
 import Profile from "../components/profile/Profile";
+import TerminosYCondiciones from "../components/terms/TerminosYCondiciones";
 export const ROOT = "/";
 export const AUTH = "/auth";
 export const PROFILE = "/protected/profile/:username";

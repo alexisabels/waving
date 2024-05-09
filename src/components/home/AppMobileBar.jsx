@@ -1,18 +1,18 @@
-import { useState } from "react";
+import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import {
+  Avatar,
   BottomNavigation,
   BottomNavigationAction,
-  useTheme,
-  useMediaQuery,
-  Avatar,
   Box,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { PROTECTED } from "../../lib/routes";
 import { useAuth, useLogout } from "../../hooks/auth";
+import { PROTECTED } from "../../lib/routes";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
 
 export default function AppMobileBar() {

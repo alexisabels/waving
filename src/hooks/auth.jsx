@@ -1,16 +1,16 @@
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 
-import { useEffect, useState } from "react";
 import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
   setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../lib/firebase";
 import { AUTH, HOME } from "../lib/routes";
-import { doc, getDoc, setDoc } from "firebase/firestore";
 import isUsernameExists from "../utils/isUsernameExist";
 export function useAuth() {
   const [authUser, authLoading, error] = useAuthState(auth);
@@ -113,7 +113,7 @@ export function useRegister() {
     const usernameExists = await isUsernameExists(username);
     if (usernameExists) {
       setSnackbarMessage(
-        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo",
+        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo"
       );
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
