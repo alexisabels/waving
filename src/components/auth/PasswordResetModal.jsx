@@ -14,7 +14,7 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
 
 function PasswordResetModal({ open, onClose }) {
-  const [email, setEmail] = useState(""); // Estado para guardar el correo electrónico ingresado
+  const [email, setEmail] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("info");
@@ -27,7 +27,7 @@ function PasswordResetModal({ open, onClose }) {
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value); // Actualiza el estado con el correo electrónico ingresado
+    setEmail(event.target.value);
   };
 
   const handleReset = () => {

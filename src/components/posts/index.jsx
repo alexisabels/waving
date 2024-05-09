@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-// Asegúrate de que la ruta de importación es correcta
-import { Paper, Typography, Box, Avatar, Stack } from "@mui/material";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
+import { Avatar, Box, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
-import PostMenu from "./PostMenu"; // Verifica la ruta
+import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 import { PROTECTED } from "../../lib/routes";
-import { Link } from "react-router-dom";
+import avatarexample from "./../../../public/assets/img/avatarexample.png";
+import PostMenu from "./PostMenu";
 
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;

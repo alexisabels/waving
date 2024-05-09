@@ -17,6 +17,6 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    // "linebreak-style": 0,
+    "linebreak-style": 0, // <----------
   },
 };

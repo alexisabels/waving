@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { PeopleRounded, Settings } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -11,9 +12,9 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 import WaveLogo from "../../../public/assets/img/WaveLogo";
 import { PROTECTED } from "../../lib/routes";
-import AccountMenu from "./AccountMenu";
-import { PeopleRounded, Settings } from "@mui/icons-material";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
+import AccountMenu from "./AccountMenu";
+import CentralItems from "./CentralItems";
 
 export default function Navbar() {
   const trigger = useScrollTrigger({
@@ -85,13 +86,13 @@ export default function Navbar() {
 
         {isMobile && (
           <Stack direction="row" gap={2} sx={{ alignItems: "center", mx: 2 }}>
-            <CentralBox
+            <CentralItems
               icon={<PeopleRounded />}
               text="Social"
               showText={!trigger && mediumScreen}
             />
 
-            <CentralBox
+            <CentralItems
               icon={
                 <Avatar
                   sx={{ width: 25, height: 25, color: "black" }}
@@ -101,7 +102,7 @@ export default function Navbar() {
               text="Mi perfil"
               showText={!trigger && mediumScreen}
             />
-            <CentralBox
+            <CentralItems
               icon={<Settings />}
               text="Ajustes"
               showText={!trigger && mediumScreen}
@@ -111,34 +112,6 @@ export default function Navbar() {
 
         <AccountMenu />
       </Box>
-    </Box>
-  );
-}
-
-function CentralBox({ icon, text, showText }) {
-  return (
-    <Box
-      sx={{
-        borderRadius: "16px",
-        width: showText ? "120px" : "50px", // Reduce el ancho si no se muestra el texto
-        height: "40px",
-        borderColor: "transparent",
-        color: "white",
-        backgroundColor: "#40646e",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "12px",
-        fontWeight: "bold",
-        textTransform: "uppercase",
-        transition: "width 0.3s ease",
-      }}
-    >
-      <Stack alignItems="center" direction="row" gap={1}>
-        {icon}
-        {showText && text}
-      </Stack>
     </Box>
   );
 }
