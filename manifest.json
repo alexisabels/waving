@@ -9,10 +9,12 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#ebe3dd",
+  "background_color": "#ebe3dd",
   "description": "Waving Social",
+  "short_name": "Waving",
   "dir": "ltr",
   "lang": "es",
-  "display_override": ["window-controls-overlay"]
+  "display_override": ["window-controls-overlay"],
+  "id": "123"
 }
