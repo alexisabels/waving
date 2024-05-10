@@ -14,6 +14,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useAuth, useLogout } from "../../hooks/auth";
 import { PROTECTED } from "../../lib/routes";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
+import { Settings } from "@mui/icons-material";
 
 export default function AppMobileBar() {
   const [value, setValue] = useState("recents");
@@ -67,8 +68,16 @@ export default function AppMobileBar() {
               display: "flex",
               backgroundColor: "rgba(34, 60, 67, 1.98)",
               boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-              "& .MuiBottomNavigationAction-label": {
-                color: "white",
+              "& .MuiBottomNavigationAction-root": {
+                minWidth: 0,
+                padding: "6px 6px",
+                "& .MuiBottomNavigationAction-label": {
+                  color: "white",
+                  fontSize: "0.75rem",
+                },
+                "& .MuiSvgIcon-root": {
+                  fontSize: "1.5rem",
+                },
               },
             }}
           >
@@ -93,10 +102,17 @@ export default function AppMobileBar() {
               showLabel={true}
             />
             <BottomNavigationAction
-              label="Users"
+              label="Social"
               icon={<GroupRoundedIcon sx={{ color: "white" }} />}
               component={NavLink}
-              to={`${PROTECTED}/users`}
+              to={`${PROTECTED}/social`}
+              showLabel={true}
+            />
+            <BottomNavigationAction
+              label="Ajustes"
+              icon={<Settings sx={{ color: "white" }} />}
+              component={NavLink}
+              to={`${PROTECTED}/ajustes/`}
               showLabel={true}
             />
             <BottomNavigationAction

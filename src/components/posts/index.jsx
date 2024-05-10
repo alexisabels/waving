@@ -34,7 +34,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
     >
       <Box
         sx={{
-          bgcolor: "#223C43",
+          bgcolor: "#34535c",
           color: "white",
           display: "flex",
           width: "100%",

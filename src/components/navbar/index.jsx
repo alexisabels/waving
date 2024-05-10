@@ -46,6 +46,9 @@ export default function Navbar() {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#EBE3DD",
+        background:
+          "linear-gradient(to bottom, #EBE3DD, #EBE3DD 70%, transparent 100%)",
+
         position: "sticky",
         top: 0,
         zIndex: 3,
