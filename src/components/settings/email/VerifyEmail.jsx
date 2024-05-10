@@ -30,56 +30,60 @@ export default function VerifyEmail() {
   };
 
   return (
-    <Box
-      sx={{
-        maxWidth: 400,
-        backgroundColor: "rgba(255, 99, 71, 0.17)",
-        p: 2,
-        borderRadius: 5,
-        mb: 2,
-      }}
-    >
-      <Typography variant="h6" gutterBottom sx={{ fontWeight: "regular" }}>
-        Verifica tu correo electrónico
-      </Typography>
+    <>
       {!auth.currentUser.emailVerified && (
-        <>
-          <Alert severity="warning" sx={{ mb: 2, borderRadius: 5 }}>
-            Tu correo actual aún no está verificado.
-          </Alert>
-          <Collapse in={open}>
-            <Alert
-              severity="info"
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => setOpen(false)}
+        <Box
+          sx={{
+            maxWidth: 400,
+            backgroundColor: "rgba(255, 99, 71, 0.17)",
+            p: 2,
+            borderRadius: 5,
+            mb: 2,
+          }}
+        >
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "regular" }}>
+            Verifica tu correo electrónico
+          </Typography>
+          {!auth.currentUser.emailVerified && (
+            <>
+              <Alert severity="warning" sx={{ mb: 2, borderRadius: 5 }}>
+                Tu correo actual aún no está verificado.
+              </Alert>
+              <Collapse in={open}>
+                <Alert
+                  severity="info"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => setOpen(false)}
+                    >
+                      <Close />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2, borderRadius: 5 }}
                 >
-                  <Close />
-                </IconButton>
-              }
-              sx={{ mb: 2, borderRadius: 5 }}
-            >
-              {msg}
-            </Alert>
-          </Collapse>
-          <Button
-            variant="contained"
-            type="submit"
-            style={{
-              borderRadius: 20,
-              textTransform: "none",
-              backgroundColor: "#223C43",
-            }}
-            onClick={handleSendVerification}
-            fullWidth
-          >
-            Enviar Correo de Verificación
-          </Button>
-        </>
+                  {msg}
+                </Alert>
+              </Collapse>
+              <Button
+                variant="contained"
+                type="submit"
+                style={{
+                  borderRadius: 20,
+                  textTransform: "none",
+                  backgroundColor: "#223C43",
+                }}
+                onClick={handleSendVerification}
+                fullWidth
+              >
+                Enviar Correo de Verificación
+              </Button>
+            </>
+          )}
+        </Box>
       )}
-    </Box>
+    </>
   );
 }
