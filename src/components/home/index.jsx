@@ -14,6 +14,8 @@ import { useAddPost, usePosts } from "../../hooks/post";
 import { useAuth } from "../../hooks/auth";
 import PostsLists from "../posts/PostsLists";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
+import { Fab, Zoom, useScrollTrigger } from '@mui/material';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 function NewPost() {
   const { register, handleSubmit, reset } = useForm();
@@ -119,6 +121,42 @@ function NewPost() {
     </Box>
   );
 }
+function ScrollTopButton() {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100, 
+  });
+
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <Fab
+        color="primary"
+        size="small"
+        onClick={handleClick}
+        sx={{
+          position: 'fixed',
+          bottom: 80, 
+          right: 30, 
+          backgroundColor: "#223C43",
+          "&:hover": {
+            backgroundColor: "#223C43",
+          },
+        }}
+      >
+        <ArrowUpwardIcon />
+      </Fab>
+    </Zoom>
+  );
+}
+
+
 export default function Home() {
   const { posts, isLoading: postsLoading } = usePosts();
 
@@ -127,6 +165,7 @@ export default function Home() {
       <NewPost />
 
       <PostsLists posts={posts} isLoading={postsLoading} />
+      <ScrollTopButton />
     </Box>
   );
 }

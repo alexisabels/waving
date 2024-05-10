@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { deleteUser as firebaseDeleteUser, getAuth } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../lib/firebase";
 import { AUTH } from "../../lib/routes";
@@ -125,6 +125,22 @@ export default function DeleteAccount() {
             }
             label="Confirmo que quiero eliminar mi cuenta permanentemente."
           />
+              <Button
+            onClick={() => setModalOpen(false)}
+            variant="contained"
+            fullWidth
+            sx={{
+              mt: 2,
+              borderRadius: 2,
+              py: 1,
+              bgcolor: "green",
+              "&:hover": {
+                bgcolor: "#45a045",
+              },
+            }}
+          >
+            Mantener mi cuenta
+          </Button>
           <Button
             onClick={handleDeleteUser}
             variant="contained"
@@ -141,6 +157,7 @@ export default function DeleteAccount() {
           >
             Confirmar y Eliminar
           </Button>
+      
         </Box>
       </Modal>
     </Box>
