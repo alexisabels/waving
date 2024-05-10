@@ -31,7 +31,7 @@ export default function VerifyEmail() {
 
   return (
     <>
-      {!auth.currentUser.emailVerified && (
+      {!auth.currentUser?.emailVerified && (
         <Box
           sx={{
             maxWidth: 400,
@@ -44,7 +44,7 @@ export default function VerifyEmail() {
           <Typography variant="h6" gutterBottom sx={{ fontWeight: "regular" }}>
             Verifica tu correo electrónico
           </Typography>
-          {!auth.currentUser.emailVerified && (
+          {!auth.currentUser?.emailVerified && (
             <>
               <Alert severity="warning" sx={{ mb: 2, borderRadius: 5 }}>
                 Tu correo actual aún no está verificado.

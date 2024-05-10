@@ -102,7 +102,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
         }}
       >
         {text.split(/(\s+)/).map((part, index) => {
-          // Esta expresión regular identifica URLs
+          // Regex que identifica URLs
           const urlRegex =
             /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
           if (urlRegex.test(part)) {

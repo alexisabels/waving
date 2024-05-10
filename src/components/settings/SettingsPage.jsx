@@ -2,6 +2,7 @@ import { useState } from "react";
 import PasswordResetModal from "../auth/PasswordResetModal";
 import { Box, Button, Typography } from "@mui/material";
 import EmailSettings from "./email/EmailSettings";
+import DeleteAccount from "./DeleteAccount";
 
 export default function SettingsPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -34,6 +35,8 @@ export default function SettingsPage() {
       <PasswordResetModal open={modalOpen} onClose={handleCloseModal} />
       <h2>Correo electrónico</h2>
       <EmailSettings />
+      <h2>Mi cuenta</h2>
+      <DeleteAccount />
     </Box>
   );
 }

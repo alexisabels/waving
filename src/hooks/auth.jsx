@@ -49,25 +49,35 @@ export function useLogin() {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       navigate(redirectTo);
-
       setSnackbarMessage("Sesión iniciada correctamente");
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
     } catch (error) {
+      console.error("Error en el login: ", error);
+      let message = "Error desconocido";
       switch (error.code) {
         case "auth/invalid-credential":
-          setSnackbarMessage("El email o la contraseña son incorrectos");
+        case "auth/wrong-password":
+          message = "El email o la contraseña son incorrectos";
+          break;
+        case "auth/user-not-found":
+          message = "El email o la contraseña son incorrectos";
+          break;
+        case "auth/too-many-requests":
+          message =
+            "El acceso a esta cuenta ha sido bloqueado temporalmente, por favor inténtalo más tarde o cambia tu contraseña.";
           break;
       }
+      setSnackbarMessage(message);
       setSnackbarSeverity("error");
       setOpenSnackbar(true);
-      console.error("Error en el login: ", error);
       setLoading(false);
       return false;
     }
     setLoading(false);
     return true;
   }
+
   return {
     login,
     isLoading,
@@ -113,7 +123,7 @@ export function useRegister() {
     const usernameExists = await isUsernameExists(username);
     if (usernameExists) {
       setSnackbarMessage(
-        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo",
+        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo"
       );
       setSnackbarSeverity("error");
       setOpenSnackbar(true);

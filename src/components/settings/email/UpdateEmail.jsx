@@ -35,7 +35,7 @@ export default function UpdateEmail() {
         Cambiar correo asociado a la cuenta
       </Typography>
       <Typography variant="p" sx={{ mb: 2, fontWeight: "lighter" }}>
-        Tu correo actual: {auth.currentUser.email}
+        Tu correo actual: {auth.currentUser?.email}
       </Typography>
       <TextField
         label="Nuevo Correo"

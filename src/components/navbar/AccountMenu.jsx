@@ -73,7 +73,7 @@ export default function AccountMenu() {
 
   const handleMenuItemClick = () => {
     setAnchorEl(null);
-    navigate(`${PROTECTED}/profile/${user?.username}`); // Redirige a la URL del perfil del usuario
+    navigate(`${PROTECTED}/profile/${user?.username}`);
   };
   const handleClose = () => {
     setAnchorEl(null);
