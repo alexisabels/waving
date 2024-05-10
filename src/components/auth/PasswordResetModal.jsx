@@ -77,9 +77,13 @@ function PasswordResetModal({ open, onClose }) {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "primary.main",
+                  borderColor: "#223C43",
                 },
               },
+              "& .MuiInputLabel-outlined.Mui-focused": {
+                color: "#223C43",
+              },
+              bgcolor: "white",
             }}
           />
         </DialogContent>

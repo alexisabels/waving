@@ -110,7 +110,7 @@ export default function DeleteAccount() {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2, mb: 3 }}>
             ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se
-            puede deshacer.
+            puede deshacer. Tus posts no se borrarán.
           </Typography>
           <FormControlLabel
             control={
