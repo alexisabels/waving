@@ -84,9 +84,36 @@ export default function Post({ post, currentUser, showSnackbar }) {
       </Box>
       <Typography
         variant="body1"
-        sx={{ wordBreak: "break-word", whiteSpace: "pre-line", p: 2 }}
+        sx={{
+          wordBreak: "break-word",
+          whiteSpace: "pre-line",
+          p: 2,
+          "& a": {
+            color: "#007bff",
+            textDecoration: "none",
+            "&:hover": {
+              textDecoration: "underline",
+              color: "#007bff",
+            },
+            "&:visited": {
+              color: "#007bff",
+            },
+          },
+        }}
       >
-        {text}
+        {text.split(/(\s+)/).map((part, index) => {
+          // Esta expresión regular identifica URLs
+          const urlRegex =
+            /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
+          if (urlRegex.test(part)) {
+            return (
+              <Link key={index} href={part} rel="noopener">
+                {part}
+              </Link>
+            );
+          }
+          return <React.Fragment key={index}>{part}</React.Fragment>;
+        })}
       </Typography>
     </Paper>
   );
