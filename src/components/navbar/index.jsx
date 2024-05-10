@@ -15,6 +15,8 @@ import { PROTECTED } from "../../lib/routes";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import AccountMenu from "./AccountMenu";
 import CentralItems from "./CentralItems";
+import { useAuth } from "../../hooks/auth";
+import Waving from "./Waving";
 
 export default function Navbar() {
   const trigger = useScrollTrigger({
@@ -22,7 +24,7 @@ export default function Navbar() {
     threshold: 100,
   });
   const theme = useTheme();
-
+  const { user } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -80,7 +82,7 @@ export default function Navbar() {
         >
           <Stack alignItems="center" direction="row" gap={1}>
             <WaveLogo />
-            Waving
+            <Waving />
           </Stack>
         </Link>
 
@@ -90,6 +92,7 @@ export default function Navbar() {
               icon={<PeopleRounded />}
               text="Social"
               showText={!trigger && mediumScreen}
+              linkTo={`${PROTECTED}/social/`}
             />
 
             <CentralItems
@@ -101,11 +104,13 @@ export default function Navbar() {
               }
               text="Mi perfil"
               showText={!trigger && mediumScreen}
+              linkTo={`${PROTECTED}/profile/${user?.username}`}
             />
             <CentralItems
               icon={<Settings />}
               text="Ajustes"
               showText={!trigger && mediumScreen}
+              linkTo={`${PROTECTED}/ajustes/`}
             />
           </Stack>
         )}

@@ -12,9 +12,10 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth, useLogout } from "../../hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PROTECTED } from "../../lib/routes";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
+
 function ActiveUserLink() {
   const { user, isLoading } = useAuth();
   if (isLoading)
@@ -63,15 +64,20 @@ export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { logout, isLoading } = useLogout();
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleMenuItemClick = () => {
+    setAnchorEl(null);
+    navigate(`${PROTECTED}/profile/${user?.username}`); // Redirige a la URL del perfil del usuario
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <React.Fragment>
       <Box
@@ -138,7 +144,7 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={handleMenuItemClick}
           sx={{
             color: "rgba(0, 0, 0, 0.6)",
 
@@ -155,7 +161,6 @@ export default function AccountMenu() {
             sx={{ width: 32, height: 32, color: "black" }}
           />{" "}
           <ActiveUserLink />
-          {/* AQUI VA MI PERFIL */}
         </MenuItem>
         <Divider />
 

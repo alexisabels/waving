@@ -4,11 +4,16 @@ import Home from "../components/home";
 import Layout from "../components/layout";
 import Profile from "../components/profile/Profile";
 import TerminosYCondiciones from "../components/terms/TerminosYCondiciones";
+import SocialPage from "../components/social/SocialPage";
+import SettingsPage from "../components/settings/SettingsPage";
 export const ROOT = "/";
 export const AUTH = "/auth";
 export const PROFILE = "/protected/profile/:username";
 export const PROTECTED = "/protected";
 export const HOME = "/protected/home";
+export const SOCIAL = "/protected/social";
+export const AJUSTES = "/protected/ajustes";
+
 export const TERMSANDCONDITONS = "/terminosycondiciones";
 export const router = createBrowserRouter([
   {
@@ -28,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: PROFILE,
         element: <Profile />,
+      },
+      {
+        path: SOCIAL,
+        element: <SocialPage />,
+      },
+      {
+        path: AJUSTES,
+        element: <SettingsPage />,
       },
     ],
   },

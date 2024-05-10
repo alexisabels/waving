@@ -1,0 +1,14 @@
+@keyframes waveAnimation {
+    0%, 10%, 90%, 100% {
+      stroke-dashoffset: 100%;  
+    }
+    50% {
+      stroke-dashoffset: 0; 
+    }
+  }
+  
+  .wavePath {
+    stroke-dasharray: 100%;
+    animation: waveAnimation 5s linear infinite;
+  }
+  
