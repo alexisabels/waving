@@ -13,6 +13,7 @@ export default function SettingsPage() {
   return (
     <Box sx={{ mb: 9 }}>
       <h1>Ajustes</h1>
+
       <Box sx={{ maxWidth: 400 }}>
         <h2>Contraseña</h2>
         <Typography variant="h6" gutterBottom sx={{ fontWeight: "regular" }}>

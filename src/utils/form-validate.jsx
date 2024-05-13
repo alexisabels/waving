@@ -8,6 +8,7 @@ export const usernameValidate = {
     message: "El nombre de usuario no puede tener menos de 4 caracteres",
   },
   pattern: {
+    //regex para validar user (letras y numeros)
     value: /^[a-zA-Z0-9]+$/,
     message:
       "El nombre de usuario solo puede contener letras y números, ni espacios ni símbolos",
@@ -20,6 +21,7 @@ export const emailValidate = {
     message: "Por favor, introduce un email válido",
   },
   pattern: {
+    //regex para validar mail
     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
     message: "El email no es válido",
   },

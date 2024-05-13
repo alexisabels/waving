@@ -16,18 +16,18 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
 } from "firebase/auth";
-import { emailValidate } from "../../../utils/form-validate"; // Asegúrate de que la ruta es correcta
+import { emailValidate } from "../../../utils/form-validate";
 
 export default function UpdateEmail() {
   const auth = getAuth();
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [password, setPassword] = useState(""); // Estado para la contraseña
+  const [password, setPassword] = useState("");
 
   const handleUpdateEmail = () => {
     const user = auth.currentUser;
-    const credential = EmailAuthProvider.credential(user.email, password); // Credenciales actuales
+    const credential = EmailAuthProvider.credential(user.email, password);
 
     const reauthAndUpdate = () => {
       updateEmail(user, newEmail)
@@ -49,8 +49,8 @@ export default function UpdateEmail() {
 
     reauthenticateWithCredential(user, credential)
       .then(reauthAndUpdate)
-      .catch((error) => {
-        setMsg("Reautenticación necesaria: " + error.message);
+      .catch(() => {
+        setMsg("Error: la contraseña no es correcta");
         setOpen(true);
       });
   };

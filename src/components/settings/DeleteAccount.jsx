@@ -4,15 +4,17 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
+  IconButton,
   Modal,
   Typography,
 } from "@mui/material";
 import { deleteUser as firebaseDeleteUser, getAuth } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../lib/firebase";
 import { AUTH } from "../../lib/routes";
+import { Close } from "@mui/icons-material";
 
 export default function DeleteAccount() {
   const auth = getAuth();
@@ -55,19 +57,7 @@ export default function DeleteAccount() {
       <Typography variant="h6" gutterBottom>
         Eliminar cuenta de usuario
       </Typography>
-      {open && (
-        <Alert
-          severity="info"
-          action={
-            <Button color="inherit" size="small" onClick={() => setOpen(false)}>
-              Cerrar
-            </Button>
-          }
-          sx={{ mb: 2 }}
-        >
-          {msg}
-        </Alert>
-      )}
+
       <Button
         variant="contained"
         color="error"
@@ -101,12 +91,18 @@ export default function DeleteAccount() {
             id="modal-modal-title"
             variant="h1"
             component="h1"
-            sx={{ mb: 3 }}
+            sx={{
+              mb: 3,
+              userSelect: "none",
+              WebkitUserSelect: "none",
+              msUserSelect: "none",
+              MozUserSelect: "none",
+            }}
           >
             ⚠️
           </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Confirmar Eliminación de la Cuenta
+            Eliminar mi cuenta
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2, mb: 3 }}>
             ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se
@@ -125,7 +121,25 @@ export default function DeleteAccount() {
             }
             label="Confirmo que quiero eliminar mi cuenta permanentemente."
           />
-              <Button
+          {open && (
+            <Alert
+              severity="info"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => setOpen(false)}
+                >
+                  <Close />
+                </IconButton>
+              }
+              sx={{ borderRadius: 5, mt: 2 }}
+            >
+              {msg}
+            </Alert>
+          )}
+          <Button
             onClick={() => setModalOpen(false)}
             variant="contained"
             fullWidth
@@ -155,9 +169,8 @@ export default function DeleteAccount() {
               },
             }}
           >
-            Confirmar y Eliminar
+            Eliminar mi cuenta
           </Button>
-      
         </Box>
       </Modal>
     </Box>

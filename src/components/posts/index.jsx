@@ -7,6 +7,7 @@ import { useUser } from "../../hooks/user";
 import { PROTECTED } from "../../lib/routes";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import PostMenu from "./PostMenu";
+import InteractionBar from "./InteractionBar";
 
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
@@ -115,6 +116,8 @@ export default function Post({ post, currentUser, showSnackbar }) {
           return <React.Fragment key={index}>{part}</React.Fragment>;
         })}
       </Typography>
+      {/* BARRA DE INTERACCIÓN */}
+      <InteractionBar />
     </Paper>
   );
 }

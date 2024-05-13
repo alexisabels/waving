@@ -1,9 +1,21 @@
+import { Typography } from "@mui/material";
 import "./Waving.css";
 
 function Waving() {
   return (
     <div className="wave">
-      <p>Waving</p>
+      <Typography
+        variant="p"
+        sx={{
+          color: "white",
+          userSelect: "none",
+          WebkitUserSelect: "none",
+          msUserSelect: "none",
+          MozUserSelect: "none",
+        }}
+      >
+        Waving
+      </Typography>
     </div>
   );
 }
