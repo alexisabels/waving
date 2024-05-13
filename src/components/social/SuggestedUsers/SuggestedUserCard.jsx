@@ -42,12 +42,13 @@ export default function SuggestedUserCard({ user }) {
         <Button
           variant="contained"
           size="medium"
+          disabled
           sx={{
             borderRadius: 20,
             textTransform: "none",
             backgroundColor: "#223C43",
             width: "100px",
-            marginTop: "auto", // Asegura que el botón siempre esté al fondo
+            marginTop: "auto",
           }}
         >
           Seguir

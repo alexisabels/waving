@@ -1,46 +1,27 @@
-import { useEffect, useState } from "react";
+import { useAuth } from "../../../hooks/auth";
 import SuggestedUserCard from "./SuggestedUserCard";
 import { Stack } from "@mui/material";
-import { fetchUsers } from "../../../hooks/fetchUsers";
 export default function SuggestedUsersList() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [users, setUsers] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    const loadUniqueUsers = async () => {
-      setLoading(true);
-      try {
-        const allUsers = await fetchUsers();
-        const uniqueUsers = allUsers
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 4);
-        setUsers(uniqueUsers);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    loadUniqueUsers();
-  }, []);
-
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
+  if (isLoading) return <div>Cargando...</div>;
+  if (!user) return <div>No hay usuario disponible.</div>;
   return (
     <Stack
       direction="row"
-      justifyContent="flex-start" // Cambio para alinear al inicio
+      justifyContent="flex-start"
       alignItems="center"
       spacing={2}
-      sx={{ overflowX: "scroll", pr: 2 }} // Añade padding en los lados
+      sx={{ overflowX: "scroll", pr: 2 }}
       width="100%"
     >
-      {users.map((user) => (
-        <SuggestedUserCard key={user.id} user={user} />
-      ))}
+      {/* {users.map((user) => ( */}
+      <SuggestedUserCard key={user.id} user={user} />
+      {/*  ))} */}
     </Stack>
   );
 }
