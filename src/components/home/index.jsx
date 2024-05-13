@@ -14,8 +14,8 @@ import { useAddPost, usePosts } from "../../hooks/post";
 import { useAuth } from "../../hooks/auth";
 import PostsLists from "../posts/PostsLists";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
-import { Fab, Zoom, useScrollTrigger } from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { Fab, Zoom, useScrollTrigger } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 function NewPost() {
   const { register, handleSubmit, reset } = useForm();
@@ -124,13 +124,13 @@ function NewPost() {
 function ScrollTopButton() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 100, 
+    threshold: 100,
   });
 
   const handleClick = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', 
+      behavior: "smooth",
     });
   };
 
@@ -141,9 +141,9 @@ function ScrollTopButton() {
         size="small"
         onClick={handleClick}
         sx={{
-          position: 'fixed',
-          bottom: 80, 
-          right: 30, 
+          position: "fixed",
+          bottom: 80,
+          right: 30,
           backgroundColor: "#223C43",
           "&:hover": {
             backgroundColor: "#223C43",
@@ -156,14 +156,15 @@ function ScrollTopButton() {
   );
 }
 
-
 export default function Home() {
   const { posts, isLoading: postsLoading } = usePosts();
 
   return (
     <Box maxWidth="600px" mx="auto">
       <NewPost />
-
+      <Typography variant="h4" component="h4" fontWeight="bold">
+        Últimos Posts
+      </Typography>
       <PostsLists posts={posts} isLoading={postsLoading} />
       <ScrollTopButton />
     </Box>

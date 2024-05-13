@@ -8,6 +8,7 @@ import {
   doc,
   orderBy,
   deleteDoc,
+  where,
 } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -33,7 +34,7 @@ export function useAddPost() {
       await setDoc(
         doc(db, "posts", docRef.id),
         { id: docRef.id },
-        { merge: true },
+        { merge: true }
       );
 
       console.log("Post publicado con ID: ", docRef.id);
@@ -64,6 +65,19 @@ export function usePosts() {
   const q = query(collection(db, "posts"), orderBy("date", "desc"));
   const [posts, isLoading, error] = useCollectionData(q);
   if (error) throw error;
+  return { posts, isLoading };
+}
+
+export function useUserPosts(uid = null) {
+  const q = query(
+    collection(db, "posts"),
+    where("uid", "==", uid),
+    orderBy("date", "desc")
+  );
+  const [posts, isLoading, error] = useCollectionData(q);
+
+  if (error) throw error;
+
   return { posts, isLoading };
 }
 

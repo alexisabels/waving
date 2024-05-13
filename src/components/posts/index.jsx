@@ -1,6 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { Avatar, Box, Paper, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  CircularProgress,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/user";
@@ -78,7 +85,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
               </Typography>
             </Box>
           </Box>
-          {currentUser.id === uid && (
+          {currentUser?.id === uid && (
             <PostMenu postId={post.id} showSnackbar={showSnackbar} />
           )}
         </Stack>

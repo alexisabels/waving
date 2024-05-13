@@ -4,6 +4,15 @@ import { Link } from "react-router-dom";
 import { PROTECTED } from "../../../lib/routes";
 
 export default function SuggestedUserCard({ user }) {
+  const date =
+    user && user.date
+      ? new Date(user.date).toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          weekday: "long",
+        })
+      : "Fecha no disponible";
   return (
     <Box
       component={Link}
@@ -37,7 +46,7 @@ export default function SuggestedUserCard({ user }) {
           sx={{ textAlign: "center" }}
           fontSize="12px"
         >
-          se unió hace 3 días
+          {date}
         </Typography>
         <Button
           variant="contained"

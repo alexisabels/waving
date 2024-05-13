@@ -41,9 +41,6 @@ export default function PostsLists({ posts, isLoading }) {
   }
   return (
     <>
-      <Typography variant="h4" component="h4" fontWeight="bold">
-        Últimos Posts
-      </Typography>
       <Box
         sx={{
           width: "100%",
@@ -69,7 +66,7 @@ export default function PostsLists({ posts, isLoading }) {
                 currentUser={user}
                 showSnackbar={showSnackbar}
               />
-            ) : null,
+            ) : null
           )
         )}
       </Box>
