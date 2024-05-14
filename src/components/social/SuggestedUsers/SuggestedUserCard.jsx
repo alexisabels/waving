@@ -2,17 +2,27 @@
 import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { PROTECTED } from "../../../lib/routes";
+import moment from "moment";
 
 export default function SuggestedUserCard({ user }) {
-  const date =
-    user && user.date
-      ? new Date(user.date).toLocaleDateString("es-ES", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          weekday: "long",
-        })
-      : "Fecha no disponible";
+  moment.locale("es");
+  const today = moment().startOf("day");
+  const userDate = moment(user.date);
+
+  // Verificar si la fecha es de hoy
+  const isToday = userDate.isSame(today, "day");
+
+  let date;
+  if (isToday) {
+    date = userDate.fromNow();
+  } else {
+    date = userDate.calendar(null, {
+      sameDay: "[hoy]", // No se usará ya que 'isToday' lo maneja
+      lastDay: "[ayer]",
+      lastWeek: "[el] dddd",
+      sameElse: "[el] D [de] MMMM [de] YYYY",
+    });
+  }
   return (
     <Box
       component={Link}
@@ -46,7 +56,7 @@ export default function SuggestedUserCard({ user }) {
           sx={{ textAlign: "center" }}
           fontSize="12px"
         >
-          {date}
+          se unió {date}
         </Typography>
         <Button
           variant="contained"

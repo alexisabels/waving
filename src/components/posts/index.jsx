@@ -17,22 +17,32 @@ import PostMenu from "./PostMenu";
 import InteractionBar from "./InteractionBar";
 import moment from "moment";
 import "moment/dist/locale/es";
-
+// sin /dist no va
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
   const { user, loading } = useUser(uid);
 
   const username = loading ? "" : user ? user.username : "Usuario desconocido";
-  // const timestamp = "hace 1 minuto";
-  // const timestamp = new Date(post.date).toLocaleDateString("es-ES", {
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "numeric",
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  // });
   moment.locale("es");
-  const timestamp = moment(post.date).fromNow();
+  const today = moment().startOf("day");
+  const postDate = moment(post.date);
+
+  // Verificar si la fecha es de hoy
+  const isToday = postDate.isSame(today, "day");
+
+  let timestamp;
+  if (isToday) {
+    timestamp = postDate.fromNow();
+  } else {
+    timestamp = postDate.calendar(null, {
+      sameDay: "[hoy a las] LT", // No se usará ya que 'isToday' lo maneja
+      nextDay: "[mañana a las] LT",
+      nextWeek: "dddd [a las] LT",
+      lastDay: "[ayer a las] LT",
+      lastWeek: "[el] dddd [pasado a las] LT",
+      sameElse: "D [de] MMMM [de] YYYY [·] LT",
+    });
+  }
 
   return (
     <Paper

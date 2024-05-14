@@ -24,7 +24,7 @@ export default function UserData({ user }) {
       >
         <Box maxWidth="50%">
           <Typography variant="h4" component="h4" fontWeight="bold">
-            {user.username}
+            @{user.username}
           </Typography>
           <Typography
             variant="p"
