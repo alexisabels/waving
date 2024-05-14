@@ -15,13 +15,24 @@ import { PROTECTED } from "../../lib/routes";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import PostMenu from "./PostMenu";
 import InteractionBar from "./InteractionBar";
+import moment from "moment";
+import "moment/dist/locale/es";
 
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
   const { user, loading } = useUser(uid);
 
   const username = loading ? "" : user ? user.username : "Usuario desconocido";
-  const timestamp = "hace 1 minuto";
+  // const timestamp = "hace 1 minuto";
+  // const timestamp = new Date(post.date).toLocaleDateString("es-ES", {
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  //   hour: "2-digit",
+  //   minute: "2-digit",
+  // });
+  moment.locale("es");
+  const timestamp = moment(post.date).fromNow();
 
   return (
     <Paper

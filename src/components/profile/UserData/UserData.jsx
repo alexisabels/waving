@@ -26,7 +26,14 @@ export default function UserData({ user }) {
           <Typography variant="h4" component="h4" fontWeight="bold">
             {user.username}
           </Typography>
-          Fecha de registro: {formattedDate}
+          <Typography
+            variant="p"
+            component="p"
+            fontWeight="lighter"
+            marginTop={1}
+          >
+            se unió el {formattedDate}
+          </Typography>
           <Stack
             alignItems="center"
             justifyContent="left"
