@@ -1,3 +1,40 @@
-.wave:hover {
-    color: #EBE3DD;
-}
+.wave {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .wave .wave-text span {
+    display: inline-block;
+    transition: transform 0.1s ease-in-out;
+  }
+  
+  .wave:hover .wave-text span {
+    animation: bote 0.3s ease-in-out forwards;
+  }
+  
+  @keyframes bote {
+    0% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-100%);
+    }
+    41% {
+      transform: translateY(100%);
+    }
+    60% {
+      transform: translateY(0);
+    }
+    80% {
+      transform: translateY(-20%);
+    }
+    85% {
+        transform: translateY(-10%);
+      }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
