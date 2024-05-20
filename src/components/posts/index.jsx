@@ -17,6 +17,7 @@ import PostMenu from "./PostMenu";
 import InteractionBar from "./InteractionBar";
 import moment from "moment";
 import "moment/dist/locale/es";
+import FollowBtn from "./FollowBtn";
 // sin /dist no va
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
@@ -97,6 +98,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
                 >
                   {username}
                 </Typography>
+                <FollowBtn />
               </div>
               <Typography
                 variant="caption"

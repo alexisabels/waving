@@ -4,7 +4,6 @@ import { useState } from "react";
 import FollowingModal from "./FollowingModal";
 import FollowersModal from "./FollowersModal";
 import EditProfileBtn from "./EditProfileBtn";
-import { useAuth } from "../../../hooks/auth";
 import { auth } from "../../../lib/firebase";
 
 export default function UserData({ user }) {

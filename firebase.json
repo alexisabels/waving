@@ -8,5 +8,12 @@
         "destination": "/index.html"
       }
     ]
-  }
+  },
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/protected/home",
+      "type": 301
+    }
+  ]
 }

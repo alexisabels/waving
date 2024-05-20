@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 
+// eslint-disable-next-line react/prop-types, no-unused-vars
 function EditProfileBtn({ user }) {
   return (
     <Button
@@ -7,13 +8,15 @@ function EditProfileBtn({ user }) {
       size="small"
       type="submit"
       fullWidth
+      disabled
+      // hasta que funcione
       style={{
         borderRadius: 20,
         textTransform: "none",
-        backgroundColor: "#223C43",
+        // backgroundColor: "#223C43",
       }}
     >
-      Editar perfil
+      Editar perfil (próximamente)
     </Button>
   );
 }
