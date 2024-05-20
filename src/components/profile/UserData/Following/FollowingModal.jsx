@@ -1,14 +1,18 @@
 /* eslint-disable react/prop-types */
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Divider, Modal, Typography } from "@mui/material";
+import FollowingList from "./FollowingList";
 
-export default function FollowersModal({
-  modalFollowersOpen,
-  setModalFollowersOpen,
+export default function FollowingModal({
+  // eslint-disable-next-line no-unused-vars
+  user,
+  modalFollowingOpen,
+  setModalFollowingOpen,
 }) {
+  // const [following, setFollowing] = useUser()
   return (
     <Modal
-      open={modalFollowersOpen}
-      onClose={() => setModalFollowersOpen(false)}
+      open={modalFollowingOpen}
+      onClose={() => setModalFollowingOpen(false)}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -22,6 +26,7 @@ export default function FollowersModal({
           p: 4,
           borderRadius: 2,
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          minWidth: 300,
           maxWidth: 300,
           textAlign: "center",
         }}
@@ -29,6 +34,8 @@ export default function FollowersModal({
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Seguidores
         </Typography>
+        <Divider variant="fullWidth" sx={{ mt: 1, mb: 2 }} />
+        <FollowingList users={user} />
       </Box>
     </Modal>
   );

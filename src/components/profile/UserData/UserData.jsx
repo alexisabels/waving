@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
 import { useState } from "react";
-import FollowingModal from "./FollowingModal";
-import FollowersModal from "./FollowersModal";
+import FollowingModal from "./Following/FollowingModal";
+import FollowersModal from "./Followers/FollowersModal";
 import EditProfileBtn from "./EditProfileBtn";
 import { auth } from "../../../lib/firebase";
 
@@ -68,10 +68,12 @@ export default function UserData({ user }) {
       <FollowingModal
         modalFollowingOpen={modalFollowingOpen}
         setModalFollowingOpen={setModalFollowingOpen}
+        user={user}
       />
       <FollowersModal
         modalFollowersOpen={modalFollowersOpen}
         setModalFollowersOpen={setModalFollowersOpen}
+        user={user}
       />
     </div>
   );

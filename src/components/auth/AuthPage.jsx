@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useTheme, useMediaQuery } from "@mui/material";
 
 import Register from "./Register";
 import Login from "./Login";
 import ocean from "../../../public/assets/img/ocean.jpg";
 import texture from "../../../public/assets/img/texture.png";
 import "./AuthPage.css";
+import WelcomeMsg from "./WelcomeMsg";
 const AuthPage = () => {
   const [isRegistered, setIsRegistered] = useState(true);
   const theme = useTheme();
@@ -31,19 +32,7 @@ const AuthPage = () => {
             backgroundSize: "cover",
           }}
         >
-          <Typography
-            variant="h2"
-            component="div"
-            sx={{
-              color: "white",
-              userSelect: "none",
-              WebkitUserSelect: "none",
-              msUserSelect: "none",
-              MozUserSelect: "none",
-            }}
-          >
-            Hola!
-          </Typography>
+          <WelcomeMsg />
         </Box>
       )}
 

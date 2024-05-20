@@ -16,7 +16,7 @@ function EditProfileBtn({ user }) {
         // backgroundColor: "#223C43",
       }}
     >
-      Editar perfil (próximamente)
+      Editar perfil (próx.)
     </Button>
   );
 }

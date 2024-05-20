@@ -33,7 +33,7 @@ export default function Profile() {
 
   const { posts, isLoading: postsLoading } = useUserPosts(user?.id);
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return "Cargando...";
   if (!user) return <div>Usuario no encontrado.</div>;
 
   // Conversión de fecha

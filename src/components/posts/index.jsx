@@ -23,7 +23,13 @@ export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
   const { user, loading } = useUser(uid);
 
-  const username = loading ? "" : user ? user.username : "Usuario desconocido";
+  const username = loading ? (
+    <CircularProgress size="1rem" color="inherit" />
+  ) : user ? (
+    user.username
+  ) : (
+    "Usuario desconocido"
+  );
   moment.locale("es");
   const today = moment().startOf("day");
   const postDate = moment(post.date);
