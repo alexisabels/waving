@@ -4,7 +4,7 @@ import { db } from "../../lib/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import PostsLists from "../posts/PostsLists";
 import { useUserPosts } from "../../hooks/post";
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import UserData from "./UserData/UserData";
 
 export default function Profile() {
@@ -54,6 +54,7 @@ export default function Profile() {
         }}
       >
         <UserData user={user} />
+        <Divider />
         <Typography
           variant="h5"
           component="h4"
