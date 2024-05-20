@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import {
   Alert,
   Avatar,
@@ -17,27 +19,44 @@ import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import { Fab, Zoom, useScrollTrigger } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
+function Characters({ textLength }) {
+  const color = textLength > 240 ? "red" : "lightgray";
+  return (
+    <Typography variant="body2" style={{ color: color }}>
+      {textLength}/240
+    </Typography>
+  );
+}
+
 function NewPost() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, watch } = useForm();
+  const [textLength, setTextLength] = useState(0);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const {
     addPost,
-    // eslint-disable-next-line no-unused-vars
-    isLoading,
     openSnackbar,
     setOpenSnackbar,
     snackbarMessage,
     snackbarSeverity,
   } = useAddPost();
-  // eslint-disable-next-line no-unused-vars
-  const { user, isLoading: authLoading } = useAuth();
-  function handleAddPost(data) {
-    addPost({
-      uid: user.id,
-      text: data.text,
-    });
-    console.log(data);
-    reset();
-    setOpenSnackbar(true);
+  const { user } = useAuth();
+
+  const textValue = watch("text", "");
+  useEffect(() => {
+    setTextLength(textValue.length);
+    setIsButtonDisabled(textValue.length > 240);
+  }, [textValue]);
+
+  async function handleAddPost(data) {
+    try {
+      await addPost({
+        uid: user.id,
+        text: data.text,
+      });
+      reset();
+    } catch (e) {
+      // No hacer nada aquí, ya que el hook useAddPost maneja el error
+    }
   }
 
   const handleClose = (event, reason) => {
@@ -46,6 +65,10 @@ function NewPost() {
     }
     setOpenSnackbar(false);
   };
+  const borderShadowColor =
+    textLength > 240
+      ? "0 0 0 5px rgba(255, 0, 0, 0.1)"
+      : "0 0 0 5px rgba(34, 60, 67, 0.1)";
   return (
     <Box paddingTop={8} paddingBottom={4}>
       <form onSubmit={handleSubmit(handleAddPost)}>
@@ -54,16 +77,16 @@ function NewPost() {
             Nuevo Post
           </Typography>
           <Button
-            // cambiar a loadingbutton de mui
             variant="contained"
             size="large"
             type="submit"
             style={{
               borderRadius: 20,
               textTransform: "none",
-              backgroundColor: "#223C43",
+              backgroundColor: isButtonDisabled ? "grey" : "#223C43",
               width: "100px",
             }}
+            disabled={isButtonDisabled}
           >
             Post
           </Button>
@@ -85,7 +108,7 @@ function NewPost() {
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                 borderColor: "black",
                 border: "none",
-                boxShadow: "0 0 0 5px rgba(34, 60, 67, 0.1)",
+                boxShadow: borderShadowColor,
               },
             },
             startAdornment: (
@@ -93,7 +116,12 @@ function NewPost() {
                 <Avatar
                   src={avatarexample}
                   sx={{ width: 38, height: 38, color: "white" }}
-                ></Avatar>
+                />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <Characters textLength={textLength} />
               </InputAdornment>
             ),
           }}
@@ -121,6 +149,7 @@ function NewPost() {
     </Box>
   );
 }
+
 function ScrollTopButton() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
