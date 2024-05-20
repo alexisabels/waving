@@ -74,7 +74,7 @@ function NewPost() {
       <form onSubmit={handleSubmit(handleAddPost)}>
         <Stack spacing={2} direction="row" justifyContent="space-between">
           <Typography variant="h4" component="h4" fontWeight="bold">
-            Nuevo Post
+            Nuevo Post.
           </Typography>
           <Button
             variant="contained"
