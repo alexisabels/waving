@@ -25,9 +25,14 @@ export function useAddPost() {
         throw new Error("El contenido del post no puede estar vacío.");
       }
 
+      const cleanedPost = {
+        ...post,
+        text: post.text.trim().replace(/\s+$/, ""),
+      };
+
       setLoading(true);
       const docRef = await addDoc(collection(db, "posts"), {
-        ...post,
+        ...cleanedPost,
         date: Date.now(),
         likes: [],
       });
