@@ -25,18 +25,16 @@ export default function FollowBtn({ currentUserId, targetUserId }) {
 
   //no renderizarlo si el user es el msmo
   if (currentUserId === targetUserId) {
-    return (
-      <Chip sx={{ marginLeft: 1 }} size="small" label="Tú" color="success" />
-    );
+    return null;
   }
 
   return (
     <Chip
-      sx={{ marginLeft: 1 }}
+      sx={{ marginLeft: 1.25 }}
       icon={isFollowing ? <CheckIcon /> : <AddIcon />}
       size="small"
       label={isFollowing ? "Siguiendo" : "Seguir"}
-      color="info"
+      color={isFollowing ? "success" : "warning"}
       onClick={handleToggle}
     />
   );

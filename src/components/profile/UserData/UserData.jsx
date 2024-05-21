@@ -74,7 +74,7 @@ export default function UserData({ user }) {
             />
           </Stack>
         </Box>
-        <Stack alignItems="center" direction="column" gap={1} marginTop={2}>
+        <Stack alignItems="center" direction="column" gap={1}>
           <Avatar sx={{ width: 100, height: 100 }} />
           <BigFollowBtn
             currentUserId={currentUser.uid}
