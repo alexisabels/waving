@@ -40,7 +40,7 @@ export default function UserData({ user }) {
             @{user.username}
           </Typography>
 
-          {currentUser?.uid === user.id && <EditProfileBtn user={user} />}
+          {/* {currentUser?.uid === user.id && <EditProfileBtn user={user} />} */}
           <Typography
             variant="p"
             component="p"
@@ -80,6 +80,7 @@ export default function UserData({ user }) {
             currentUserId={currentUser.uid}
             targetUserId={user.id}
           />
+          {currentUser?.uid === user.id && <EditProfileBtn user={user} />}
         </Stack>
       </Stack>
       <FollowingModal
