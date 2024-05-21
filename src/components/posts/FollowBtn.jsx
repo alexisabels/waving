@@ -22,8 +22,7 @@ export default function FollowBtn({ currentUserId, targetUserId }) {
     }
     setIsFollowing(!isFollowing);
   };
-  console.log("currentUserId" + currentUserId);
-  console.log("targetUserId" + targetUserId);
+
   //no renderizarlo si el user es el msmo
   if (currentUserId === targetUserId) {
     return (
