@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { db } from "../../../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ModalUserChip from "../ModalUserChip";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { useAuth } from "../../../../hooks/auth";
 
 export default function FollowersList({ userIds, isLoading, onClose }) {
   const [users, setUsers] = useState([]);
   const { user: currentUser } = useAuth();
+  const [loadingUsers, setLoadingUsers] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,6 +21,7 @@ export default function FollowersList({ userIds, isLoading, onClose }) {
         })
       );
       setUsers(usersData);
+      setLoadingUsers(false);
     };
 
     if (!isLoading) {
@@ -27,8 +29,8 @@ export default function FollowersList({ userIds, isLoading, onClose }) {
     }
   }, [userIds, isLoading]);
 
-  if (isLoading) {
-    return <div>Cargando...</div>;
+  if (isLoading || loadingUsers) {
+    return <CircularProgress sx={{ color: "#223C43" }} size={50} />;
   }
 
   if (users.length === 0) {

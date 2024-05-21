@@ -4,7 +4,7 @@ import { Chip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
-import { useFollow } from "../../hooks/useFollow";
+import { useFollow } from "../hooks/useFollow";
 
 export default function FollowBtn({ currentUserId, targetUserId }) {
   const { following, followUser, unfollowUser } = useFollow(currentUserId);

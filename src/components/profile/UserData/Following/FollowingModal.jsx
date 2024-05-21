@@ -37,7 +37,11 @@ export default function FollowingModal({
           Siguiendo
         </Typography>
         <Divider variant="fullWidth" sx={{ mt: 1, mb: 2 }} />
-        <FollowingList userIds={following} isLoading={loading} />
+        <FollowingList
+          userIds={following}
+          isLoading={loading}
+          onClose={() => setModalFollowingOpen(false)}
+        />
       </Box>
     </Modal>
   );

@@ -15,27 +15,28 @@ import {
 export function useFollow(uid) {
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingFollowers, setLoadingFollowers] = useState(true);
+  const [loadingFollowing, setLoadingFollowing] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!uid) {
       setError("No se ha proporcionado un UID");
-      setLoading(false);
+      setLoadingFollowers(false);
+      setLoadingFollowing(false);
       return;
     }
 
     const fetchFollowData = async () => {
-      setLoading(true);
+      setLoadingFollowers(true);
+      setLoadingFollowing(true);
       try {
-        // Obtener la lista de seguidos
         const followingQuery = query(
           collection(db, "following", uid, "myFollowing")
         );
         const followingSnapshot = await getDocs(followingQuery);
         const followingList = followingSnapshot.docs.map((doc) => doc.id);
 
-        // Obtener la lista de seguidores
         const followersQuery = query(
           collection(db, "followers", uid, "myFollowers")
         );
@@ -44,11 +45,12 @@ export function useFollow(uid) {
 
         setFollowing(followingList);
         setFollowers(followersList);
-        setLoading(false);
       } catch (err) {
         console.error("Error al obtener la lista de seguidores/seguidos:", err);
         setError(err);
-        setLoading(false);
+      } finally {
+        setLoadingFollowers(false);
+        setLoadingFollowing(false);
       }
     };
 
@@ -107,5 +109,13 @@ export function useFollow(uid) {
     }
   };
 
-  return { following, followers, loading, error, followUser, unfollowUser };
+  return {
+    following,
+    followers,
+    loadingFollowers,
+    loadingFollowing,
+    error,
+    followUser,
+    unfollowUser,
+  };
 }

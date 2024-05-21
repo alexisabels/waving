@@ -7,6 +7,7 @@ import FollowersModal from "./Followers/FollowersModal";
 import EditProfileBtn from "./EditProfileBtn";
 import { auth } from "../../../lib/firebase";
 import { useFollow } from "../../../hooks/useFollow";
+import BigFollowBtn from "../../../utils/BigFollowBtn";
 
 export default function UserData({ user }) {
   const formattedDate = new Date(user.date).toLocaleDateString("es-ES", {
@@ -18,8 +19,8 @@ export default function UserData({ user }) {
   const [modalFollowersOpen, setModalFollowersOpen] = useState(false);
   const [modalFollowingOpen, setModalFollowingOpen] = useState(false);
   const currentUser = auth.currentUser;
-  const { followers, following } = useFollow(user.id);
-
+  const { followers, following, loadingFollowers, loadingFollowing } =
+    useFollow(user.id);
   return (
     <div>
       <Stack
@@ -56,16 +57,30 @@ export default function UserData({ user }) {
             marginTop={2}
           >
             <Chip
-              label={`${followers.length} seguidores`}
+              label={
+                loadingFollowers
+                  ? "Cargando..."
+                  : `${followers.length} seguidores`
+              }
               onClick={() => setModalFollowersOpen(true)}
             />
             <Chip
-              label={`${following.length} siguiendo`}
+              label={
+                loadingFollowing
+                  ? "Cargando..."
+                  : `${following.length} siguiendo`
+              }
               onClick={() => setModalFollowingOpen(true)}
             />
           </Stack>
         </Box>
-        <Avatar sx={{ width: 100, height: 100 }} />
+        <Stack alignItems="center" direction="column" gap={1} marginTop={2}>
+          <Avatar sx={{ width: 100, height: 100 }} />
+          <BigFollowBtn
+            currentUserId={currentUser.uid}
+            targetUserId={user.id}
+          />
+        </Stack>
       </Stack>
       <FollowingModal
         modalFollowingOpen={modalFollowingOpen}

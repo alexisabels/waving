@@ -17,7 +17,8 @@ import PostMenu from "./PostMenu";
 import InteractionBar from "./InteractionBar";
 import moment from "moment";
 import "moment/dist/locale/es";
-import FollowBtn from "./FollowBtn";
+import FollowBtn from "../../utils/FollowBtn";
+import { Link as MuiLink } from "@mui/material";
 
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
@@ -142,9 +143,14 @@ export default function Post({ post, currentUser, showSnackbar }) {
             /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
           if (urlRegex.test(part)) {
             return (
-              <Link key={index} href={part} rel="noopener">
+              <MuiLink
+                key={index}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {part}
-              </Link>
+              </MuiLink>
             );
           }
           return <React.Fragment key={index}>{part}</React.Fragment>;
