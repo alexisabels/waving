@@ -21,7 +21,6 @@ export default function UserData({ user }) {
   const currentUser = auth.currentUser;
   const { followers, following, loadingFollowers, loadingFollowing } =
     useFollow(user.id);
-
   return (
     <div>
       <Stack
@@ -31,7 +30,7 @@ export default function UserData({ user }) {
         gap={1}
         marginBottom={3}
       >
-        <Stack alignItems="flex-start" gap={1}>
+        <Box maxWidth="50%">
           <Typography
             variant="h4"
             component="h4"
@@ -40,6 +39,8 @@ export default function UserData({ user }) {
           >
             @{user.username}
           </Typography>
+
+          {/* {currentUser?.uid === user.id && <EditProfileBtn user={user} />} */}
           <Typography
             variant="p"
             component="p"
@@ -48,7 +49,13 @@ export default function UserData({ user }) {
           >
             se unió el {formattedDate}
           </Typography>
-          <Stack alignItems="center" direction="row" gap={1} marginTop={2}>
+          <Stack
+            alignItems="center"
+            justifyContent="left"
+            direction="row"
+            gap={1}
+            marginTop={2}
+          >
             <Chip
               label={
                 loadingFollowers
@@ -66,7 +73,7 @@ export default function UserData({ user }) {
               onClick={() => setModalFollowingOpen(true)}
             />
           </Stack>
-        </Stack>
+        </Box>
         <Stack alignItems="center" direction="column" gap={1}>
           <Avatar sx={{ width: 100, height: 100 }} />
           <BigFollowBtn
