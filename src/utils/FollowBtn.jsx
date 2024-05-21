@@ -1,13 +1,14 @@
 // components/FollowBtn.jsx
 /* eslint-disable react/prop-types */
-import { Chip } from "@mui/material";
+import { Chip, CircularProgress } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import { useState, useEffect } from "react";
 import { useFollow } from "../hooks/useFollow";
 
 export default function FollowBtn({ currentUserId, targetUserId }) {
-  const { following, followUser, unfollowUser } = useFollow(currentUserId);
+  const { following, followUser, unfollowUser, loadingFollowing } =
+    useFollow(currentUserId);
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
@@ -23,9 +24,21 @@ export default function FollowBtn({ currentUserId, targetUserId }) {
     setIsFollowing(!isFollowing);
   };
 
-  //no renderizarlo si el user es el msmo
+  // No renderizarlo si el user es el mismo
   if (currentUserId === targetUserId) {
     return null;
+  }
+
+  if (loadingFollowing) {
+    return (
+      <Chip
+        sx={{ marginLeft: 1.25 }}
+        icon={<CircularProgress size="1rem" />}
+        size="small"
+        label="Cargando..."
+        color="default"
+      />
+    );
   }
 
   return (
