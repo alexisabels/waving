@@ -33,7 +33,7 @@ export default function BigFollowBtn({ currentUserId, targetUserId }) {
       icon={isFollowing ? <CheckIcon /> : <AddIcon />}
       size="medium"
       label={isFollowing ? "Siguiendo" : "Seguir"}
-      color={isFollowing ? "success" : "warning"}
+      color={isFollowing ? "warning" : "success"}
       onClick={handleToggle}
     />
   );

@@ -47,7 +47,7 @@ export default function FollowBtn({ currentUserId, targetUserId }) {
       icon={isFollowing ? <CheckIcon /> : <AddIcon />}
       size="small"
       label={isFollowing ? "Siguiendo" : "Seguir"}
-      color={isFollowing ? "success" : "warning"}
+      color={isFollowing ? "warning" : "success"}
       onClick={handleToggle}
     />
   );
