@@ -1,7 +1,7 @@
 // components/SuggestedUsersList.jsx
 import { useAuth } from "../../../hooks/auth";
 import SuggestedUserCard from "./SuggestedUserCard";
-import { Stack } from "@mui/material";
+import { CircularProgress, Stack, Typography } from "@mui/material";
 import { useFollow } from "../../../hooks/useFollow";
 import { useEffect, useState } from "react";
 import { db } from "../../../lib/firebase";
@@ -28,7 +28,14 @@ export default function SuggestedUsersList() {
     }
   }, [following]);
 
-  if (isLoading) return <div>Cargando...</div>;
+  if (isLoading)
+    return (
+      <Typography textAlign="center">
+        <CircularProgress sx={{ color: "#223C43" }} size={50} />
+        <br />
+        Cargando usuarios...
+      </Typography>
+    );
   if (!user) return <div>No hay usuario disponible.</div>;
 
   return (

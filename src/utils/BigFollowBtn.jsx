@@ -21,7 +21,6 @@ export default function BigFollowBtn({ currentUserId, targetUserId }) {
       followUser(targetUserId);
     }
     setIsFollowing(!isFollowing);
-    window.location.reload();
   };
 
   //no renderizarlo si el user es el msmo
@@ -34,7 +33,7 @@ export default function BigFollowBtn({ currentUserId, targetUserId }) {
       icon={isFollowing ? <CheckIcon /> : <AddIcon />}
       size="medium"
       label={isFollowing ? "Siguiendo" : "Seguir"}
-      color="info"
+      color={isFollowing ? "success" : "warning"}
       onClick={handleToggle}
     />
   );
