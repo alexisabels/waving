@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+// components/UserData/UserData.jsx
 import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import FollowingModal from "./Following/FollowingModal";
 import FollowersModal from "./Followers/FollowersModal";
 import EditProfileBtn from "./EditProfileBtn";
 import { auth } from "../../../lib/firebase";
+import { useFollow } from "../../../hooks/useFollow";
 
 export default function UserData({ user }) {
   const formattedDate = new Date(user.date).toLocaleDateString("es-ES", {
@@ -16,8 +18,8 @@ export default function UserData({ user }) {
   const [modalFollowersOpen, setModalFollowersOpen] = useState(false);
   const [modalFollowingOpen, setModalFollowingOpen] = useState(false);
   const currentUser = auth.currentUser;
-  // console.log("Current" + currentUser?.uid);
-  // console.log("Userpage" + user.id);
+  const { followers, following } = useFollow(user.id);
+
   return (
     <div>
       <Stack
@@ -54,11 +56,11 @@ export default function UserData({ user }) {
             marginTop={2}
           >
             <Chip
-              label="13 seguidores"
+              label={`${followers.length} seguidores`}
               onClick={() => setModalFollowersOpen(true)}
             />
             <Chip
-              label="21 siguiendo"
+              label={`${following.length} siguiendo`}
               onClick={() => setModalFollowingOpen(true)}
             />
           </Stack>

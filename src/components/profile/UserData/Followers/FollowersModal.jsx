@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
+// components/Followers/FollowersModal.jsx
 import { Box, Divider, Modal, Typography } from "@mui/material";
 import FollowersList from "./FollowersList";
+import { useFollow } from "../../../../hooks/useFollow";
 
 export default function FollowersModal({
-  // eslint-disable-next-line no-unused-vars
   user,
   modalFollowersOpen,
   setModalFollowersOpen,
 }) {
-  // const [followers, setFollowers] = useUser()
+  const { followers, loading } = useFollow(user.id);
+
   return (
     <Modal
       open={modalFollowersOpen}
@@ -35,7 +37,11 @@ export default function FollowersModal({
           Seguidores
         </Typography>
         <Divider variant="fullWidth" sx={{ mt: 1, mb: 2 }} />
-        <FollowersList users={user} />
+        <FollowersList
+          userIds={followers}
+          isLoading={loading}
+          onClose={() => setModalFollowersOpen(false)}
+        />
       </Box>
     </Modal>
   );

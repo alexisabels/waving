@@ -1,3 +1,4 @@
+// components/SuggestedUserCard.jsx
 /* eslint-disable react/prop-types */
 import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -23,13 +24,13 @@ export default function SuggestedUserCard({ user }) {
       sameElse: "[el] D [de] MMMM [de] YYYY",
     });
   }
+
   return (
     <Box
       component={Link}
       to={`${PROTECTED}/profile/${user?.username}`}
       sx={{
         width: 160,
-
         textDecoration: "none",
       }}
     >
@@ -47,7 +48,7 @@ export default function SuggestedUserCard({ user }) {
           "&:hover": { boxShadow: "0 8px 16px rgba(0,0,0,0.3)" },
         }}
       >
-        <Avatar sx={{ width: 56, height: 56 }} />
+        <Avatar src={user.avatar} sx={{ width: 56, height: 56 }} />
         <Typography variant="h6" sx={{ textAlign: "center", minHeight: 40 }}>
           {user.username}
         </Typography>
@@ -61,16 +62,16 @@ export default function SuggestedUserCard({ user }) {
         <Button
           variant="contained"
           size="medium"
-          disabled
           sx={{
             borderRadius: 20,
             textTransform: "none",
             backgroundColor: "#223C43",
+            "&:hover": { backgroundColor: "#3a6b78" },
             width: "100px",
             marginTop: "auto",
           }}
         >
-          Seguir
+          Unfollow
         </Button>
       </Paper>
     </Box>

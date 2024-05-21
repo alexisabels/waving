@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
+// components/Following/FollowingModal.jsx
 import { Box, Divider, Modal, Typography } from "@mui/material";
 import FollowingList from "./FollowingList";
+import { useFollow } from "../../../../hooks/useFollow";
 
 export default function FollowingModal({
-  // eslint-disable-next-line no-unused-vars
   user,
   modalFollowingOpen,
   setModalFollowingOpen,
 }) {
-  // const [following, setFollowing] = useUser()
+  const { following, loading } = useFollow(user.id);
+
   return (
     <Modal
       open={modalFollowingOpen}
@@ -32,10 +34,10 @@ export default function FollowingModal({
         }}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Seguidores
+          Siguiendo
         </Typography>
         <Divider variant="fullWidth" sx={{ mt: 1, mb: 2 }} />
-        <FollowingList users={user} />
+        <FollowingList userIds={following} isLoading={loading} />
       </Box>
     </Modal>
   );

@@ -1,9 +1,17 @@
+// components/ModalUserChip.jsx
 /* eslint-disable react/prop-types */
-
-import { Avatar, Box, Divider, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Stack, Typography } from "@mui/material";
 import FollowToggleButton from "../../posts/FollowBtn";
+import { Link } from "react-router-dom";
+import { PROTECTED } from "../../../lib/routes";
 
-export default function ModalUserChip({ user }) {
+export default function ModalUserChip({ user, currentUserId, onClose }) {
+  const handleCloseModal = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -23,14 +31,32 @@ export default function ModalUserChip({ user }) {
         width="100%"
       >
         <Stack direction="row" alignItems="center">
-          <Avatar sx={{ width: 40, height: 40, mr: 1.5 }} />
+          <Avatar
+            sx={{ width: 38, height: 38, color: "white", mr: 1.5 }}
+            component={Link}
+            to={`${PROTECTED}/profile/${user.username}`}
+            onClick={handleCloseModal}
+          />{" "}
           <Box>
-            <Typography variant="body1" noWrap>
-              alesguga
+            <Typography
+              variant="body1"
+              component={Link}
+              noWrap
+              to={`${PROTECTED}/profile/${user.username}`}
+              sx={{
+                color: "black",
+                textDecoration: "none",
+              }}
+              onClick={handleCloseModal}
+            >
+              {user.username}
             </Typography>
           </Box>
         </Stack>
-        <FollowToggleButton />
+        <FollowToggleButton
+          currentUserId={currentUserId}
+          targetUserId={user.id}
+        />
       </Stack>
     </Box>
   );

@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+// components/Post.jsx
 import {
   Avatar,
   Box,
@@ -18,7 +18,7 @@ import InteractionBar from "./InteractionBar";
 import moment from "moment";
 import "moment/dist/locale/es";
 import FollowBtn from "./FollowBtn";
-// sin /dist no va
+
 export default function Post({ post, currentUser, showSnackbar }) {
   const { text, uid } = post;
   const { user, loading } = useUser(uid);
@@ -34,7 +34,6 @@ export default function Post({ post, currentUser, showSnackbar }) {
   const today = moment().startOf("day");
   const postDate = moment(post.date);
 
-  // Verificar si la fecha es de hoy
   const isToday = postDate.isSame(today, "day");
 
   let timestamp;
@@ -42,7 +41,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
     timestamp = postDate.fromNow();
   } else {
     timestamp = postDate.calendar(null, {
-      sameDay: "[hoy a las] LT", // No se usará ya que 'isToday' lo maneja
+      sameDay: "[hoy a las] LT",
       nextDay: "[mañana a las] LT",
       nextWeek: "dddd [a las] LT",
       lastDay: "[ayer a las] LT",
@@ -104,7 +103,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
                 >
                   {username}
                 </Typography>
-                <FollowBtn />
+                <FollowBtn currentUserId={currentUser?.id} targetUserId={uid} />
               </div>
               <Typography
                 variant="caption"
@@ -139,7 +138,6 @@ export default function Post({ post, currentUser, showSnackbar }) {
         }}
       >
         {text.split(/(\s+)/).map((part, index) => {
-          // Regex que identifica URLs
           const urlRegex =
             /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
           if (urlRegex.test(part)) {
@@ -152,7 +150,6 @@ export default function Post({ post, currentUser, showSnackbar }) {
           return <React.Fragment key={index}>{part}</React.Fragment>;
         })}
       </Typography>
-      {/* BARRA DE INTERACCIÓN */}
       <InteractionBar />
     </Paper>
   );
