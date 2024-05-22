@@ -10,7 +10,6 @@ export default function ModalUserChip({ user, currentUserId, onClose }) {
       onClose();
     }
   };
-
   return (
     <Box
       sx={{
@@ -48,7 +47,7 @@ export default function ModalUserChip({ user, currentUserId, onClose }) {
               }}
               onClick={handleCloseModal}
             >
-              {user.username}
+              {user.username || "Desconocido"}
             </Typography>
           </Box>
         </Stack>
