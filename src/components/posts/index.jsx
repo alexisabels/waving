@@ -5,6 +5,7 @@ import {
   CircularProgress,
   Paper,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -82,27 +83,31 @@ export default function Post({ post, currentUser, showSnackbar }) {
           sx={{ width: "100%", px: 2, py: 1 }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Avatar
-              src={avatarexample}
-              sx={{ width: 38, height: 38, color: "white" }}
-              component={Link}
-              to={`${PROTECTED}/profile/${username}`}
-            />
+            <Tooltip title={`Ver el perfil de ${username}`}>
+              <Avatar
+                src={avatarexample}
+                sx={{ width: 38, height: 38, color: "white" }}
+                component={Link}
+                to={`${PROTECTED}/profile/${username}`}
+              />
+            </Tooltip>
             <Box sx={{ ml: 2 }}>
               <div>
-                <Typography
-                  variant="subtitle2"
-                  component={Link}
-                  noWrap
-                  to={`${PROTECTED}/profile/${username}`}
-                  sx={{
-                    textDecoration: "none",
-                    color: "white",
-                    "&:hover": { textDecoration: "underline" },
-                  }}
-                >
-                  {username}
-                </Typography>
+                <Tooltip title={`Ver el perfil de ${username}`}>
+                  <Typography
+                    variant="subtitle2"
+                    component={Link}
+                    noWrap
+                    to={`${PROTECTED}/profile/${username}`}
+                    sx={{
+                      textDecoration: "none",
+                      color: "white",
+                      "&:hover": { textDecoration: "underline" },
+                    }}
+                  >
+                    {username}
+                  </Typography>
+                </Tooltip>
                 <FollowBtn currentUserId={currentUser?.id} targetUserId={uid} />
               </div>
               <Typography

@@ -9,6 +9,7 @@ import {
   Snackbar,
   Stack,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -21,10 +22,26 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 function Characters({ textLength }) {
   const color = textLength > 240 ? "red" : "lightgray";
+  const tooltipTitle =
+    textLength > 240
+      ? "Has superado el límite de caracteres permitido"
+      : "Límite de caracteres";
   return (
-    <Typography variant="body2" style={{ color: color }}>
-      {textLength}/240
-    </Typography>
+    <Tooltip title={tooltipTitle}>
+      <Typography
+        variant="body2"
+        style={{ color: color }}
+        sx={{
+          color: "white",
+          userSelect: "none",
+          WebkitUserSelect: "none",
+          msUserSelect: "none",
+          MozUserSelect: "none",
+        }}
+      >
+        {textLength}/240
+      </Typography>
+    </Tooltip>
   );
 }
 
@@ -55,7 +72,7 @@ function NewPost() {
       });
       reset();
     } catch (e) {
-      // No hacer nada aquí, ya que el hook useAddPost maneja el error
+      // No hacer nada aqui, ya que el hook useAddPost maneja el error
     }
   }
 

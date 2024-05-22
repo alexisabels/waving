@@ -36,8 +36,6 @@ export default function Profile() {
   if (loading) return "Cargando...";
   if (!user) return <div>Usuario no encontrado.</div>;
 
-  // Conversión de fecha
-
   return (
     <div>
       <Box

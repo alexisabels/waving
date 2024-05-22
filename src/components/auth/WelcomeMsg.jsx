@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import "./WelcomeMsg.css"; // Asegúrate de importar el archivo CSS
+import "./WelcomeMsg.css";
 
 export default function WelcomeMsg() {
   return (
