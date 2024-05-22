@@ -12,11 +12,21 @@ export default function FollowedUsersList() {
   const [followedUsers, setFollowedUsers] = useState([]);
 
   useEffect(() => {
+    if (!user) return;
+
     const fetchFollowedUsers = async () => {
       const usersData = await Promise.all(
         following.map(async (id) => {
           const userDoc = await getDoc(doc(db, "users", id));
-          return { id, ...userDoc.data() };
+          // Aquí obtenemos el campo followedAt desde la colección de following
+          const followedAtDoc = await getDoc(
+            doc(db, "following", user.id, "myFollowing", id)
+          );
+          const followedAtTimestamp = followedAtDoc.data()?.followedAt;
+          const followedAtDate = followedAtTimestamp
+            ? followedAtTimestamp.toDate()
+            : null;
+          return { id, followedAt: followedAtDate, ...userDoc.data() };
         })
       );
       setFollowedUsers(usersData);
@@ -25,7 +35,7 @@ export default function FollowedUsersList() {
     if (following.length > 0) {
       fetchFollowedUsers();
     }
-  }, [following]);
+  }, [following, user]);
 
   if (isLoading)
     return (

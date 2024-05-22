@@ -7,16 +7,16 @@ import moment from "moment";
 export default function FollowedUserCard({ user }) {
   moment.locale("es");
   const today = moment().startOf("day");
-  const userDate = moment(user.date);
+  const followedDate = moment(user.followedAt);
 
   // verifica si la fecha es de hoy
-  const isToday = userDate.isSame(today, "day");
+  const isToday = followedDate.isSame(today, "day");
 
   let date;
   if (isToday) {
-    date = userDate.fromNow();
+    date = followedDate.fromNow();
   } else {
-    date = userDate.calendar(null, {
+    date = followedDate.calendar(null, {
       sameDay: "[hoy]", // no se usa ya que 'isToday' arriba lo maneja
       lastDay: "[ayer]",
       lastWeek: "[el] dddd",
@@ -56,7 +56,7 @@ export default function FollowedUserCard({ user }) {
           sx={{ textAlign: "center" }}
           fontSize="12px"
         >
-          se unió {date}
+          siguiendo desde {date}
         </Typography>
         <Button
           variant="contained"
