@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Paper, Tooltip, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { PROTECTED } from "../../../lib/routes";
 import moment from "moment";
@@ -58,20 +58,22 @@ export default function FollowedUserCard({ user }) {
         >
           siguiendo desde {date}
         </Typography>
-        <Button
-          variant="contained"
-          size="medium"
-          sx={{
-            borderRadius: 20,
-            textTransform: "none",
-            backgroundColor: "#223C43",
-            "&:hover": { backgroundColor: "#3a6b78" },
-            width: "100px",
-            marginTop: "auto",
-          }}
-        >
-          Unfollow
-        </Button>
+        <Tooltip title={`Dejar de seguir a ${user.username}`}>
+          <Button
+            variant="contained"
+            size="medium"
+            sx={{
+              borderRadius: 20,
+              textTransform: "none",
+              backgroundColor: "#223C43",
+              "&:hover": { backgroundColor: "#3a6b78" },
+              width: "100px",
+              marginTop: "auto",
+            }}
+          >
+            Unfollow
+          </Button>
+        </Tooltip>
       </Paper>
     </Box>
   );
