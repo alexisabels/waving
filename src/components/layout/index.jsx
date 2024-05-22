@@ -1,11 +1,12 @@
+import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { AUTH } from "../../lib/routes";
 import { useAuth } from "../../hooks/auth";
-import Navbar from "../navbar";
-import { Box } from "@mui/material";
+import { AUTH } from "../../lib/routes";
 import LoadingPage from "../../utils/LoadingPage";
 import AppMobileBar from "../home/AppMobileBar";
+import Navbar from "../navbar";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -36,6 +37,7 @@ export default function Layout() {
         }}
       >
         <Outlet />
+        <ScrollToTopButton />
       </Box>
       <AppMobileBar />
     </Box>

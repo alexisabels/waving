@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
+import { Alert, Button } from "@mui/material";
+import { deleteUser as firebaseDeleteUser, getAuth } from "firebase/auth";
+import { deleteDoc, doc } from "firebase/firestore";
 import { useState } from "react";
-import { getAuth, deleteUser as firebaseDeleteUser } from "firebase/auth";
-import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { Button, Alert } from "@mui/material";
 
 function DeleteUser({ uid }) {
   const [error, setError] = useState("");
