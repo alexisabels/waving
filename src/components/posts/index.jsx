@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// components/Post.jsx
 import {
   Avatar,
   Box,

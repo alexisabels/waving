@@ -1,13 +1,12 @@
-// components/SuggestedUsersList.jsx
 import { useAuth } from "../../../hooks/auth";
-import SuggestedUserCard from "./SuggestedUserCard";
+import FollowedUserCard from "./FollowedUserCard";
 import { CircularProgress, Stack, Typography } from "@mui/material";
 import { useFollow } from "../../../hooks/useFollow";
 import { useEffect, useState } from "react";
 import { db } from "../../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-export default function SuggestedUsersList() {
+export default function FollowedUsersList() {
   const { user, isLoading } = useAuth();
   const { following } = useFollow(user?.id);
   const [followedUsers, setFollowedUsers] = useState([]);
@@ -48,7 +47,7 @@ export default function SuggestedUsersList() {
       width="100%"
     >
       {followedUsers.map((followedUser) => (
-        <SuggestedUserCard key={followedUser.id} user={followedUser} />
+        <FollowedUserCard key={followedUser.id} user={followedUser} />
       ))}
     </Stack>
   );

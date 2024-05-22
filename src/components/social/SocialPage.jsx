@@ -1,6 +1,5 @@
-// components/SocialPage.jsx
 import { Box } from "@mui/material";
-import SuggestedUsersList from "./SuggestedUsers/SuggestedUsersList";
+import FollowedUsersList from "./FollowedUsers/FollowedUsersList";
 import FollowedPostsFeed from "./FollowedPostsFeed";
 
 export default function SocialPage() {
@@ -9,7 +8,7 @@ export default function SocialPage() {
       <Box maxWidth="600px" mx="auto">
         <h1>Social</h1>
         <h3>Siguiendo</h3>
-        <SuggestedUsersList />
+        <FollowedUsersList />
         <h2>De tus seguidos</h2>
         <FollowedPostsFeed />
       </Box>

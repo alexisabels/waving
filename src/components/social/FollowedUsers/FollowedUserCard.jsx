@@ -1,11 +1,10 @@
-// components/SuggestedUserCard.jsx
 /* eslint-disable react/prop-types */
 import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { PROTECTED } from "../../../lib/routes";
 import moment from "moment";
 
-export default function SuggestedUserCard({ user }) {
+export default function FollowedUserCard({ user }) {
   moment.locale("es");
   const today = moment().startOf("day");
   const userDate = moment(user.date);

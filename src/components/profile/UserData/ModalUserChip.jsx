@@ -1,4 +1,3 @@
-// components/ModalUserChip.jsx
 /* eslint-disable react/prop-types */
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import FollowToggleButton from "../../../utils/FollowBtn";

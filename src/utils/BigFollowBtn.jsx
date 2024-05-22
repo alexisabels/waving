@@ -1,4 +1,3 @@
-// components/FollowBtn.jsx
 /* eslint-disable react/prop-types */
 import { Chip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";

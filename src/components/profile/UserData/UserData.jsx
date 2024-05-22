@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// components/UserData/UserData.jsx
 import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import FollowingModal from "./Following/FollowingModal";

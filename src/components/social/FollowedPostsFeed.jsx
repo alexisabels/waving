@@ -1,4 +1,3 @@
-// components/FollowedPostsFeed.jsx
 import { useFollowedPosts } from "../../hooks/useFollowedPosts";
 import PostsLists from "../posts/PostsLists";
 import { useAuth } from "../../hooks/auth";

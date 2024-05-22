@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// components/Followers/FollowersModal.jsx
 import { Box, Divider, Modal, Typography } from "@mui/material";
 import FollowersList from "./FollowersList";
 import { useFollow } from "../../../../hooks/useFollow";
