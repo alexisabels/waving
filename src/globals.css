@@ -12,7 +12,7 @@ body {
   background-color: #EBE3DD
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar-thumb:vertical {
   display: none;
 }
 html {

@@ -10,7 +10,7 @@ export default function SuggestedUserCard({ user }) {
   const today = moment().startOf("day");
   const userDate = moment(user.date);
 
-  // Verificar si la fecha es de hoy
+  // verifica si la fecha es de hoy
   const isToday = userDate.isSame(today, "day");
 
   let date;
@@ -18,7 +18,7 @@ export default function SuggestedUserCard({ user }) {
     date = userDate.fromNow();
   } else {
     date = userDate.calendar(null, {
-      sameDay: "[hoy]", // No se usará ya que 'isToday' lo maneja
+      sameDay: "[hoy]", // no se usa ya que 'isToday' arriba lo maneja
       lastDay: "[ayer]",
       lastWeek: "[el] dddd",
       sameElse: "[el] D [de] MMMM [de] YYYY",
