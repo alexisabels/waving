@@ -23,7 +23,7 @@ export default function FollowBtn({ currentUserId, targetUserId }) {
     setIsFollowing(!isFollowing);
   };
 
-  // No renderizarlo si el user es el mismo
+  // no renderizarlo si el user es el mismo
   if (currentUserId === targetUserId) {
     return null;
   }
