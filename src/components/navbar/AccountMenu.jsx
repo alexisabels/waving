@@ -9,6 +9,7 @@ import {
   Divider,
   ListItemIcon,
   Typography,
+  Zoom,
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth, useLogout } from "../../hooks/auth";
@@ -87,7 +88,7 @@ export default function AccountMenu() {
           textAlign: "center",
         }}
       >
-        <Tooltip title="Ajustes de cuenta">
+        <Tooltip title="Ajustes de cuenta" TransitionComponent={Zoom}>
           <IconButton
             onClick={handleClick}
             size="small"

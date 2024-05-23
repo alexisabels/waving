@@ -1,9 +1,9 @@
-import { Tooltip, Typography } from "@mui/material";
+import { Tooltip, Typography, Zoom } from "@mui/material";
 import "./Waving.css";
 
 function Waving() {
   return (
-    <Tooltip title="Ir a la pantalla principal">
+    <Tooltip title="Ir a la pantalla principal" TransitionComponent={Zoom}>
       <div className="wave">
         <Typography
           variant="p"

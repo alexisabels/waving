@@ -1,5 +1,13 @@
 /* eslint-disable react/prop-types */
-import { Avatar, Box, Chip, Stack, Tooltip, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Chip,
+  Stack,
+  Tooltip,
+  Typography,
+  Zoom,
+} from "@mui/material";
 import { useState } from "react";
 import FollowingModal from "./Following/FollowingModal";
 import FollowersModal from "./Followers/FollowersModal";
@@ -55,7 +63,10 @@ export default function UserData({ user }) {
             gap={1}
             marginTop={2}
           >
-            <Tooltip title="Ver todos los seguidores">
+            <Tooltip
+              title="Ver todos los seguidores"
+              TransitionComponent={Zoom}
+            >
               <Chip
                 label={
                   loadingFollowers
@@ -65,7 +76,7 @@ export default function UserData({ user }) {
                 onClick={() => setModalFollowersOpen(true)}
               />
             </Tooltip>
-            <Tooltip title="Ver todos los seguidos">
+            <Tooltip title="Ver todos los seguidos" TransitionComponent={Zoom}>
               <Chip
                 label={
                   loadingFollowing

@@ -1,5 +1,13 @@
 /* eslint-disable react/prop-types */
-import { Avatar, Box, Button, Paper, Tooltip, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Paper,
+  Tooltip,
+  Typography,
+  Zoom,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { PROTECTED } from "../../../lib/routes";
 import moment from "moment";
@@ -58,7 +66,10 @@ export default function FollowedUserCard({ user }) {
         >
           siguiendo desde {date}
         </Typography>
-        <Tooltip title={`Dejar de seguir a ${user.username}`}>
+        <Tooltip
+          title={`Dejar de seguir a ${user.username}`}
+          TransitionComponent={Zoom}
+        >
           <Button
             variant="contained"
             size="medium"

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Tooltip, Typography } from "@mui/material";
+import { Tooltip, Typography, Zoom } from "@mui/material";
 
 function InputLength({ textLength }) {
   const color = textLength > 240 ? "red" : "lightgray";
@@ -8,7 +8,7 @@ function InputLength({ textLength }) {
       ? "Has superado el límite de caracteres permitido"
       : "Límite de caracteres";
   return (
-    <Tooltip title={tooltipTitle}>
+    <Tooltip title={tooltipTitle} TransitionComponent={Zoom}>
       <Typography
         variant="body2"
         style={{ color: color }}

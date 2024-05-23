@@ -7,6 +7,7 @@ import {
   Stack,
   Tooltip,
   Typography,
+  Zoom,
 } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -83,7 +84,10 @@ export default function Post({ post, currentUser, showSnackbar }) {
           sx={{ width: "100%", px: 2, py: 1 }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Tooltip title={`Ver el perfil de ${username}`}>
+            <Tooltip
+              title={`Ver el perfil de ${username}`}
+              TransitionComponent={Zoom}
+            >
               <Avatar
                 src={avatarexample}
                 sx={{ width: 38, height: 38, color: "white" }}
@@ -93,7 +97,10 @@ export default function Post({ post, currentUser, showSnackbar }) {
             </Tooltip>
             <Box sx={{ ml: 2 }}>
               <div>
-                <Tooltip title={`Ver el perfil de ${username}`}>
+                <Tooltip
+                  title={`Ver el perfil de ${username}`}
+                  TransitionComponent={Zoom}
+                >
                   <Typography
                     variant="subtitle2"
                     component={Link}
