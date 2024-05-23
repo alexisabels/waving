@@ -123,7 +123,7 @@ export function useRegister() {
     const usernameExists = await isUsernameExists(username);
     if (usernameExists) {
       setSnackbarMessage(
-        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo"
+        "Ya existe un usuario con ese nombre. Por favor, introduce uno nuevo",
       );
       setSnackbarSeverity("error");
       setOpenSnackbar(true);

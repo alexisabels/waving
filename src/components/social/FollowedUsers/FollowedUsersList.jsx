@@ -20,14 +20,14 @@ export default function FollowedUsersList() {
           const userDoc = await getDoc(doc(db, "users", id));
           // Aquí obtenemos el campo followedAt desde la colección de following
           const followedAtDoc = await getDoc(
-            doc(db, "following", user.id, "myFollowing", id)
+            doc(db, "following", user.id, "myFollowing", id),
           );
           const followedAtTimestamp = followedAtDoc.data()?.followedAt;
           const followedAtDate = followedAtTimestamp
             ? followedAtTimestamp.toDate()
             : null;
           return { id, followedAt: followedAtDate, ...userDoc.data() };
-        })
+        }),
       );
       setFollowedUsers(usersData);
     };

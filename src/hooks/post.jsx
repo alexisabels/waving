@@ -39,7 +39,7 @@ export function useAddPost() {
       await setDoc(
         doc(db, "posts", docRef.id),
         { id: docRef.id },
-        { merge: true }
+        { merge: true },
       );
 
       console.log("Post publicado con ID: ", docRef.id);
@@ -77,7 +77,7 @@ export function useUserPosts(uid = null) {
   const q = query(
     collection(db, "posts"),
     where("uid", "==", uid),
-    orderBy("date", "desc")
+    orderBy("date", "desc"),
   );
   const [posts, isLoading, error] = useCollectionData(q);
 

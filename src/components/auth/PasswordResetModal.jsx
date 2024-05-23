@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Dialog,
   DialogTitle,
@@ -12,6 +11,7 @@ import {
 } from "@mui/material";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function PasswordResetModal({ open, onClose }) {
   const [email, setEmail] = useState("");
@@ -120,5 +120,10 @@ function PasswordResetModal({ open, onClose }) {
     </>
   );
 }
+
+PasswordResetModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default PasswordResetModal;

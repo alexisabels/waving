@@ -27,7 +27,7 @@ export default function DeleteAccount() {
   const handleDeleteUser = async () => {
     if (!confirmed) {
       setMsg(
-        "Por favor, confirma que quieres eliminar la cuenta marcando la casilla."
+        "Por favor, confirma que quieres eliminar la cuenta marcando la casilla.",
       );
       setOpen(true);
       return;

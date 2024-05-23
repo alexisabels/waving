@@ -1,28 +1,29 @@
 /* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { useState } from "react";
 
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Snackbar,
-  Alert,
-  InputAdornment,
-  IconButton,
-  Grid,
-} from "@mui/material";
-import PasswordResetModal from "./PasswordResetModal";
-import { useLogin } from "../../hooks/auth";
-import { useForm } from "react-hook-form";
-import { emailValidate, passwordValidate } from "../../utils/form-validate";
-import { HOME } from "../../lib/routes";
 import {
   AlternateEmail,
   Key,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useLogin } from "../../hooks/auth";
+import { HOME } from "../../lib/routes";
+import { emailValidate, passwordValidate } from "../../utils/form-validate";
+import PasswordResetModal from "./PasswordResetModal";
 
 const Login = ({ onToggleForm }) => {
   const {
@@ -180,8 +181,6 @@ const Login = ({ onToggleForm }) => {
         </Grid>
         <Grid item>
           <Button
-            // disabled
-
             onClick={onToggleForm}
             sx={{
               color: "#223C43",
@@ -214,6 +213,10 @@ const Login = ({ onToggleForm }) => {
       </Snackbar>
     </Box>
   );
+};
+
+Login.propTypes = {
+  onToggleForm: PropTypes.func.isRequired,
 };
 
 export default Login;

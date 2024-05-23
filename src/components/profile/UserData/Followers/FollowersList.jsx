@@ -17,7 +17,7 @@ export default function FollowersList({ userIds, isLoading, onClose }) {
         userIds.map(async (id) => {
           const userDoc = await getDoc(doc(db, "users", id));
           return { id, ...userDoc.data() };
-        })
+        }),
       );
       setUsers(usersData);
       setLoadingUsers(false);

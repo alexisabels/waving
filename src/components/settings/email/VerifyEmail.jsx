@@ -19,7 +19,7 @@ export default function VerifyEmail() {
     sendEmailVerification(auth.currentUser)
       .then(() => {
         setMsg(
-          "Se ha enviado un correo de verificación. Después de la verificación, recarga esta página para actualizar el estado."
+          "Se ha enviado un correo de verificación. Después de la verificación, recarga esta página para actualizar el estado.",
         );
         setOpen(true);
       })

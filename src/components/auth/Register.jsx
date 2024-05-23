@@ -2,29 +2,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  TextField,
-  Button,
-  Typography,
-  Box,
-  FormControlLabel,
-  Checkbox,
-  InputAdornment,
-  Grid,
-  IconButton,
-} from "@mui/material";
+import { AlternateEmail, Key, MailOutline } from "@mui/icons-material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Snackbar, Alert } from "@mui/material";
-import { useRegister } from "../../hooks/auth";
+import {
+  Alert,
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useRegister } from "../../hooks/auth";
+import { HOME } from "../../lib/routes";
 import {
   emailValidate,
   passwordValidate,
   usernameValidate,
 } from "../../utils/form-validate";
-import { HOME } from "../../lib/routes";
-import { AlternateEmail, Key, MailOutline } from "@mui/icons-material";
 const Register = ({ onToggleForm }) => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [termsError, setTermsError] = useState("");
