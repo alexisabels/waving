@@ -16,7 +16,7 @@ export default function Profile() {
     const fetchUser = async () => {
       const q = query(
         collection(db, "users"),
-        where("username", "==", username),
+        where("username", "==", username)
       );
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
@@ -61,7 +61,7 @@ export default function Profile() {
         >
           Publicaciones
         </Typography>
-        <PostsLists posts={posts} isLoading={postsLoading} />{" "}
+        <PostsLists posts={posts} isLoading={postsLoading} />
       </Box>
     </div>
   );

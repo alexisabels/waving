@@ -155,11 +155,10 @@ export default function AccountMenu() {
             },
           }}
         >
-          {" "}
           <Avatar
             src={avatarexample}
             sx={{ width: 32, height: 32, color: "black" }}
-          />{" "}
+          />
           <ActiveUserLink />
         </MenuItem>
         <Divider />

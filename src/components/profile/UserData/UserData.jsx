@@ -73,7 +73,7 @@ export default function UserData({ user }) {
                     : `${following.length} siguiendo`
                 }
                 onClick={() => setModalFollowingOpen(true)}
-              />{" "}
+              />
             </Tooltip>
           </Stack>
         </Box>

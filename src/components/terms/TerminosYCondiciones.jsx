@@ -41,7 +41,7 @@ export default function TerminosYCondiciones() {
 
       <p>
         We employ the use of cookies. By accessing Waving, you agreed to use
-        cookies in agreement with the Waving Social's Privacy Policy.{" "}
+        cookies in agreement with the Waving Social's Privacy Policy.
       </p>
 
       <p>

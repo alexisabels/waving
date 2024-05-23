@@ -31,7 +31,7 @@ export default function SettingsPage() {
           onClick={handleOpenModal}
         >
           Haz click aquí para cambiarla
-        </Button>{" "}
+        </Button>
       </Box>
       <PasswordResetModal open={modalOpen} onClose={handleCloseModal} />
       <h2>Correo electrónico</h2>
