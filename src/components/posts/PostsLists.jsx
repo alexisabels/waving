@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   CircularProgress,
@@ -66,7 +65,7 @@ export default function PostsLists({ posts, isLoading }) {
                 currentUser={user}
                 showSnackbar={showSnackbar}
               />
-            ) : null,
+            ) : null
           )
         )}
       </Box>

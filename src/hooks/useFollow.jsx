@@ -1,4 +1,3 @@
-// hooks/useFollow.jsx
 import { useState, useEffect } from "react";
 import { db } from "../lib/firebase";
 import {
@@ -32,13 +31,13 @@ export function useFollow(uid) {
       setLoadingFollowing(true);
       try {
         const followingQuery = query(
-          collection(db, "following", uid, "myFollowing"),
+          collection(db, "following", uid, "myFollowing")
         );
         const followingSnapshot = await getDocs(followingQuery);
         const followingList = followingSnapshot.docs.map((doc) => doc.id);
 
         const followersQuery = query(
-          collection(db, "followers", uid, "myFollowers"),
+          collection(db, "followers", uid, "myFollowers")
         );
         const followersSnapshot = await getDocs(followersQuery);
         const followersList = followersSnapshot.docs.map((doc) => doc.id);

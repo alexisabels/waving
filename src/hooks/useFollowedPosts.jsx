@@ -1,4 +1,3 @@
-// hooks/useFollowedPosts.js
 import { useState, useEffect } from "react";
 import { db } from "../lib/firebase";
 import { useFollow } from "./useFollow";
@@ -20,7 +19,7 @@ export function useFollowedPosts(currentUserId) {
           const postsQuery = query(
             collection(db, "posts"),
             where("uid", "in", following),
-            orderBy("date", "desc"),
+            orderBy("date", "desc")
           );
           const querySnapshot = await getDocs(postsQuery);
           const postsData = querySnapshot.docs.map((doc) => ({
