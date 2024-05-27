@@ -166,7 +166,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
           return <React.Fragment key={index}>{part}</React.Fragment>;
         })}
       </Typography>
-      <InteractionBar />
+      <InteractionBar postId={post.id} />
     </Paper>
   );
 }

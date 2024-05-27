@@ -1,15 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import {
-  ChatBubble,
-  ChatBubbleOutlineRounded,
-  FavoriteBorder,
-  FavoriteRounded,
-} from "@mui/icons-material";
+import { ChatBubble, ChatBubbleOutlineRounded } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
+import LikeButton from "./Interaction/LikeButton";
 
-export default function InteractionBar() {
-  const [hoverFavorite, setHoverFavorite] = useState(false);
-  const [hoverComment, sethoverComment] = useState(false);
+export default function InteractionBar({ postId, commentsCount }) {
+  const [hoverComment, setHoverComment] = useState(false);
 
   return (
     <div>
@@ -20,29 +16,8 @@ export default function InteractionBar() {
         sx={{ width: "85%", px: 2, pt: 0, pb: 2 }}
       >
         {/* Likes */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 0.5,
-            cursor: "pointer",
-          }}
-          onMouseEnter={() => setHoverFavorite(true)}
-          onMouseLeave={() => setHoverFavorite(false)}
-        >
-          {hoverFavorite ? (
-            <FavoriteRounded fontSize="small" style={{ color: "red" }} />
-          ) : (
-            <FavoriteBorder fontSize="small" />
-          )}
-          <Typography
-            variant="body1"
-            sx={{ display: "inline" }}
-            fontSize="smaller"
-          >
-            67
-          </Typography>
-        </Box>
+        <LikeButton postId={postId} />
+
         {/* Comentarios */}
         <Box
           sx={{
@@ -51,8 +26,8 @@ export default function InteractionBar() {
             gap: 0.5,
             cursor: "pointer",
           }}
-          onMouseEnter={() => sethoverComment(true)}
-          onMouseLeave={() => sethoverComment(false)}
+          onMouseEnter={() => setHoverComment(true)}
+          onMouseLeave={() => setHoverComment(false)}
         >
           {hoverComment ? (
             <ChatBubble fontSize="small" style={{ color: "#223C43" }} />
@@ -64,7 +39,7 @@ export default function InteractionBar() {
             sx={{ display: "inline" }}
             fontSize="smaller"
           >
-            14
+            {commentsCount}
           </Typography>
         </Box>
       </Stack>
