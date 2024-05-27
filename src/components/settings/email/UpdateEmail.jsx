@@ -109,6 +109,7 @@ export default function UpdateEmail() {
         label="Contraseña Actual"
         type="password"
         variant="outlined"
+        autoComplete="new-password"
         fullWidth
         InputProps={{
           startAdornment: (

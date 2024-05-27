@@ -57,7 +57,7 @@ const Register = ({ onToggleForm }) => {
 
     if (!acceptTerms) {
       setTermsError(
-        "Debes aceptar los términos y condiciones para registrarte.",
+        "Debes aceptar los términos y condiciones para registrarte."
       );
       setOpenSnackbar(true);
       return;
@@ -153,6 +153,7 @@ const Register = ({ onToggleForm }) => {
           variant="outlined"
           margin="normal"
           required
+          autoComplete="new-password"
           {...register("password", passwordValidate)}
           helperText={errors.password && errors.password.message}
           FormHelperTextProps={{ style: { color: "red" } }}
