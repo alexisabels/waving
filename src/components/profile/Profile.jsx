@@ -4,6 +4,7 @@ import { db } from "../../lib/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import PostsLists from "../posts/PostsLists";
 import { useUserPosts } from "../../hooks/post";
+import { useLikedPosts } from "../../hooks/useLikedPosts";
 import { Box, Divider, Typography } from "@mui/material";
 import UserData from "./UserData/UserData";
 
@@ -11,6 +12,7 @@ export default function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLikedPosts, setShowLikedPosts] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -32,9 +34,14 @@ export default function Profile() {
   }, [username]);
 
   const { posts, isLoading: postsLoading } = useUserPosts(user?.id);
+  const { likedPosts, isLoading: likedPostsLoading } = useLikedPosts();
 
   if (loading) return "Cargando...";
   if (!user) return <div>Usuario no encontrado.</div>;
+
+  const handleToggle = (showLiked) => {
+    setShowLikedPosts(showLiked);
+  };
 
   return (
     <div>
@@ -45,7 +52,6 @@ export default function Profile() {
           width: "100%",
           maxWidth: "600px",
           mx: "auto",
-
           display: "flex",
           flexDirection: "column",
           alignItems: "left",
@@ -53,15 +59,50 @@ export default function Profile() {
       >
         <UserData user={user} />
         <Divider />
-        <Typography
-          variant="h5"
-          component="h4"
-          fontWeight="bold"
-          paddingTop={3}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "left",
+            gap: 3,
+            paddingTop: 3,
+          }}
         >
-          Publicaciones
-        </Typography>
-        <PostsLists posts={posts} isLoading={postsLoading} />
+          <Typography
+            variant="h5"
+            component="h4"
+            fontWeight="bold"
+            onClick={() => handleToggle(false)}
+            sx={{
+              opacity: showLikedPosts ? 0.3 : 1,
+              cursor: "pointer",
+              "&:hover": {
+                opacity: 1,
+              },
+            }}
+          >
+            Publicaciones
+          </Typography>
+          <Typography
+            variant="h5"
+            component="h4"
+            fontWeight="bold"
+            onClick={() => handleToggle(true)}
+            sx={{
+              opacity: showLikedPosts ? 1 : 0.3,
+              cursor: "pointer",
+              "&:hover": {
+                opacity: 1,
+              },
+            }}
+          >
+            Me gustas
+          </Typography>
+        </Box>
+        <PostsLists
+          posts={showLikedPosts ? likedPosts : posts}
+          isLoading={showLikedPosts ? likedPostsLoading : postsLoading}
+        />
       </Box>
     </div>
   );
