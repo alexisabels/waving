@@ -3,9 +3,12 @@ import {
   Box,
   Button,
   Checkbox,
+  Collapse,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   FormControlLabel,
   IconButton,
-  Modal,
   Typography,
 } from "@mui/material";
 import { deleteUser as firebaseDeleteUser, getAuth } from "firebase/auth";
@@ -20,14 +23,14 @@ export default function DeleteAccount() {
   const auth = getAuth();
   const [msg, setMsg] = useState("");
   const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const navigate = useNavigate();
 
   const handleDeleteUser = async () => {
     if (!confirmed) {
       setMsg(
-        "Por favor, confirma que quieres eliminar la cuenta marcando la casilla.",
+        "Por favor, confirma que quieres eliminar tu cuenta marcando la casilla."
       );
       setOpen(true);
       return;
@@ -43,7 +46,7 @@ export default function DeleteAccount() {
       await firebaseDeleteUser(auth.currentUser);
       await auth.signOut();
       setMsg("Cuenta eliminada con éxito y sesión cerrada.");
-      setModalOpen(false);
+      setDialogOpen(false);
       navigate(AUTH);
     } catch (error) {
       console.error("Error al eliminar el usuario:", error);
@@ -61,118 +64,125 @@ export default function DeleteAccount() {
       <Button
         variant="contained"
         color="error"
-        onClick={() => setModalOpen(true)}
+        onClick={() => setDialogOpen(true)}
         fullWidth
         sx={{ mt: 2, borderRadius: 2, textTransform: "none", py: 1 }}
       >
         Quiero borrar mi cuenta
       </Button>
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <Dialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        maxWidth="xs"
+        fullWidth
+        PaperProps={{ sx: { borderRadius: "25px" } }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            p: 4,
-            borderRadius: 2,
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            maxWidth: 300,
-            textAlign: "center",
-          }}
-        >
-          <Typography
-            id="modal-modal-title"
-            variant="h1"
-            component="h1"
+        <DialogTitle sx={{ m: 0, p: 2, textAlign: "center" }}>
+          Eliminar mi cuenta
+          <IconButton
+            aria-label="close"
+            onClick={() => setDialogOpen(false)}
+            sx={{ position: "absolute", right: 8, top: 8, color: "gray" }}
+          >
+            <Close />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers>
+          <Box
             sx={{
-              mb: 3,
-              userSelect: "none",
-              WebkitUserSelect: "none",
-              msUserSelect: "none",
-              MozUserSelect: "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              mt: 2,
+              mb: 2,
             }}
           >
-            ⚠️
-          </Typography>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Eliminar mi cuenta
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2, mb: 3 }}>
-            ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se
-            puede deshacer. Tus posts no se borrarán.
-          </Typography>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={confirmed}
-                onChange={(e) => setConfirmed(e.target.checked)}
-                sx={{ color: "#f23535", fill: "#f23535" }}
-                style={{
-                  color: "#f23535",
-                }}
-              />
-            }
-            label="Confirmo que quiero eliminar mi cuenta permanentemente."
-          />
-          {open && (
-            <Alert
-              severity="info"
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => setOpen(false)}
-                >
-                  <Close />
-                </IconButton>
-              }
-              sx={{ borderRadius: 5, mt: 2 }}
+            <Typography
+              variant="h1"
+              component="h1"
+              sx={{
+                mb: 3,
+                userSelect: "none",
+                WebkitUserSelect: "none",
+                msUserSelect: "none",
+                MozUserSelect: "none",
+              }}
             >
-              {msg}
-            </Alert>
-          )}
-          <Button
-            onClick={() => setModalOpen(false)}
-            variant="contained"
-            fullWidth
-            sx={{
-              mt: 2,
-              borderRadius: 2,
-              py: 1,
-              bgcolor: "green",
-              "&:hover": {
-                bgcolor: "#45a045",
-              },
-            }}
-          >
-            Mantener mi cuenta
-          </Button>
-          <Button
-            onClick={handleDeleteUser}
-            variant="contained"
-            fullWidth
-            sx={{
-              mt: 2,
-              borderRadius: 2,
-              py: 1,
-              bgcolor: "red",
-              "&:hover": {
-                bgcolor: "#f23535",
-              },
-            }}
-          >
-            Eliminar mi cuenta
-          </Button>
-        </Box>
-      </Modal>
+              ⚠️
+            </Typography>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Eliminar mi cuenta
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2, mb: 3 }}>
+              ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se
+              puede deshacer. <strong>Tus posts no se borrarán.</strong>
+            </Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={confirmed}
+                  onChange={(e) => setConfirmed(e.target.checked)}
+                  sx={{ color: "#f23535", fill: "#f23535" }}
+                  style={{
+                    color: "#f23535",
+                  }}
+                />
+              }
+              label="Confirmo que quiero eliminar mi cuenta permanentemente."
+            />
+            <Collapse in={open}>
+              <Alert
+                severity="error"
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => setOpen(false)}
+                  >
+                    <Close />
+                  </IconButton>
+                }
+                sx={{ borderRadius: 5, mt: 2 }}
+              >
+                {msg}
+              </Alert>
+            </Collapse>
+            <Button
+              onClick={() => setDialogOpen(false)}
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 2,
+                borderRadius: 20,
+                py: 1,
+                bgcolor: "green",
+                "&:hover": {
+                  bgcolor: "#45a045",
+                },
+              }}
+            >
+              Mantener mi cuenta
+            </Button>
+            <Button
+              onClick={handleDeleteUser}
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 2,
+                borderRadius: 20,
+                py: 1,
+                bgcolor: "red",
+                "&:hover": {
+                  bgcolor: "#f23535",
+                },
+              }}
+            >
+              Eliminar mi cuenta
+            </Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }

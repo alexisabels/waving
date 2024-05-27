@@ -65,8 +65,14 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ m: 0, p: 2 }}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="xs"
+      fullWidth
+      PaperProps={{ sx: { borderRadius: "25px" } }}
+    >
+      <DialogTitle sx={{ m: 0, p: 2, textAlign: "center" }}>
         Editar perfil
         <IconButton
           aria-label="close"
@@ -142,12 +148,12 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
             flexDirection: "column",
             gap: 2,
             mt: 2,
+            alignItems: "center",
           }}
         >
           <TextField
             margin="normal"
             label="Nombre de usuario"
-            fullWidth
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             sx={{
@@ -160,6 +166,7 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
                 color: "#223C43",
               },
               bgcolor: "white",
+              maxWidth: 350,
             }}
           />
           <Collapse in={alertOpen}>
