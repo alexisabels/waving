@@ -55,10 +55,15 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
     }
     if (username) {
       await updateUser({ username });
-      setAlertMessage("Perfil actualizado correctamente.");
+      setAlertMessage(
+        "Perfil actualizado correctamente. Recarga para ver los cambios."
+      );
       setAlertSeverity("success");
       setAlertOpen(true);
-      onSuccess("Perfil actualizado correctamente.", "success");
+      onSuccess(
+        "Perfil actualizado correctamente. Recarga para ver los cambios.",
+        "success"
+      );
       handleClose();
       navigate(`/protected/profile/${username}`, { replace: true });
     }
