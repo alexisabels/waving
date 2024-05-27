@@ -13,7 +13,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 import { PROTECTED } from "../../lib/routes";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import PostMenu from "./PostMenu";
 import InteractionBar from "./InteractionBar";
 import moment from "moment";

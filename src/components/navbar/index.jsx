@@ -12,7 +12,6 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 import WaveLogo from "../../../public/assets/img/WaveLogo";
 import { PROTECTED } from "../../lib/routes";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import AccountMenu from "./AccountMenu";
 import CentralItems from "./CentralItems";
 import { useAuth } from "../../hooks/auth";

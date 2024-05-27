@@ -15,7 +15,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth, useLogout } from "../../hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { PROTECTED } from "../../lib/routes";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
 
 function ActiveUserLink() {
   const { user, isLoading } = useAuth();

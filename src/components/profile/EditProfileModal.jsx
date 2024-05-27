@@ -18,7 +18,7 @@ import { useUser } from "../../hooks/user";
 function EditProfileModal({ open, handleClose, currentUserId }) {
   const { user, updateUser, updateAvatar } = useUser(currentUserId);
   const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const [setAvatar] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {

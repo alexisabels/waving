@@ -13,7 +13,6 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth, useLogout } from "../../hooks/auth";
 import { PROTECTED } from "../../lib/routes";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import { Settings } from "@mui/icons-material";
 
 export default function AppMobileBar() {

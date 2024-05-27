@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../hooks/auth";
 import { useAddPost } from "../../hooks/post";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import InputLength from "./InputLength";
 
 export default function NewPost() {
