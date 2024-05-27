@@ -7,6 +7,9 @@ import {
   Tooltip,
   Typography,
   Zoom,
+  Collapse,
+  Alert,
+  IconButton,
 } from "@mui/material";
 import { useState } from "react";
 import FollowingModal from "./Following/FollowingModal";
@@ -16,6 +19,8 @@ import { auth } from "../../../lib/firebase";
 import { useFollow } from "../../../hooks/useFollow";
 import BigFollowBtn from "../../../utils/BigFollowBtn";
 import EditProfileModal from "../EditProfileModal";
+import { Close } from "@mui/icons-material";
+
 export default function UserData({ user }) {
   const formattedDate = new Date(user.date).toLocaleDateString("es-ES", {
     year: "numeric",
@@ -30,6 +35,10 @@ export default function UserData({ user }) {
     useFollow(user.id);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("success");
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -37,6 +46,13 @@ export default function UserData({ user }) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const handleSuccessAlert = (message, severity) => {
+    setAlertMessage(message);
+    setAlertSeverity(severity);
+    setAlertOpen(true);
+  };
+
   return (
     <div>
       <Stack
@@ -56,7 +72,6 @@ export default function UserData({ user }) {
             @{user.username}
           </Typography>
 
-          {/* {currentUser?.uid === user.id && <EditProfileBtn user={user} />} */}
           <Typography
             variant="p"
             component="p"
@@ -110,11 +125,30 @@ export default function UserData({ user }) {
                 open={isModalOpen}
                 handleClose={handleCloseModal}
                 currentUserId={user.id}
+                onSuccess={handleSuccessAlert}
               />
             </>
           )}
         </Stack>
       </Stack>
+      <Collapse in={alertOpen}>
+        <Alert
+          severity={alertSeverity}
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => setAlertOpen(false)}
+            >
+              <Close fontSize="inherit" />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
+          {alertMessage}
+        </Alert>
+      </Collapse>
       <FollowingModal
         modalFollowingOpen={modalFollowingOpen}
         setModalFollowingOpen={setModalFollowingOpen}

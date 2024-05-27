@@ -10,22 +10,26 @@ import {
   IconButton,
   Box,
   Typography,
+  Collapse,
+  Alert,
 } from "@mui/material";
 import { Close, Edit } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 
-function EditProfileModal({ open, handleClose, currentUserId }) {
+function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
   const { user, updateUser, updateAvatar } = useUser(currentUserId);
   const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState(null);
-  const [avatarURL, setAvatarURL] = useState(null); // Nuevo estado para URL del avatar
+  const [avatarURL, setAvatarURL] = useState(null);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("success");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       setUsername(user.username || "");
-      setAvatarURL(user.avatar || null); // Inicializar URL del avatar
+      setAvatarURL(user.avatar || null);
     }
   }, [user]);
 
@@ -33,20 +37,28 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
     const file = event.target.files[0];
     if (file) {
       const newAvatarURL = URL.createObjectURL(file);
-      setAvatarURL(newAvatarURL); // Actualizar la URL del avatar
+      setAvatarURL(newAvatarURL);
       updateAvatar(file).then(() => {
-        URL.revokeObjectURL(newAvatarURL); // Liberar la URL del objeto después de cargar
+        URL.revokeObjectURL(newAvatarURL);
       });
     }
   };
 
   const handleSave = async () => {
     if (username.length > 12) {
-      alert("El nombre de usuario no puede tener más de 12 caracteres");
+      setAlertMessage(
+        "El nombre de usuario no puede tener más de 12 caracteres"
+      );
+      setAlertSeverity("error");
+      setAlertOpen(true);
       return;
     }
     if (username) {
       await updateUser({ username });
+      setAlertMessage("Perfil actualizado correctamente.");
+      setAlertSeverity("success");
+      setAlertOpen(true);
+      onSuccess("Perfil actualizado correctamente.", "success");
       handleClose();
       navigate(`/protected/profile/${username}`, { replace: true });
     }
@@ -92,7 +104,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
               }}
             >
               <Avatar
-                src={avatarURL} // Usar el nuevo estado de URL del avatar
+                src={avatarURL}
                 sx={{
                   width: 100,
                   height: 100,
@@ -150,6 +162,23 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
               bgcolor: "white",
             }}
           />
+          <Collapse in={alertOpen}>
+            <Alert
+              severity={alertSeverity}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => setAlertOpen(false)}
+                >
+                  <Close fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {alertMessage}
+            </Alert>
+          </Collapse>
           <Typography variant="body2" align="center">
             ¿Quieres cambiar tu correo o tu contraseña? Ve a la{" "}
             <Link
@@ -166,7 +195,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
             fontWeight="lighter"
             align="center"
           >
-            Es posible que debas recargar la página para ver los cambios
+            Es posible que debas recargar la aplicación para ver los cambios
           </Typography>
         </Box>
 
