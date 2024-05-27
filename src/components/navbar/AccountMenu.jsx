@@ -46,6 +46,7 @@ function ActiveUserLink() {
     </Link>
   );
 }
+
 function ActiveUserName() {
   const { user, isLoading } = useAuth();
   if (isLoading)
@@ -55,11 +56,23 @@ function ActiveUserName() {
       </Typography>
     );
   return (
-    <Typography textAlign="center" color="white" marginInlineEnd="10px">
+    <Typography
+      textAlign="center"
+      color="white"
+      marginInlineEnd="10px"
+      sx={{
+        color: "#FFFF",
+        maxWidth: "none",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+      }}
+    >
       @{user?.username}
     </Typography>
   );
 }
+
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { logout, isLoading } = useLogout();
@@ -75,9 +88,11 @@ export default function AccountMenu() {
     setAnchorEl(null);
     navigate(`${PROTECTED}/profile/${user?.username}`);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <React.Fragment>
       <Box
@@ -96,11 +111,10 @@ export default function AccountMenu() {
             aria-expanded={open ? "true" : undefined}
           >
             <ActiveUserName />
-
             <Avatar
               sx={{ width: 38, height: 38, color: "black" }}
               src={user?.avatar}
-            ></Avatar>
+            />
           </IconButton>
         </Tooltip>
       </Box>
@@ -119,7 +133,6 @@ export default function AccountMenu() {
             mt: 3,
             borderRadius: "25px",
             px: 1,
-
             "& .MuiAvatar-root": {
               width: 32,
               height: 32,
@@ -147,7 +160,6 @@ export default function AccountMenu() {
           onClick={handleMenuItemClick}
           sx={{
             color: "rgba(0, 0, 0, 0.6)",
-
             "&:hover": {
               color: "inherit",
               borderRadius: "25px",
@@ -162,18 +174,15 @@ export default function AccountMenu() {
           <ActiveUserLink />
         </MenuItem>
         <Divider />
-
         <MenuItem
           onClick={logout}
           disabled={isLoading}
           sx={{
-            pt: "10x",
+            pt: "10px",
             pb: "9.2px",
             color: "rgba(0, 0, 0, 0.6)",
-
             "&:hover": {
               color: "inherit",
-
               border: "rgba(0, 0, 0, 4)",
               borderRadius: "25px",
               backgroundColor: "rgba(0, 0, 0, 0.1)",
@@ -184,7 +193,7 @@ export default function AccountMenu() {
           }}
         >
           <ListItemIcon>
-            <LogoutIcon fontSize="medium" htmlColor="#223C43" color="#223C43" />
+            <LogoutIcon fontSize="medium" htmlColor="#223C43" />
           </ListItemIcon>
           Logout
         </MenuItem>

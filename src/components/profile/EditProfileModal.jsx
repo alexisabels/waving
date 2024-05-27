@@ -18,7 +18,7 @@ import { useUser } from "../../hooks/user";
 function EditProfileModal({ open, handleClose, currentUserId }) {
   const { user, updateUser, updateAvatar } = useUser(currentUserId);
   const [username, setUsername] = useState("");
-  const [setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(null); // Fixed destructuring assignment
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,6 +36,10 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
   };
 
   const handleSave = async () => {
+    if (username.length > 12) {
+      alert("El nombre de usuario no puede tener más de 12 caracteres");
+      return;
+    }
     if (username) {
       await updateUser({ username });
       handleClose();
@@ -83,7 +87,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
               }}
             >
               <Avatar
-                src={user?.avatar}
+                src={avatar || user?.avatar}
                 sx={{
                   width: 100,
                   height: 100,
@@ -152,7 +156,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
             .
           </Typography>
           <Typography
-            variant="p"
+            variant="body2"
             fontSize="small"
             fontWeight="lighter"
             align="center"

@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   useScrollTrigger,
   useTheme,
+  Typography,
 } from "@mui/material";
 import { NavLink, useLocation } from "react-router-dom";
 import WaveLogo from "../../../public/assets/img/WaveLogo";
@@ -47,7 +48,6 @@ export default function Navbar() {
         backgroundColor: "#EBE3DD",
         background:
           "linear-gradient(to bottom, #EBE3DD, #EBE3DD 70%, transparent 100%)",
-
         position: "sticky",
         top: 0,
         zIndex: 3,
@@ -80,6 +80,11 @@ export default function Navbar() {
             fontWeight: "bold",
             textDecoration: "none",
             fontSize: "1.3rem",
+            display: "flex",
+            alignItems: "center",
+            flexGrow: 1,
+            flexShrink: 1,
+            mr: 2,
           }}
         >
           <Stack alignItems="center" direction="row" gap={1}>
@@ -89,14 +94,17 @@ export default function Navbar() {
         </Link>
 
         {isMobile && (
-          <Stack direction="row" gap={2} sx={{ alignItems: "center", mx: 2 }}>
+          <Stack
+            direction="row"
+            gap={2}
+            sx={{ alignItems: "center", flexGrow: 1, flexShrink: 1 }}
+          >
             <CentralItems
               icon={<PeopleRounded />}
               text="Social"
               showText={!trigger && mediumScreen}
               linkTo={`${PROTECTED}/social/`}
             />
-
             <CentralItems
               icon={
                 <Avatar
@@ -117,7 +125,9 @@ export default function Navbar() {
           </Stack>
         )}
 
-        <AccountMenu />
+        <Box sx={{ display: "flex", alignItems: "center", flexGrow: 0 }}>
+          <AccountMenu />
+        </Box>
       </Box>
     </Box>
   );
