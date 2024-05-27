@@ -89,7 +89,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
               TransitionComponent={Zoom}
             >
               <Avatar
-                src={avatarexample}
+                src={user?.avatar}
                 sx={{ width: 38, height: 38, color: "white" }}
                 component={Link}
                 to={`${PROTECTED}/profile/${username}`}

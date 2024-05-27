@@ -103,7 +103,7 @@ export default function NewPost() {
             startAdornment: (
               <InputAdornment position="start">
                 <Avatar
-                  src={avatarexample}
+                  src={user?.avatar}
                   sx={{ width: 38, height: 38, color: "white" }}
                 />
               </InputAdornment>

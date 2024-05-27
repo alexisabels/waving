@@ -12,21 +12,28 @@ import {
   Typography,
 } from "@mui/material";
 import { Close, Edit } from "@mui/icons-material";
-import avatarexample from "./../../../public/assets/img/avatarexample.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 
 function EditProfileModal({ open, handleClose, currentUserId }) {
-  const { user, updateUser } = useUser(currentUserId);
+  const { user, updateUser, updateAvatar } = useUser(currentUserId);
   const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       setUsername(user.username || "");
-      console.log(`Usuario cambiado a: ${user.username}`);
     }
   }, [user]);
+
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setAvatar(URL.createObjectURL(file));
+      updateAvatar(file);
+    }
+  };
 
   const handleSave = async () => {
     if (username) {
@@ -63,6 +70,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
             style={{ display: "none" }}
             id="avatar-upload"
             type="file"
+            onChange={handleAvatarChange}
           />
           <label htmlFor="avatar-upload">
             <Box
@@ -75,6 +83,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
               }}
             >
               <Avatar
+                src={user?.avatar}
                 sx={{
                   width: 100,
                   height: 100,

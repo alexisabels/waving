@@ -34,6 +34,7 @@ export default function ModalUserChip({ user, currentUserId, onClose }) {
             component={Link}
             to={`${PROTECTED}/profile/${user.username}`}
             onClick={handleCloseModal}
+            src={user?.avatar}
           />
           <Box>
             <Typography

@@ -93,7 +93,7 @@ export default function AppMobileBar() {
               label="Profile"
               icon={
                 <Avatar
-                  src={avatarexample}
+                  src={user?.avatar}
                   sx={{ width: 24, height: 24, color: "black" }}
                 />
               }

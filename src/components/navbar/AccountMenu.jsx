@@ -100,7 +100,7 @@ export default function AccountMenu() {
 
             <Avatar
               sx={{ width: 38, height: 38, color: "black" }}
-              src={avatarexample}
+              src={user?.avatar}
             ></Avatar>
           </IconButton>
         </Tooltip>
@@ -157,7 +157,7 @@ export default function AccountMenu() {
           }}
         >
           <Avatar
-            src={avatarexample}
+            src={user?.avatar}
             sx={{ width: 32, height: 32, color: "black" }}
           />
           <ActiveUserLink />

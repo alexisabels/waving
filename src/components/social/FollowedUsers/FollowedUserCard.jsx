@@ -55,7 +55,7 @@ export default function FollowedUserCard({ user }) {
           "&:hover": { boxShadow: "0 8px 16px rgba(0,0,0,0.3)" },
         }}
       >
-        <Avatar src={user.avatar} sx={{ width: 56, height: 56 }} />
+        <Avatar src={user?.avatar} sx={{ width: 56, height: 56 }} />
         <Typography variant="h6" sx={{ textAlign: "center", minHeight: 40 }}>
           {user.username}
         </Typography>

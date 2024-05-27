@@ -102,7 +102,7 @@ export default function Navbar() {
               icon={
                 <Avatar
                   sx={{ width: 25, height: 25, color: "black" }}
-                  src={avatarexample}
+                  src={user?.avatar}
                 />
               }
               text="Mi perfil"
