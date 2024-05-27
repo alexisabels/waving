@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../lib/firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../lib/firebase"; // Asegúrate de importar storage
 
 export function useUser(uid) {
   const [user, setUser] = useState(null);
@@ -28,5 +29,30 @@ export function useUser(uid) {
       });
   }, [uid]);
 
-  return { user, loading, error };
+  const updateUser = async (data) => {
+    const userRef = doc(db, "users", uid);
+    try {
+      await updateDoc(userRef, data);
+      setUser((prevUser) => ({ ...prevUser, ...data }));
+    } catch (err) {
+      console.error("Error al actualizar usuario:", err);
+      setError(err);
+    }
+  };
+
+  const updateAvatar = async (file) => {
+    if (!file) return;
+
+    const storageRef = ref(storage, `avatars/${uid}`);
+    try {
+      const snapshot = await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      await updateUser({ avatar: downloadURL });
+    } catch (err) {
+      console.error("Error al subir avatar:", err);
+      setError(err);
+    }
+  };
+
+  return { user, loading, error, updateUser, updateAvatar };
 }

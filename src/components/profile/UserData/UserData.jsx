@@ -15,7 +15,7 @@ import EditProfileBtn from "./EditProfileBtn";
 import { auth } from "../../../lib/firebase";
 import { useFollow } from "../../../hooks/useFollow";
 import BigFollowBtn from "../../../utils/BigFollowBtn";
-
+import EditProfileModal from "../EditProfileModal";
 export default function UserData({ user }) {
   const formattedDate = new Date(user.date).toLocaleDateString("es-ES", {
     year: "numeric",
@@ -28,6 +28,15 @@ export default function UserData({ user }) {
   const currentUser = auth.currentUser;
   const { followers, following, loadingFollowers, loadingFollowing } =
     useFollow(user.id);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div>
       <Stack
@@ -94,7 +103,16 @@ export default function UserData({ user }) {
             currentUserId={currentUser.uid}
             targetUserId={user.id}
           />
-          {currentUser?.uid === user.id && <EditProfileBtn user={user} />}
+          {currentUser?.uid === user.id && (
+            <>
+              <EditProfileBtn onClick={handleOpenModal} />
+              <EditProfileModal
+                open={isModalOpen}
+                handleClose={handleCloseModal}
+                currentUserId={user.id}
+              />
+            </>
+          )}
         </Stack>
       </Stack>
       <FollowingModal

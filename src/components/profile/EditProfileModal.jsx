@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,28 +13,26 @@ import {
 } from "@mui/material";
 import { Close, Edit } from "@mui/icons-material";
 import avatarexample from "./../../../public/assets/img/avatarexample.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 
 function EditProfileModal({ open, handleClose, currentUserId }) {
   const { user, updateUser } = useUser(currentUserId);
   const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       setUsername(user.username || "");
+      console.log(`Usuario cambiado a: ${user.username}`);
     }
   }, [user]);
-
-  const handleAvatarChange = (event) => {
-    setAvatar(URL.createObjectURL(event.target.files[0]));
-  };
 
   const handleSave = async () => {
     if (username) {
       await updateUser({ username });
       handleClose();
+      navigate(`/protected/profile/${username}`, { replace: true });
     }
   };
 
@@ -65,19 +63,18 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
             style={{ display: "none" }}
             id="avatar-upload"
             type="file"
-            onChange={handleAvatarChange}
           />
           <label htmlFor="avatar-upload">
             <Box
               sx={{
                 position: "relative",
                 "&:hover .overlay": {
+                  cursor: "pointer",
                   opacity: 1,
                 },
               }}
             >
               <Avatar
-                src={avatar || avatarexample}
                 sx={{
                   width: 100,
                   height: 100,
@@ -137,13 +134,25 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
           />
           <Typography variant="body2" align="center">
             ¿Quieres cambiar tu correo o tu contraseña? Ve a la{" "}
-            <Link to="/protected/ajustes" style={{ color: "#1976d2", textDecoration: "none" }}>
+            <Link
+              to="/protected/ajustes"
+              style={{ color: "#1976d2", textDecoration: "none" }}
+            >
               página de ajustes
             </Link>
             .
           </Typography>
+          <Typography
+            variant="p"
+            fontSize="small"
+            fontWeight="lighter"
+            align="center"
+          >
+            Es posible que debas recargar la página para ver los cambios
+          </Typography>
         </Box>
-        <Box sx={{ mt: 4, display: "flex", justifyContent: "center", gap: 2 }}>
+
+        <Box sx={{ mt: 2, display: "flex", justifyContent: "center", gap: 2 }}>
           <Button
             variant="outlined"
             onClick={handleClose}
@@ -179,7 +188,5 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
     </Dialog>
   );
 }
-
-
 
 export default EditProfileModal;

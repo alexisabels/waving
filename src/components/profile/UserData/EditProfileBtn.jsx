@@ -1,30 +1,24 @@
-import { Button, Tooltip, Zoom } from "@mui/material";
+import { Button } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
-function EditProfileBtn({ user }) {
+function EditProfileBtn({ onClick }) {
   return (
-    <Tooltip
-      title="Esta función no está disponible por ahora"
-      TransitionComponent={Zoom}
-    >
-      <span>
-        <Button
-          variant="contained"
-          size="small"
-          type="submit"
-          fullWidth
-          disabled
-          // hasta que funcione
-          style={{
-            borderRadius: 20,
-            textTransform: "none",
-            // backgroundColor: "#223C43",
-          }}
-        >
-          Editar perfil (próx.)
-        </Button>
-      </span>
-    </Tooltip>
+    <span>
+      <Button
+        variant="contained"
+        size="small"
+        type="button"
+        fullWidth
+        onClick={onClick}
+        style={{
+          borderRadius: 20,
+          textTransform: "none",
+          backgroundColor: "#223C43",
+        }}
+      >
+        Editar perfil
+      </Button>
+    </span>
   );
 }
 
