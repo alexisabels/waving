@@ -8,7 +8,6 @@ import {
   useMediaQuery,
   useScrollTrigger,
   useTheme,
-  Typography,
 } from "@mui/material";
 import { NavLink, useLocation } from "react-router-dom";
 import WaveLogo from "../../../public/assets/img/WaveLogo";

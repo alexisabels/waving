@@ -18,20 +18,25 @@ import { useUser } from "../../hooks/user";
 function EditProfileModal({ open, handleClose, currentUserId }) {
   const { user, updateUser, updateAvatar } = useUser(currentUserId);
   const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState(null); // Fixed destructuring assignment
+  const [avatar, setAvatar] = useState(null);
+  const [avatarURL, setAvatarURL] = useState(null); // Nuevo estado para URL del avatar
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       setUsername(user.username || "");
+      setAvatarURL(user.avatar || null); // Inicializar URL del avatar
     }
   }, [user]);
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setAvatar(URL.createObjectURL(file));
-      updateAvatar(file);
+      const newAvatarURL = URL.createObjectURL(file);
+      setAvatarURL(newAvatarURL); // Actualizar la URL del avatar
+      updateAvatar(file).then(() => {
+        URL.revokeObjectURL(newAvatarURL); // Liberar la URL del objeto después de cargar
+      });
     }
   };
 
@@ -87,7 +92,7 @@ function EditProfileModal({ open, handleClose, currentUserId }) {
               }}
             >
               <Avatar
-                src={avatar || user?.avatar}
+                src={avatarURL} // Usar el nuevo estado de URL del avatar
                 sx={{
                   width: 100,
                   height: 100,
