@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../lib/firebase";
 import {
   collection,
@@ -9,9 +9,11 @@ import {
   orderBy,
   deleteDoc,
   where,
+  limit,
+  startAfter,
+  getDocs,
 } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-
+import { POSTS_SIZE } from "../config";
 export function useAddPost() {
   const [isLoading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -39,7 +41,7 @@ export function useAddPost() {
       await setDoc(
         doc(db, "posts", docRef.id),
         { id: docRef.id },
-        { merge: true },
+        { merge: true }
       );
 
       console.log("Post publicado con ID: ", docRef.id);
@@ -66,24 +68,81 @@ export function useAddPost() {
   };
 }
 
-export function usePosts() {
-  const q = query(collection(db, "posts"), orderBy("date", "desc"));
-  const [posts, isLoading, error] = useCollectionData(q);
-  if (error) throw error;
-  return { posts, isLoading };
+export function usePosts(pageSize = POSTS_SIZE) {
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastVisible, setLastVisible] = useState(null);
+  const [error, setError] = useState(null);
+
+  const fetchPosts = async (loadMore = false) => {
+    setIsLoading(true);
+    try {
+      let q = query(
+        collection(db, "posts"),
+        orderBy("date", "desc"),
+        limit(pageSize)
+      );
+
+      if (loadMore && lastVisible) {
+        q = query(q, startAfter(lastVisible));
+      }
+
+      const querySnapshot = await getDocs(q);
+      const newPosts = querySnapshot.docs.map((doc) => doc.data());
+      setPosts((prev) => (loadMore ? [...prev, ...newPosts] : newPosts));
+      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+    } catch (err) {
+      setError(err);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return { posts, isLoading, error, fetchPosts };
 }
 
-export function useUserPosts(uid = null) {
-  const q = query(
-    collection(db, "posts"),
-    where("uid", "==", uid),
-    orderBy("date", "desc"),
-  );
-  const [posts, isLoading, error] = useCollectionData(q);
+export function useUserPosts(uid = null, pageSize = POSTS_SIZE) {
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastVisible, setLastVisible] = useState(null);
+  const [error, setError] = useState(null);
 
-  if (error) throw error;
+  const fetchPosts = async (loadMore = false) => {
+    setIsLoading(true);
+    try {
+      let q = query(
+        collection(db, "posts"),
+        where("uid", "==", uid),
+        orderBy("date", "desc"),
+        limit(pageSize)
+      );
 
-  return { posts, isLoading };
+      if (loadMore && lastVisible) {
+        q = query(q, startAfter(lastVisible));
+      }
+
+      const querySnapshot = await getDocs(q);
+      const newPosts = querySnapshot.docs.map((doc) => doc.data());
+      setPosts((prev) => (loadMore ? [...prev, ...newPosts] : newPosts));
+      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+    } catch (err) {
+      setError(err);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (uid) {
+      fetchPosts();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uid]);
+
+  return { posts, isLoading, error, fetchPosts };
 }
 
 export function useDeletePost() {

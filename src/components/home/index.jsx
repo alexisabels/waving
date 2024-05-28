@@ -2,11 +2,14 @@
 import { Box, Typography } from "@mui/material";
 import { usePosts } from "../../hooks/post";
 import PostsLists from "../posts/PostsLists";
-
 import NewPost from "./NewPost";
 
 export default function Home() {
-  const { posts, isLoading: postsLoading } = usePosts();
+  const { posts, isLoading: postsLoading, fetchPosts } = usePosts();
+
+  const fetchMorePosts = () => {
+    fetchPosts(true);
+  };
 
   return (
     <Box maxWidth="600px" mx="auto">
@@ -14,7 +17,11 @@ export default function Home() {
       <Typography variant="h4" component="h4" fontWeight="bold">
         Últimos Posts
       </Typography>
-      <PostsLists posts={posts} isLoading={postsLoading} />
+      <PostsLists
+        posts={posts}
+        isLoading={postsLoading}
+        fetchMorePosts={fetchMorePosts}
+      />
     </Box>
   );
 }

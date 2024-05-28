@@ -6,11 +6,12 @@ import {
   Typography,
   Snackbar,
   Alert,
+  Button,
 } from "@mui/material";
 import Post from "./index";
 import { useAuth } from "../../hooks/auth";
 
-export default function PostsLists({ posts, isLoading }) {
+export default function PostsLists({ posts, isLoading, fetchMorePosts }) {
   const { user } = useAuth();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -29,15 +30,6 @@ export default function PostsLists({ posts, isLoading }) {
     setOpenSnackbar(false);
   };
 
-  if (isLoading) {
-    return (
-      <Typography textAlign="center">
-        <CircularProgress sx={{ color: "#223C43" }} size={50} />
-        <br />
-        Cargando posts...
-      </Typography>
-    );
-  }
   return (
     <>
       <Box
@@ -46,13 +38,20 @@ export default function PostsLists({ posts, isLoading }) {
           maxWidth: "600px",
           mx: "auto",
           mt: 2,
-          mb: 9,
+          mb: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        {posts?.length === 0 ? (
+        {isLoading && (
+          <Typography textAlign="center">
+            <CircularProgress sx={{ color: "#223C43" }} size={50} />
+            <br />
+            Cargando posts...
+          </Typography>
+        )}
+        {posts?.length === 0 && !isLoading ? (
           <Typography fontSize="large" textAlign="center">
             Sin posts de momento...
           </Typography>
@@ -67,6 +66,26 @@ export default function PostsLists({ posts, isLoading }) {
               />
             ) : null
           )
+        )}
+        {posts?.length > 0 && !isLoading && (
+          <Button
+            onClick={fetchMorePosts}
+            variant="outlined"
+            sx={{
+              mt: 3,
+              alignSelf: "center",
+              borderRadius: 20,
+              textTransform: "none",
+              color: "#223C43",
+              borderColor: "#223C43",
+              "&:hover": {
+                borderColor: "#1b2e36",
+                backgroundColor: "#f5f5f5",
+              },
+            }}
+          >
+            Ver más
+          </Button>
         )}
       </Box>
       <Snackbar
