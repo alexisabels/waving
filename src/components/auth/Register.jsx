@@ -68,7 +68,7 @@ const Register = ({ onToggleForm }) => {
       password: data.password,
       redirectTo: HOME,
     });
-    if (result.error) {
+    if (result && result.error) {
       setTermsError(result.error);
       setOpenSnackbar(true);
     } else {

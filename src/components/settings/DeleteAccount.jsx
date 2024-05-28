@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Alert,
   Box,
@@ -10,14 +11,20 @@ import {
   FormControlLabel,
   IconButton,
   Typography,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
-import { deleteUser as firebaseDeleteUser, getAuth } from "firebase/auth";
+import {
+  deleteUser as firebaseDeleteUser,
+  getAuth,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+} from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../lib/firebase";
 import { AUTH } from "../../lib/routes";
-import { Close } from "@mui/icons-material";
+import { Close, Key } from "@mui/icons-material";
 
 export default function DeleteAccount() {
   const auth = getAuth();
@@ -25,6 +32,7 @@ export default function DeleteAccount() {
   const [open, setOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleDeleteUser = async () => {
@@ -35,24 +43,40 @@ export default function DeleteAccount() {
       setOpen(true);
       return;
     }
+
     if (!auth.currentUser) {
       setMsg("No hay usuario autenticado actualmente.");
       setOpen(true);
       return;
     }
-    try {
-      const userRef = doc(db, "users", auth.currentUser.uid);
-      await deleteDoc(userRef);
-      await firebaseDeleteUser(auth.currentUser);
-      await auth.signOut();
-      setMsg("Cuenta eliminada con éxito y sesión cerrada.");
-      setDialogOpen(false);
-      navigate(AUTH);
-    } catch (error) {
-      console.error("Error al eliminar el usuario:", error);
-      setMsg(`Error al eliminar la cuenta: ${error.message}`);
-      setOpen(true);
-    }
+
+    const credential = EmailAuthProvider.credential(
+      auth.currentUser.email,
+      password
+    );
+
+    const reauthAndDelete = async () => {
+      try {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await deleteDoc(userRef);
+        await firebaseDeleteUser(auth.currentUser);
+        await auth.signOut();
+        setMsg("Cuenta eliminada con éxito y sesión cerrada.");
+        setDialogOpen(false);
+        navigate(AUTH);
+      } catch (error) {
+        console.error("Error al eliminar el usuario:", error);
+        setMsg(`Error al eliminar la cuenta: ${error.message}`);
+        setOpen(true);
+      }
+    };
+
+    reauthenticateWithCredential(auth.currentUser, credential)
+      .then(reauthAndDelete)
+      .catch(() => {
+        setMsg("Error: la contraseña no es correcta");
+        setOpen(true);
+      });
   };
 
   return (
@@ -117,6 +141,33 @@ export default function DeleteAccount() {
               ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se
               puede deshacer. <strong>Tus posts no se borrarán.</strong>
             </Typography>
+            <TextField
+              label="Contraseña Actual"
+              type="password"
+              variant="outlined"
+              autoComplete="new-password"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Key fontSize="medium" />
+                  </InputAdornment>
+                ),
+              }}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#223C43",
+                  },
+                },
+                "& .MuiInputLabel-outlined.Mui-focused": {
+                  color: "#223C43",
+                },
+                mb: 2,
+              }}
+            />
             <FormControlLabel
               control={
                 <Checkbox

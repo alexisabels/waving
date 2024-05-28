@@ -101,7 +101,7 @@ export function usePosts(pageSize = POSTS_SIZE) {
       }
     );
 
-    // Cleanup subscription on unmount
+    // "desuscribirse" al desmontar compnente
     return () => unsubscribe();
   }, [pageSize]);
 
