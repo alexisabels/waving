@@ -6,6 +6,7 @@ import Profile from "../components/profile/Profile";
 import TerminosYCondiciones from "../components/terms/TerminosYCondiciones";
 import SocialPage from "../components/social/SocialPage";
 import SettingsPage from "../components/settings/SettingsPage";
+import PostPage from "../components/postPage/PostPage";
 export const ROOT = "/";
 export const AUTH = "/auth";
 export const PROFILE = "/protected/profile/:username";
@@ -13,7 +14,7 @@ export const PROTECTED = "/protected";
 export const HOME = "/protected/home";
 export const SOCIAL = "/protected/social";
 export const AJUSTES = "/protected/ajustes";
-
+export const POST = "/protected/post/:postId";
 export const TERMSANDCONDITONS = "/terminosycondiciones";
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: AJUSTES,
         element: <SettingsPage />,
+      },
+      {
+        path: POST,
+        element: <PostPage />,
       },
     ],
   },
