@@ -7,6 +7,8 @@ import {
   addDoc,
   serverTimestamp,
   getDocs,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 const useComment = (postId) => {
@@ -36,10 +38,10 @@ const useComment = (postId) => {
     fetchComments();
   }, [postId, db]);
 
-  const addComment = async (userId, text) => {
+  const addComment = async (userId, postId, text) => {
     try {
       const commentsCollectionRef = collection(db, "comments");
-      await addDoc(commentsCollectionRef, {
+      const docRef = await addDoc(commentsCollectionRef, {
         postId,
         date: serverTimestamp(),
         text,
@@ -47,10 +49,21 @@ const useComment = (postId) => {
       });
       setComments((prevComments) => [
         ...prevComments,
-        { postId, date: new Date(), text, uid: userId },
+        { id: docRef.id, postId, date: new Date(), text, uid: userId },
       ]);
     } catch (error) {
       console.error("Error adding comment: ", error);
+    }
+  };
+
+  const deleteComment = async (commentId) => {
+    try {
+      await deleteDoc(doc(db, "comments", commentId));
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== commentId)
+      );
+    } catch (error) {
+      console.error("Error deleting comment: ", error);
     }
   };
 
@@ -58,6 +71,8 @@ const useComment = (postId) => {
     comments,
     loading,
     addComment,
+    deleteComment,
+    setComments, // Exponemos setComments para poder usarlo en PostPage
   };
 };
 
