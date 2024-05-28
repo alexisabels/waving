@@ -12,6 +12,7 @@ import {
   limit,
   startAfter,
   getDocs,
+  onSnapshot,
 } from "firebase/firestore";
 import { POSTS_SIZE } from "../config";
 export function useAddPost() {
@@ -75,25 +76,55 @@ export function usePosts(pageSize = POSTS_SIZE) {
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
 
-  const fetchPosts = async (loadMore = false) => {
+  useEffect(() => {
+    const q = query(
+      collection(db, "posts"),
+      orderBy("date", "desc"),
+      limit(pageSize)
+    );
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const newPosts = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPosts(newPosts);
+        setLastVisible(snapshot.docs[snapshot.docs.length - 1]);
+        setIsLoading(false);
+        setHasMore(newPosts.length === pageSize);
+      },
+      (err) => {
+        setError(err);
+        setIsLoading(false);
+      }
+    );
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [pageSize]);
+
+  const fetchMorePosts = async () => {
     if (!hasMore) return;
+
     setIsLoading(true);
     try {
-      let q = query(
+      const q = query(
         collection(db, "posts"),
         orderBy("date", "desc"),
+        startAfter(lastVisible),
         limit(pageSize)
       );
 
-      if (loadMore && lastVisible) {
-        q = query(q, startAfter(lastVisible));
-      }
-
       const querySnapshot = await getDocs(q);
-      const newPosts = querySnapshot.docs.map((doc) => doc.data());
-      setPosts((prev) => (loadMore ? [...prev, ...newPosts] : newPosts));
-      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+      const newPosts = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
+      setPosts((prev) => [...prev, ...newPosts]);
+      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
       if (newPosts.length < pageSize) {
         setHasMore(false);
       }
@@ -103,11 +134,7 @@ export function usePosts(pageSize = POSTS_SIZE) {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  return { posts, isLoading, error, fetchPosts, hasMore };
+  return { posts, isLoading, error, fetchMorePosts, hasMore };
 }
 
 export function useUserPosts(uid = null, pageSize = POSTS_SIZE) {

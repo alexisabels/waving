@@ -5,11 +5,12 @@ import PostsLists from "../posts/PostsLists";
 import NewPost from "./NewPost";
 
 export default function Home() {
-  const { posts, isLoading: postsLoading, fetchPosts, hasMore } = usePosts();
-
-  const fetchMorePosts = () => {
-    fetchPosts(true);
-  };
+  const {
+    posts,
+    isLoading: postsLoading,
+    fetchMorePosts,
+    hasMore,
+  } = usePosts();
 
   return (
     <Box maxWidth="600px" mx="auto">
