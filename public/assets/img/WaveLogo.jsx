@@ -9,7 +9,7 @@ function WaveLogo() {
       viewBox="0 0 35 35"
     >
       <g
-        stroke="#6da4fc"
+        stroke="#6ec4db"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
@@ -30,7 +30,7 @@ function WaveLogo() {
       </g>
       <defs>
         <clipPath id="clip0_130_15">
-          <path fill="#6da4fc" d="M0 0H35V35H0z"></path>
+          <path fill="#6ec4db" d="M0 0H35V35H0z"></path>
         </clipPath>
       </defs>
     </svg>
