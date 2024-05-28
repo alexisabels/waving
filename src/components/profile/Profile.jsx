@@ -33,11 +33,17 @@ export default function Profile() {
     fetchUser();
   }, [username]);
 
-  const { posts, isLoading: postsLoading, fetchPosts } = useUserPosts(user?.id);
+  const {
+    posts,
+    isLoading: postsLoading,
+    fetchPosts,
+    hasMore: hasMorePosts,
+  } = useUserPosts(user?.id);
   const {
     likedPosts,
     isLoading: likedPostsLoading,
     fetchLikedPosts,
+    hasMore: hasMoreLikedPosts,
   } = useLikedPosts();
 
   if (loading) return "Cargando...";
@@ -115,6 +121,7 @@ export default function Profile() {
           posts={showLikedPosts ? likedPosts : posts}
           isLoading={showLikedPosts ? likedPostsLoading : postsLoading}
           fetchMorePosts={fetchMorePosts}
+          hasMore={showLikedPosts ? hasMoreLikedPosts : hasMorePosts}
         />
       </Box>
     </div>

@@ -11,7 +11,12 @@ import {
 import Post from "./index";
 import { useAuth } from "../../hooks/auth";
 
-export default function PostsLists({ posts, isLoading, fetchMorePosts }) {
+export default function PostsLists({
+  posts,
+  isLoading,
+  fetchMorePosts,
+  hasMore,
+}) {
   const { user } = useAuth();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -67,12 +72,13 @@ export default function PostsLists({ posts, isLoading, fetchMorePosts }) {
             ) : null
           )
         )}
-        {posts?.length > 0 && !isLoading && (
+        {posts?.length > 0 && !isLoading && hasMore && (
           <Button
             onClick={fetchMorePosts}
             variant="outlined"
             sx={{
               mt: 3,
+              mb: 9,
               alignSelf: "center",
               borderRadius: 20,
               textTransform: "none",

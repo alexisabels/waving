@@ -73,8 +73,10 @@ export function usePosts(pageSize = POSTS_SIZE) {
   const [isLoading, setIsLoading] = useState(true);
   const [lastVisible, setLastVisible] = useState(null);
   const [error, setError] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchPosts = async (loadMore = false) => {
+    if (!hasMore) return;
     setIsLoading(true);
     try {
       let q = query(
@@ -91,6 +93,10 @@ export function usePosts(pageSize = POSTS_SIZE) {
       const newPosts = querySnapshot.docs.map((doc) => doc.data());
       setPosts((prev) => (loadMore ? [...prev, ...newPosts] : newPosts));
       setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+
+      if (newPosts.length < pageSize) {
+        setHasMore(false);
+      }
     } catch (err) {
       setError(err);
     }
@@ -99,10 +105,9 @@ export function usePosts(pageSize = POSTS_SIZE) {
 
   useEffect(() => {
     fetchPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { posts, isLoading, error, fetchPosts };
+  return { posts, isLoading, error, fetchPosts, hasMore };
 }
 
 export function useUserPosts(uid = null, pageSize = POSTS_SIZE) {
@@ -110,8 +115,10 @@ export function useUserPosts(uid = null, pageSize = POSTS_SIZE) {
   const [isLoading, setIsLoading] = useState(true);
   const [lastVisible, setLastVisible] = useState(null);
   const [error, setError] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchPosts = async (loadMore = false) => {
+    if (!hasMore) return;
     setIsLoading(true);
     try {
       let q = query(
@@ -129,6 +136,10 @@ export function useUserPosts(uid = null, pageSize = POSTS_SIZE) {
       const newPosts = querySnapshot.docs.map((doc) => doc.data());
       setPosts((prev) => (loadMore ? [...prev, ...newPosts] : newPosts));
       setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+
+      if (newPosts.length < pageSize) {
+        setHasMore(false);
+      }
     } catch (err) {
       setError(err);
     }
@@ -139,10 +150,9 @@ export function useUserPosts(uid = null, pageSize = POSTS_SIZE) {
     if (uid) {
       fetchPosts();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
-  return { posts, isLoading, error, fetchPosts };
+  return { posts, isLoading, error, fetchPosts, hasMore };
 }
 
 export function useDeletePost() {

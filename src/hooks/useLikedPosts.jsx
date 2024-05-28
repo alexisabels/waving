@@ -1,33 +1,65 @@
 import { useState, useEffect } from "react";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  limit,
+  startAfter,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { getAuth } from "firebase/auth";
+import { POSTS_SIZE } from "../config";
 
-export function useLikedPosts() {
+export function useLikedPosts(pageSize = POSTS_SIZE) {
   const [likedPosts, setLikedPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [lastVisible, setLastVisible] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
   const auth = getAuth();
   const userId = auth.currentUser?.uid;
 
-  useEffect(() => {
-    if (!userId) {
+  const fetchLikedPosts = async (loadMore = false) => {
+    if (!userId || !hasMore) {
       setIsLoading(false);
       return;
     }
 
-    const q = query(
-      collection(db, "posts"),
-      where("likes", "array-contains", userId)
-    );
+    setIsLoading(true);
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const posts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setLikedPosts(posts);
-      setIsLoading(false);
-    });
+    try {
+      let q = query(
+        collection(db, "posts"),
+        where("likes", "array-contains", userId),
+        limit(pageSize)
+      );
 
-    return () => unsubscribe();
+      if (loadMore && lastVisible) {
+        q = query(q, startAfter(lastVisible));
+      }
+
+      const querySnapshot = await getDocs(q);
+      const newPosts = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setLikedPosts((prev) => (loadMore ? [...prev, ...newPosts] : newPosts));
+      setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+
+      if (newPosts.length < pageSize) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error fetching liked posts: ", error);
+    }
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchLikedPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
-  return { likedPosts, isLoading };
+  return { likedPosts, isLoading, fetchLikedPosts, hasMore };
 }

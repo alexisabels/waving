@@ -6,7 +6,7 @@ import { CircularProgress, Typography } from "@mui/material";
 
 export default function FollowedPostsFeed() {
   const { user } = useAuth();
-  const { posts, isLoading, fetchPosts } = useFollowedPosts(user?.id);
+  const { posts, isLoading, fetchPosts, hasMore } = useFollowedPosts(user?.id);
 
   const fetchMorePosts = () => {
     fetchPosts(true);
@@ -28,6 +28,7 @@ export default function FollowedPostsFeed() {
         posts={posts}
         isLoading={isLoading}
         fetchMorePosts={fetchMorePosts}
+        hasMore={hasMore}
       />
     </div>
   );

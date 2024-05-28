@@ -5,7 +5,7 @@ import PostsLists from "../posts/PostsLists";
 import NewPost from "./NewPost";
 
 export default function Home() {
-  const { posts, isLoading: postsLoading, fetchPosts } = usePosts();
+  const { posts, isLoading: postsLoading, fetchPosts, hasMore } = usePosts();
 
   const fetchMorePosts = () => {
     fetchPosts(true);
@@ -21,6 +21,7 @@ export default function Home() {
         posts={posts}
         isLoading={postsLoading}
         fetchMorePosts={fetchMorePosts}
+        hasMore={hasMore}
       />
     </Box>
   );

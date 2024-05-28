@@ -18,10 +18,11 @@ export function useFollowedPosts(currentUserId, pageSize = POSTS_SIZE) {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastVisible, setLastVisible] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchPosts = useCallback(
     async (loadMore = false) => {
-      if (loadingFollowing) return;
+      if (loadingFollowing || !hasMore) return;
 
       if (following.length > 0) {
         setLoading(true);
@@ -45,6 +46,10 @@ export function useFollowedPosts(currentUserId, pageSize = POSTS_SIZE) {
 
           setPosts((prev) => (loadMore ? [...prev, ...postsData] : postsData));
           setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+
+          if (postsData.length < pageSize) {
+            setHasMore(false);
+          }
         } catch (err) {
           setError(err);
         } finally {
@@ -54,7 +59,7 @@ export function useFollowedPosts(currentUserId, pageSize = POSTS_SIZE) {
         setLoading(false);
       }
     },
-    [following, loadingFollowing, lastVisible, pageSize]
+    [following, loadingFollowing, lastVisible, pageSize, hasMore]
   );
 
   useEffect(() => {
@@ -62,5 +67,5 @@ export function useFollowedPosts(currentUserId, pageSize = POSTS_SIZE) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [following, loadingFollowing]);
 
-  return { posts, isLoading, error, fetchPosts };
+  return { posts, isLoading, error, fetchPosts, hasMore };
 }
