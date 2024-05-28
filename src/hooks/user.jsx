@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "../lib/firebase"; // Asegúrate de importar storage
+import { db, storage } from "../lib/firebase";
 
 export function useUser(uid) {
   const [user, setUser] = useState(null);
