@@ -5,7 +5,7 @@ import Comment from "./Comment";
 const CommentsList = ({ comments, loading, currentUser, onDelete }) => {
   return (
     <Box>
-      <Typography variant="h6" component="h4" fontWeight="bold">
+      <Typography variant="h6" component="h4" fontWeight="bold" sx={{ mb: 1 }}>
         Comentarios
       </Typography>
       {loading ? (

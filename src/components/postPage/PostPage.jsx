@@ -21,7 +21,6 @@ export default function PostPage({ showSnackbar }) {
     loading: loadingComments,
     addComment,
     deleteComment,
-    setComments,
   } = useComment(postId);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ export default function PostPage({ showSnackbar }) {
         if (docSnap.exists()) {
           setPost({ id: docSnap.id, ...docSnap.data() });
         } else {
-          console.log("error al fetch el post");
+          console.log("error al sacar el post");
         }
       } catch (error) {
         console.error("Error fetching post: ", error);
@@ -56,12 +55,14 @@ export default function PostPage({ showSnackbar }) {
   return (
     <Box maxWidth="600px" mx="auto">
       {post && (
-        <Post
-          key={post.id}
-          post={post}
-          currentUser={currentUser}
-          showSnackbar={showSnackbar}
-        />
+        <Box display="flex" justifyContent="center">
+          <Post
+            key={post.id}
+            post={post}
+            currentUser={currentUser}
+            showSnackbar={showSnackbar}
+          />
+        </Box>
       )}
       <AddComment
         currentUserId={currentUser?.id}

@@ -14,7 +14,7 @@ const AddComment = ({ currentUserId, postId, addComment }) => {
   };
 
   return (
-    <Box maxWidth="576px" paddingTop={3} paddingBottom={3}>
+    <Box maxWidth="600px" paddingTop={3} paddingBottom={3}>
       <Typography variant="h6" component="h4" fontWeight="bold">
         Escribe un comentario
       </Typography>
@@ -30,7 +30,7 @@ const AddComment = ({ currentUserId, postId, addComment }) => {
             size="medium"
             type="submit"
             style={{
-              borderRadius: 20,
+              borderRadius: 90,
               textTransform: "none",
               backgroundColor: "#223C43",
               width: "100px",

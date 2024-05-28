@@ -40,7 +40,7 @@ export default function PostsLists({
       <Box
         sx={{
           width: "100%",
-          maxWidth: "600px",
+          maxWidth: "576px",
           mx: "auto",
           mt: 2,
           mb: 1,

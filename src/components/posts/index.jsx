@@ -135,6 +135,7 @@ export default function Post({ post, currentUser, showSnackbar }) {
           wordBreak: "break-word",
           whiteSpace: "pre-line",
           p: 2,
+          pb: 1,
           "& a": {
             color: "#007bff",
             textDecoration: "none",

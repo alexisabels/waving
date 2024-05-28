@@ -9,6 +9,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  getDoc,
 } from "firebase/firestore";
 
 const useComment = (postId) => {
@@ -23,10 +24,23 @@ const useComment = (postId) => {
         const commentsCollectionRef = collection(db, "comments");
         const q = query(commentsCollectionRef, where("postId", "==", postId));
         const querySnapshot = await getDocs(q);
-        const commentsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+
+        const commentsData = await Promise.all(
+          querySnapshot.docs.map(async (commentDoc) => {
+            const commentData = commentDoc.data();
+            const userRef = doc(db, "users", commentData.uid);
+            const userSnap = await getDoc(userRef);
+            const userData = userSnap.exists() ? userSnap.data() : {};
+
+            return {
+              id: commentDoc.id,
+              ...commentData,
+              userName: userData.username || "Usuario desconocido",
+              userAvatar: userData.avatar || "",
+            };
+          })
+        );
+
         setComments(commentsData);
       } catch (error) {
         console.error("Error fetching comments: ", error);
@@ -47,9 +61,21 @@ const useComment = (postId) => {
         text,
         uid: userId,
       });
+      const userRef = doc(db, "users", userId);
+      const userSnap = await getDoc(userRef);
+      const userData = userSnap.exists() ? userSnap.data() : {};
+
       setComments((prevComments) => [
         ...prevComments,
-        { id: docRef.id, postId, date: new Date(), text, uid: userId },
+        {
+          id: docRef.id,
+          postId,
+          date: new Date(),
+          text,
+          uid: userId,
+          userName: userData.username || "Usuario desconocido",
+          userAvatar: userData.avatar || "",
+        },
       ]);
     } catch (error) {
       console.error("Error adding comment: ", error);
@@ -72,7 +98,7 @@ const useComment = (postId) => {
     loading,
     addComment,
     deleteComment,
-    setComments, // Exponemos setComments para poder usarlo en PostPage
+    setComments,
   };
 };
 
