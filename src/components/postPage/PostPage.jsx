@@ -16,7 +16,13 @@ export default function PostPage({ showSnackbar }) {
   const [loading, setLoading] = useState(true);
   const db = getFirestore();
   const { user: currentUser } = useAuth();
-  const { comments, loading: loadingComments, addComment } = useComment(postId);
+  const {
+    comments,
+    loading: loadingComments,
+    addComment,
+    deleteComment,
+    setComments,
+  } = useComment(postId);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -39,6 +45,10 @@ export default function PostPage({ showSnackbar }) {
     fetchPost();
   }, [postId, db]);
 
+  const handleDeleteComment = async (commentId) => {
+    await deleteComment(commentId);
+  };
+
   if (loading) {
     return <CircularProgress />;
   }
@@ -58,7 +68,12 @@ export default function PostPage({ showSnackbar }) {
         postId={postId}
         addComment={addComment}
       />
-      <CommentsList comments={comments} loading={loadingComments} />
+      <CommentsList
+        comments={comments}
+        loading={loadingComments}
+        currentUser={currentUser}
+        onDelete={handleDeleteComment}
+      />
     </Box>
   );
 }

@@ -8,7 +8,7 @@ const AddComment = ({ currentUserId, postId, addComment }) => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
-      await addComment(currentUserId, newComment);
+      await addComment(currentUserId, postId, newComment);
       setNewComment("");
     }
   };
@@ -20,6 +20,7 @@ const AddComment = ({ currentUserId, postId, addComment }) => {
       </Typography>
       <form onSubmit={handleCommentSubmit}>
         <Stack
+          sx={{ mt: 1 }}
           spacing={2}
           direction="row-reverse"
           justifyContent="space-between"
@@ -49,6 +50,7 @@ const AddComment = ({ currentUserId, postId, addComment }) => {
               sx: {
                 color: "white",
                 borderRadius: 10,
+
                 p: 1.5,
                 bgcolor: "#223C43",
                 borderColor: "#223C43",
