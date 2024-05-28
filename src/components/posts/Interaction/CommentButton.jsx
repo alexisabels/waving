@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types */
 import { ChatBubbleOutlineRounded } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+import { PROTECTED } from "../../../lib/routes";
 
-const CommentButton = ({ commentsCount }) => {
+const CommentButton = ({ commentsCount, postId }) => {
   return (
     <Box
+      component={Link}
+      to={`${PROTECTED}/post/${postId}`}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -12,6 +16,8 @@ const CommentButton = ({ commentsCount }) => {
         cursor: "pointer",
         padding: "5px 10px",
         borderRadius: "20px",
+        textDecoration: "none",
+        color: "#223C43",
         transition: "background-color 0.3s",
         "&:hover": {
           backgroundColor: "#f0f0f0",
