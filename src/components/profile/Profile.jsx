@@ -33,14 +33,26 @@ export default function Profile() {
     fetchUser();
   }, [username]);
 
-  const { posts, isLoading: postsLoading } = useUserPosts(user?.id);
-  const { likedPosts, isLoading: likedPostsLoading } = useLikedPosts();
+  const { posts, isLoading: postsLoading, fetchPosts } = useUserPosts(user?.id);
+  const {
+    likedPosts,
+    isLoading: likedPostsLoading,
+    fetchLikedPosts,
+  } = useLikedPosts();
 
   if (loading) return "Cargando...";
   if (!user) return <div>Usuario no encontrado.</div>;
 
   const handleToggle = (showLiked) => {
     setShowLikedPosts(showLiked);
+  };
+
+  const fetchMorePosts = () => {
+    if (showLikedPosts) {
+      fetchLikedPosts(true);
+    } else {
+      fetchPosts(true);
+    }
   };
 
   return (
@@ -102,6 +114,7 @@ export default function Profile() {
         <PostsLists
           posts={showLikedPosts ? likedPosts : posts}
           isLoading={showLikedPosts ? likedPostsLoading : postsLoading}
+          fetchMorePosts={fetchMorePosts}
         />
       </Box>
     </div>
