@@ -1,32 +1,50 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { db } from "../lib/firebase";
 import { useFollow } from "./useFollow";
-import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  limit,
+  startAfter,
+} from "firebase/firestore";
+import { POSTS_SIZE } from "../config";
 
-export function useFollowedPosts(currentUserId) {
+export function useFollowedPosts(currentUserId, pageSize = POSTS_SIZE) {
   const { following, loadingFollowing } = useFollow(currentUserId);
   const [posts, setPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lastVisible, setLastVisible] = useState(null);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
+  const fetchPosts = useCallback(
+    async (loadMore = false) => {
       if (loadingFollowing) return;
 
       if (following.length > 0) {
         setLoading(true);
         try {
-          const postsQuery = query(
+          let postsQuery = query(
             collection(db, "posts"),
             where("uid", "in", following),
-            orderBy("date", "desc")
+            orderBy("date", "desc"),
+            limit(pageSize)
           );
+
+          if (loadMore && lastVisible) {
+            postsQuery = query(postsQuery, startAfter(lastVisible));
+          }
+
           const querySnapshot = await getDocs(postsQuery);
           const postsData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
-          setPosts(postsData);
+
+          setPosts((prev) => (loadMore ? [...prev, ...postsData] : postsData));
+          setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
         } catch (err) {
           setError(err);
         } finally {
@@ -35,10 +53,14 @@ export function useFollowedPosts(currentUserId) {
       } else {
         setLoading(false);
       }
-    };
+    },
+    [following, loadingFollowing, lastVisible, pageSize]
+  );
 
+  useEffect(() => {
     fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [following, loadingFollowing]);
 
-  return { posts, isLoading, error };
+  return { posts, isLoading, error, fetchPosts };
 }

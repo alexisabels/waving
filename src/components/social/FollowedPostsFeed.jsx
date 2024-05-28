@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useFollowedPosts } from "../../hooks/useFollowedPosts";
 import PostsLists from "../posts/PostsLists";
 import { useAuth } from "../../hooks/auth";
@@ -5,7 +6,11 @@ import { CircularProgress, Typography } from "@mui/material";
 
 export default function FollowedPostsFeed() {
   const { user } = useAuth();
-  const { posts, isLoading } = useFollowedPosts(user?.id);
+  const { posts, isLoading, fetchPosts } = useFollowedPosts(user?.id);
+
+  const fetchMorePosts = () => {
+    fetchPosts(true);
+  };
 
   if (isLoading) {
     return (
@@ -19,7 +24,11 @@ export default function FollowedPostsFeed() {
 
   return (
     <div>
-      <PostsLists posts={posts} isLoading={isLoading} />
+      <PostsLists
+        posts={posts}
+        isLoading={isLoading}
+        fetchMorePosts={fetchMorePosts}
+      />
     </div>
   );
 }
