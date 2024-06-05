@@ -8,16 +8,13 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { getAuth } from "firebase/auth";
 import { POSTS_SIZE } from "../config";
 
-export function useLikedPosts(pageSize = POSTS_SIZE) {
+export function useLikedPosts(userId, pageSize = POSTS_SIZE) {
   const [likedPosts, setLikedPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lastVisible, setLastVisible] = useState(null);
   const [hasMore, setHasMore] = useState(true);
-  const auth = getAuth();
-  const userId = auth.currentUser?.uid;
 
   const fetchLikedPosts = async (loadMore = false) => {
     if (!userId || !hasMore) {

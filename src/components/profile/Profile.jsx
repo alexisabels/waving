@@ -39,12 +39,13 @@ export default function Profile() {
     fetchPosts,
     hasMore: hasMorePosts,
   } = useUserPosts(user?.id);
+
   const {
     likedPosts,
     isLoading: likedPostsLoading,
     fetchLikedPosts,
     hasMore: hasMoreLikedPosts,
-  } = useLikedPosts();
+  } = useLikedPosts(user?.id);
 
   if (loading) return "Cargando...";
   if (!user) return <div>Usuario no encontrado.</div>;

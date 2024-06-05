@@ -1,15 +1,20 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import FollowToggleButton from "../../../utils/FollowBtn";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PROTECTED } from "../../../lib/routes";
 
 export default function ModalUserChip({ user, currentUserId, onClose }) {
-  const handleCloseModal = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
     if (onClose) {
       onClose();
     }
+    navigate(`${PROTECTED}/profile/${user.username}`);
+    window.location.reload();
   };
+
   return (
     <Box
       sx={{
@@ -31,22 +36,20 @@ export default function ModalUserChip({ user, currentUserId, onClose }) {
         <Stack direction="row" alignItems="center">
           <Avatar
             sx={{ width: 38, height: 38, color: "white", mr: 1.5 }}
-            component={Link}
-            to={`${PROTECTED}/profile/${user.username}`}
-            onClick={handleCloseModal}
+            onClick={handleClick}
             src={user?.avatar}
           />
           <Box>
             <Typography
               variant="body1"
-              component={Link}
+              component="span"
               noWrap
-              to={`${PROTECTED}/profile/${user.username}`}
               sx={{
                 color: "black",
                 textDecoration: "none",
+                cursor: "pointer",
               }}
-              onClick={handleCloseModal}
+              onClick={handleClick}
             >
               {user.username || "Desconocido"}
             </Typography>
