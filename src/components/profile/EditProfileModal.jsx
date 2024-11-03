@@ -16,6 +16,7 @@ import {
 import { Close, Edit } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/user";
+import isUsernameExists from "../../utils/isUsernameExist";
 
 function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
   const { user, updateUser, updateAvatar } = useUser(currentUserId);
@@ -45,6 +46,8 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
   };
 
   const handleSave = async () => {
+    const usernameExists = await isUsernameExists(username);
+
     if (username.length > 12) {
       setAlertMessage(
         "El nombre de usuario no puede tener más de 12 caracteres"
@@ -53,7 +56,7 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
       setAlertOpen(true);
       return;
     }
-    if (username) {
+    if (username && !usernameExists) {
       await updateUser({ username });
       setAlertMessage(
         "Perfil actualizado correctamente. Recarga para ver los cambios."
@@ -66,6 +69,12 @@ function EditProfileModal({ open, handleClose, currentUserId, onSuccess }) {
       );
       handleClose();
       navigate(`/protected/profile/${username}`, { replace: true });
+    } else {
+      setAlertMessage(
+        "El nombre de usuario ya existe. Por favor, elige otro."
+      );
+      setAlertSeverity("error");
+      setAlertOpen(true);
     }
   };
 
