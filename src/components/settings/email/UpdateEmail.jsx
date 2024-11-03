@@ -50,7 +50,7 @@ export default function UpdateEmail() {
     reauthenticateWithCredential(user, credential)
       .then(reauthAndUpdate)
       .catch(() => {
-        setMsg("Error: la contraseña no es correcta");
+        setMsg("Error: La contraseña no es correcta");
         setOpen(true);
       });
   };

@@ -74,7 +74,7 @@ export default function DeleteAccount() {
     reauthenticateWithCredential(auth.currentUser, credential)
       .then(reauthAndDelete)
       .catch(() => {
-        setMsg("Error: la contraseña no es correcta");
+        setMsg("Error: La contraseña no es correcta");
         setOpen(true);
       });
   };

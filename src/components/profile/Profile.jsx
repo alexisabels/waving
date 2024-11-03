@@ -115,7 +115,7 @@ export default function Profile() {
               },
             }}
           >
-            Me gustas
+            Me gusta
           </Typography>
         </Box>
         <PostsLists
