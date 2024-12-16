@@ -212,7 +212,7 @@ const Register = ({ onToggleForm }) => {
                 to="/terminosycondiciones"
                 style={{ textDecoration: "underline", color: "#223C43" }}
               >
-                términos y condiciones
+                términos y política de privacidad.
               </Link>
             </span>
           }

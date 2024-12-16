@@ -3,6 +3,7 @@ import PasswordResetModal from "../auth/PasswordResetModal";
 import { Box, Button, Typography } from "@mui/material";
 import EmailSettings from "./email/EmailSettings";
 import DeleteAccount from "./DeleteAccount";
+import { Link } from "react-router-dom";
 
 export default function SettingsPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -38,6 +39,14 @@ export default function SettingsPage() {
       <EmailSettings />
       <h2>Mi cuenta</h2>
       <DeleteAccount />
+      <h2>Términos y condiciones y política de privacidad</h2>
+      <Link
+        to="/terminosycondiciones"
+        style={{ textDecoration: "underline", color: "#223C43" }}
+      >
+        Haz click aquí para revisar los términos y condiciones y la política de
+        privacidad
+      </Link>
     </Box>
   );
 }
