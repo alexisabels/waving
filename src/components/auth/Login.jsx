@@ -15,6 +15,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Paper,
   Snackbar,
   TextField,
   Typography,
@@ -49,6 +50,15 @@ const Login = ({ onToggleForm }) => {
     });
     if (succeeded) reset();
   }
+
+  async function handleDemoLogin() {
+    await login({
+      email: "demo@waving.es",
+      password: "demo123",
+      redirectTo: HOME,
+    });
+  }
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -71,7 +81,38 @@ const Login = ({ onToggleForm }) => {
     <Box sx={{ maxWidth: 400, mx: "auto" }}>
       <Typography variant="h4" component="h2" mb={2}>
         Iniciar Sesión
-      </Typography>
+      </Typography>      <Paper
+        elevation={1}
+        sx={{
+          p: 2,
+          mb: 3,
+          bgcolor: "#e7f1f2",
+          borderRadius: "10px",
+          border: "1px solid #223C4322",
+          boxShadow: "0 2px 8px rgba(34, 60, 67, 0.08)",
+        }}
+      >
+        <Typography variant="body2" mb={2} sx={{ color: "#223C43" }}>
+          ¿Quieres conocer la aplicación? Puedes usar una cuenta de
+          demostración para explorar todas las funcionalidades:
+        </Typography>
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={handleDemoLogin}
+          disabled={isLoading}
+          sx={{
+            backgroundColor: "#223C43",
+            color: "white",
+            borderRadius: "20px",
+            "&:hover": { backgroundColor: "#1a2e36" },
+            textTransform: "none",
+            fontWeight: "medium",          }}
+        >
+          Acceder como usuario demo
+        </Button>
+      </Paper>
+
       <form onSubmit={handleSubmit(handleLogin)}>
         <TextField
           fullWidth

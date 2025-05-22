@@ -48,8 +48,15 @@ export function useLogin() {
     try {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
-      navigate(redirectTo);
-      setSnackbarMessage("Sesión iniciada correctamente");
+      navigate(redirectTo);     
+      const message = email === "demo@waving.es" 
+        ? "¡Bienvenido a la cuenta de demostración! Explora todas las funcionalidades de Waving"
+        : "Sesión iniciada correctamente";
+        
+      localStorage.setItem("loginMessage", message);
+      localStorage.setItem("showLoginMessage", "true");
+      
+      setSnackbarMessage(message);
       setSnackbarSeverity("success");
       setOpenSnackbar(true);
     } catch (error) {
